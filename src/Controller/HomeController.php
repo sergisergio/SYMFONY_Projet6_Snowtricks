@@ -59,4 +59,12 @@ class HomeController extends AbstractController
     {
         return $this->render('login.html.twig');
     }
+
+    /**
+     * @Route("/forgotpassword", name="app_forgotpasswordpage")
+     */
+    function forgotPasswordPage()
+    {
+        return $this->render('forgotpasswordpage.html.twig');
+    }
 }
