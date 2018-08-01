@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/a", name="app_homepage")
      */
     function homePage()
     {
-        $tricks = [
+        /*$tricks = [
             'figure 1',
             'figure 2',
             'figure 3',
@@ -47,7 +47,7 @@ class HomeController extends AbstractController
         return $this->render('homepage.html.twig', [
             'tricks' => $tricks,
             'images' => $images,
-        ]);
+        ]);*/
     }
 
     /**
