@@ -17,7 +17,37 @@ class HomeController extends AbstractController
      */
     function homePage()
     {
-        return $this->render('homepage.html.twig');
+        $tricks = [
+            'figure 1',
+            'figure 2',
+            'figure 3',
+            'figure 4',
+            'figure 5',
+            'figure 6',
+            'figure 7',
+            'figure 8',
+            'figure 9',
+            'figure 10',
+
+        ];
+
+        $images = [
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+            'https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg',
+        ];
+
+        return $this->render('homepage.html.twig', [
+            'tricks' => $tricks,
+            'images' => $images,
+        ]);
     }
 
     /**

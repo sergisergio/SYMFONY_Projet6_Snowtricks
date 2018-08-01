@@ -33,23 +33,27 @@
     <!-- Projects Section -->
     <section id="tricks" class="projects-section bg-light">
         <div class="container">
+            <div class="row" style="margin: 0 auto;width: 100%;">
 
-            {# Ici il faudra que je fasse une boucle pour afficher les figures ! #}
-            <!-- Featured Project Row -->
-            <div class="row align-items-center no-gutters mb-4 mb-lg-5">
-                <div class="col-xl-8 col-lg-7">
-                    <img class="img-fluid mb-3 mb-lg-0" src="images/grab.jpg" alt="">
-                </div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="featured-text text-center text-lg-left">
-                        <h4>Grab</h4>
-                        <p class="text-black-50 mb-0">Un grab consiste à attraper la planche avec la main pendant le saut. Le verbe anglais to grab signifie « attraper. »</p>
-
+            {% for trick in tricks %}
+                <div class="col-md-offset-2"></div>
+                    <div class="col-md-2 col-xs-12" style="border:2px solid black; margin: 5px;">
+                        <a href="#">
+                        <div class="md-12">
+                            <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
+                        </div>
+                        {{ trick }}
+                        </a>
+                        {% if (0 == 1) %}
+                        <a href="#"><i class="fa fa-pencil"></i></a>
+                        <a href="#"><i class="fa fa-trash"></i></a>
+                        {% endif %}
                     </div>
-                    <hr>
-                    <a href="{{ path('app_trickpage') }}" class="btn btn-primary js-scroll-trigger pull-right">Voir plus</a>
-                </div>
+
+
+            {% endfor %}
             </div>
+        </div>
 
 
     </section>

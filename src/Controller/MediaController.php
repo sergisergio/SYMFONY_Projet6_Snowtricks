@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: leazygomalas
- * Date: 22/07/2018
- * Time: 19:42
+ * Date: 29/07/2018
+ * Time: 20:20
  */
 
 namespace App\Controller;
 
 
-class PicturesController
+class MediaController
 {
 
 }
