@@ -24,7 +24,7 @@ class TrickController extends AbstractController
     {
         //return new Response('ajouter un trick');
         $trick = new Trick();
-        $trick->setName('Page pour ajouter un trick')
+        $trick->setName('Trick Name')
             ->setSlug('nom d\'un trick'.rand(100, 999))
             ->setDescription('DESCRIPTIONNNNNNNNN')
             ->setCreatedAt(new \DateTime(sprintf('-%d days', rand(1, 100))));
@@ -40,7 +40,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/")
+     * @Route("/", name="app_homepage")
      */
     public function show(EntityManagerInterface $em)
     {
@@ -52,5 +52,11 @@ class TrickController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @Route("/add/trick", name="app_createtrickpage")
+     */
+    public function add()
+    {
+        return $this->render('createtrick.html.twig');
+    }
 }

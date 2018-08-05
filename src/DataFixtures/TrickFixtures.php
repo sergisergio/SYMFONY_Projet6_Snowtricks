@@ -6,19 +6,22 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Trick;
 
-class TrickFixtures extends Fixture
+class TrickFixtures extends BaseFixture
 {
+    private static $trickName = [
+        'Trick1', 'Trick2', 'Trick3', 'Trick4', 'Trick5',
+    ];
+
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        $trick = new Trick();
-        $trick->setName('Page pour ajouter un trick')
-            ->setSlug('nom d\'un trick'.rand(100, 999))
-            ->setDescription('DESCRIPTIONNNNNNNNN')
-            ->setCreatedAt(new \DateTime(sprintf('-%d days', rand(1, 100))));
+        $this->createMany(Trick::class, 15, function(Trick $trick, $count) {
 
-        $manager->persist($trick);
-        $manager->flush();
+            if ($this->faker->boolean(70)) {
+                $trick->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            }
+
+            $trick->setName($this->faker->randomElement(self::$trickName));
+
+        });
     }
 }

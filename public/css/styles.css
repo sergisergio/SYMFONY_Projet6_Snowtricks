@@ -3,11 +3,15 @@ body {
     background: #efefee;
     min-height: 45rem;
     padding-bottom: 80px;
+    overflow: auto;
 }
 
 html {height:100%}
 
 /* NAVIGATION */
+ul li a .nav-link {
+    color: #000 !important;
+}
 
 .navbar-bg {
     background: url('../images/navbar.jpeg');

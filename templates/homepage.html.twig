@@ -32,11 +32,17 @@
 
     <!-- Projects Section -->
     <section id="tricks" class="projects-section bg-light">
-        <div class="container">
-            <div class="row" style="margin: 0 auto;width: 100%;">
+        <div class="container" >
+            <div class="col-md-12 text-center">
+            {% if 1 == 1 %}
+                    <a class="btn btn-primary" href="{{ path('app_createtrickpage') }}" role="button">Ajouter une figure</a>
+                {% endif %}
+            </div>
+            <div class="row" style="margin: 50px auto;width: 100%;">
+
 
             {% for trick in tricks %}
-                <div class="col-md-offset-2"></div>
+                <div class="text-center" style="margin: 0 auto"></div>
                     <div class="col-md-2 col-xs-12" style="border:2px solid black; margin: 5px;">
                         <a href="#">
                         <div class="md-12">
@@ -44,7 +50,7 @@
                         </div>
                         {{ trick.name }}
                         </a>
-                        {% if (0 == 1) %}
+                        {% if (1 == 1) %}
                         <a href="#"><i class="fa fa-pencil"></i></a>
                         <a href="#"><i class="fa fa-trash"></i></a>
                         {% endif %}
