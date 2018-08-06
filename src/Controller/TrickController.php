@@ -38,18 +38,12 @@ class TrickController extends AbstractController
             $trick->getSlug()
         ));
     }
-
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/trick/{slug}", name="app_trickpage")
      */
-    public function show(EntityManagerInterface $em)
+    function trickPage($slug)
     {
-        $repository = $em->getRepository(Trick::class);
-        $trick = $repository->findAll();
-
-        return $this->render('homepage.html.twig', [
-            'tricks' => $trick,
-        ]);
+        return $this->render('trick.html.twig');
     }
 
     /**
@@ -58,5 +52,13 @@ class TrickController extends AbstractController
     public function add()
     {
         return $this->render('createtrick.html.twig');
+    }
+
+    /**
+     * @Route("/modifytrick", name="app_modifytrickpage")
+     */
+    function modifyTrickPage()
+    {
+        return $this->render('modifytrick.html.twig');
     }
 }

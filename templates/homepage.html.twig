@@ -26,12 +26,11 @@
                     </p>
                 </div>
             </div>
-            <img src="img/ipad.png" class="img-fluid" alt="">
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="tricks" class="projects-section bg-light">
+    <section id="tricks" style="background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);" class="projects-section bg-light">
         <div class="container" >
             <div class="col-md-12 text-center">
             {% if 1 == 1 %}
@@ -43,16 +42,16 @@
 
             {% for trick in tricks %}
                 <div class="text-center" style="margin: 0 auto"></div>
-                    <div class="col-md-2 col-xs-12" style="border:2px solid black; margin: 5px;">
-                        <a href="#">
+                    <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: -5px;">
+                        <a href="{{ path('app_trickpage', {slug: 'figure-nom-numero'}) }}">
                         <div class="md-12">
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
                         </div>
                         {{ trick.name }}
                         </a>
                         {% if (1 == 1) %}
-                        <a href="#"><i class="fa fa-pencil"></i></a>
-                        <a href="#"><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('app_modifytrickpage')}}"><i class="fa fa-pencil"></i></a>
+                        <a href="#" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </div>
 
@@ -61,17 +60,6 @@
             </div>
         </div>
 
-
-    </section>
-    <section>
-        <div class="container">
-            <ul>
-                <li>5 tricks par ligne (image avec le nom en-dessous, un stylo et une corbeille si l'utilisateur est connecté).</li>
-                <li>Sur mobile, il doit y avoir un trick par ligne.</li>
-                <li>Une fenêtre modale doit apparaître quand on veut supprimer un trick.</li>
-                <li>Quand plus de 15 tricks sont chargés, une flèche, en bas à droite, doit nous permettre de remonter au début des tricks...</li>
-            </ul>
-        </div>
 
     </section>
 

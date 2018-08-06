@@ -12,6 +12,9 @@ html {height:100%}
 ul li a .nav-link {
     color: #000 !important;
 }
+.box-card {
+    background: #FFF;
+}
 
 .navbar-bg {
     background: url('../images/navbar.jpeg');
