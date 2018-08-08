@@ -134,8 +134,8 @@
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.56s cubic-bezier(0.25, 0.8, 0.25, 1);
-  max-width: 600px;
-  padding: 0;
+  max-width: 700px;
+  padding: 25px;
   margin: 15px auto;
 }
 
@@ -387,7 +387,7 @@ body {
     <header class="masthead" style="height: 50vh;">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
-                <h1 class="mx-auto my-0 text-uppercase">Trick Name</h1>
+                <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
 
             </div>
@@ -400,9 +400,14 @@ body {
             <div class="col-md-12 text-center">
                 <p class="text-center">images and videos</p>
                 <hr>
-                <p>Description</p>
+                <p>{{ trick.description }}</p>
                 <hr>
-                <p>createdAt, updatedAt, Category</p>
+                <p>Auteur</p>
+                <p>{% if trick.updatedAt %}
+                        {{trick.updatedAt|date("m/d/Y") }}
+                    {% else %}
+                        {{trick.createdAt|date("m/d/Y") }} %}</p>
+                {% endif %}
                 <hr>
 
             </div>
@@ -435,16 +440,20 @@ body {
             </form>
             {% else %}
             <div class="form-card text-center">
-                Connectez-vous pour publier un message<br>
-                <a href="{{ path('app_loginpage') }}">Me connecter</a>
+                <a class="btn btn-success" href="{{ path('app_loginpage') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous</a>
+                 pour publier un message<br>
             </div>
 
             {% endif %}
         </div>
         <div class="col-sm-12">
+            {% for comment in comments %}
             <div class="form-card text-center">
-                Tous les commentaires
+                <p class="text-left">Auteur</p>
+                <p class="text-left">{{ comment.createdAt|date("m/d/Y") }}</p>
+                {{ comment.content }}
             </div>
+            {% endfor %}
         </div>
     </div>
     </div>

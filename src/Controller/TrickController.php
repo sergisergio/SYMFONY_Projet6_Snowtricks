@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,9 +42,18 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{slug}", name="app_trickpage")
      */
-    function trickPage($slug)
+    function trickPage($slug, EntityManagerInterface $em)
     {
-        return $this->render('trick.html.twig');
+        $repository = $em->getRepository(Trick::class);
+        $trick = $repository->findOneBy(['slug' => $slug]);
+
+        $repository = $em->getRepository(Comment::class);
+        $comments = $repository->findAll();
+
+        return $this->render('trick.html.twig', [
+            'trick' => $trick,
+            'comments' => $comments,
+        ]);
     }
 
     /**
