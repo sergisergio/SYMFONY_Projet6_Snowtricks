@@ -2,11 +2,13 @@
 
 namespace App\DataFixtures;
 
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Trick;
 
-class TrickFixtures extends Fixture
+class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -22,8 +24,18 @@ class TrickFixtures extends Fixture
 
             $manager->persist($trick);
             $this->addReference('trick-'.$i, $trick);
+            $trick->setCategory($this->getReference('category-1'));
+
             //dump($i);die();
         }
         $manager->flush();
     }
+
+    public function getDependencies()
+    {
+        // TODO: Implement getDependencies() method.
+        return [CategoryFixtures::class];
+    }
+
+
 }

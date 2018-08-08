@@ -42,11 +42,11 @@
             {% for trick in tricks %}
 
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
-                        <a href="{{ path('app_trickpage', {slug: trick.slug }) }}">
+                        <a href="{{ path('app_trickpage', { name: trick.category.name, id: trick.id }) }}">
                         <div class="md-12">
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
                         </div>
-                        {{ trick.name }}
+                        {{ trick.name }} {{ trick.id }}
                         </a>
                         {% if (1 == 1) %}
                         <a href="{{ path('app_modifytrickpage')}}"><i class="fa fa-pencil"></i></a>

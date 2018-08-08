@@ -387,7 +387,7 @@ body {
     <header class="masthead" style="height: 50vh;">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
-                <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}</h1>
+                <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}{{ trick.id }}</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
 
             </div>
@@ -402,6 +402,7 @@ body {
                 <hr>
                 <p>{{ trick.description }}</p>
                 <hr>
+                <p>{{ trick.category.name }}</p>
                 <p>Auteur</p>
                 <p>{% if trick.updatedAt %}
                         {{trick.updatedAt|date("m/d/Y") }}
