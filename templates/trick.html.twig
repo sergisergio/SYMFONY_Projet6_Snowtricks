@@ -384,7 +384,7 @@ body {
 {% block body %}
 
     <!-- Header -->
-    <header class="masthead" style="height: 50vh;">
+    <header class="masthead" style="height: 50vh;background: url({{ medium.url }});background-repeat: no-repeat;background-size: cover;">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
                 <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}{{ trick.id }}</h1>
@@ -398,12 +398,20 @@ body {
     <section id="tricks" class="projects-section bg-light">
         <div class="container" >
             <div class="col-md-12 text-center">
-                <p class="text-center">images and videos</p>
+                <div class="row justify-content-md-center" style="padding: 45px;">
+                {% for medium in media %}
+
+                        <div class="col-md-2">
+                            <p class="text-center"><img class="img-fluid" src="{{ medium.url }}" /></p>
+                        </div>
+
+                {% endfor %}
+                </div>
                 <hr>
                 <p>{{ trick.description }}</p>
                 <hr>
                 <p>{{ trick.category.name }}</p>
-                <p>Auteur</p>
+                <p>{{ trick.author.username }}</p>
                 <p>{% if trick.updatedAt %}
                         {{trick.updatedAt|date("m/d/Y") }}
                     {% else %}
