@@ -2,8 +2,10 @@ body {
     position: relative;
     background: #efefee;
     min-height: 45rem;
-    padding-bottom: 80px;
+    padding-bottom: 0px;
     overflow: auto;
+    bottom: 0;
+    margin-bottom: 0px !important;
 }
 
 html {height:100%}
