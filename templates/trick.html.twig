@@ -458,7 +458,7 @@ body {
         <div class="col-sm-12">
             {% for comment in comments %}
             <div class="form-card text-center">
-                <p class="text-left">Auteur</p>
+                <p class="text-left">{{ trick.author.username }}</p>
                 <p class="text-left">{{ comment.createdAt|date("m/d/Y") }}</p>
                 {{ comment.content }}
             </div>

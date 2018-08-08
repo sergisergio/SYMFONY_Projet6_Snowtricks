@@ -19,6 +19,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
                 ->setCreatedAt(new \Datetime);
 
             $comment->setTrick($this->getReference('trick-1'));
+            $comment->setAuthor($this->getReference('user-1'));
 
             $manager->persist($comment);
         }
@@ -28,7 +29,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         // TODO: Implement getDependencies() method.
-        return [TrickFixtures::class];
+        return [TrickFixtures::class, UserFixtures::class];
     }
 
 }
