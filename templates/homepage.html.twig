@@ -1,5 +1,13 @@
 {%  extends 'base.html.twig' %}
+{% block title %}Accueil Snowtricks{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/custom.css">
+    <style>
+        #list .box-card{ display: none;}
 
+    </style>
+{% endblock %}
 {% block body %}
 
     <!-- Header -->
@@ -38,27 +46,47 @@
 
                 {% endif %}
             </div>
-            <div class="row justify-content-md-center" style="margin: 50px auto;width: 100%;">
+            <div class="row justify-content-md-center" id="list" style="margin: 50px auto;width: 100%;">
             {% for trick in tricks %}
 
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
-                        <a href="{{ path('app_trickpage', { name: trick.category.name, id: trick.id }) }}">
+                        <a href="{{ path('app_trickpage', { name: trick.category.name, slug: trick.slug }) }}">
                         <div class="md-12">
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
                         </div>
                         {{ trick.name }} {{ trick.id }}
                         </a>
                         {% if (1 == 1) %}
-                        <a href="{{ path('app_modifytrickpage')}}"><i class="fa fa-pencil"></i></a>
-                        <a href="#" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('app_modifytrickpage', {id: trick.id}) }}"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ path('app_deletetrick', {id: trick.id, slug: trick.slug}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </div>
 
             {% endfor %}
             </div>
+            <div class="text-center">
+            <a class="btn btn-primary" href="#tricks" id="loadMore">Voir plus</a>
+            </div>
         </div>
-
-
+        <div class="totop">
+        <a href="#tricks" class="js-scroll-trigger"><i class="fa fa-arrow-up fa-2x" style="position: absolute; right: 30px; bottom: 80px; color: #fff;"></i></a>
+        </div>
     </section>
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            size_boxcard = $("#list .box-card").length;
+            x=15;
+            $('#list .box-card:lt('+x+')').show();
+            $('#loadMore').click(function () {
+                x= (x+5 <= size_boxcard) ? x+5 : size_boxcard;
+                $('#list .box-card:lt('+x+')').show();
+            });
+        });
 
+    </script>
+
+
+{% endblock %}
 {%  endblock %}

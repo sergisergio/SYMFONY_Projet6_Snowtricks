@@ -59,4 +59,5 @@
     a:focus,a:hover{text-decoration:none;color:#3c6360}
     .bg-black{background-color:#161616!important}
     .bg-primary{background-color:#64a19d!important}
-    .text-primary{color:#64a19d!important}footer{padding:5rem 0;width:100%;bottom:0}
+    .text-primary{color:#64a19d!important}
+    footer{padding:5rem 0;width:100%;bottom:0; position:absolute}

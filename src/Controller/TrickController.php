@@ -15,6 +15,7 @@ use App\Entity\Media;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Trick;
@@ -43,12 +44,12 @@ class TrickController extends AbstractController
         ));
     }
     /**
-     * @Route("/trick/{name}/{id}", name="app_trickpage")
+     * @Route("/trick/{name}/{slug}", name="app_trickpage")
      */
-    function trickPage($id, $name, EntityManagerInterface $em)
+    function trickPage($slug, $name, EntityManagerInterface $em)
     {
         $repository = $em->getRepository(Trick::class);
-        $trick = $repository->findOneBy(['id' => $id]);
+        $trick = $repository->findOneBy(['slug' => $slug]);
 
         $repository = $em->getRepository(Comment::class);
         $comments = $repository->findAll();
@@ -83,10 +84,36 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/modifytrick", name="app_modifytrickpage")
+     * @Route("/modifytrick/{id}", name="app_modifytrickpage")
      */
-    function modifyTrickPage()
+    function modifyTrickPage($id, EntityManagerInterface $em)
     {
-        return $this->render('modifytrick.html.twig');
+        $repository = $em->getRepository(Trick::class);
+        $trick = $repository->findOneBy(['slug' => $id]);
+        return $this->render('modifytrick.html.twig', [
+            'trick' => $trick,
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="app_deletetrick")
+     *
+     * @return Response
+     */
+    public function deleteTrick($id, EntityManagerInterface $em)
+    {
+        $repository = $em->getRepository(Trick::class);
+        $trick = $repository->find($id);
+
+        //if(!$trick)
+            //throw $this->createNotFoundException('No trick found for id'.$id);
+
+        //$em = $this->getDoctrine()->getManager();
+        $em->remove($trick);
+        $em->flush();
+
+        return $this->redirectToRoute('app_homepage', [
+            'id' => $trick->getId()
+        ]);
     }
 }
