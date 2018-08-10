@@ -42,7 +42,7 @@
         <div class="container" >
             <div class="col-md-12 text-center">
             {% if 1 == 1 %}
-                <a class="btn btn-success" href="{{ path('app_createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Ajouter une figure</a>
+                <a class="btn btn-success" href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Ajouter une figure</a>
 
                 {% endif %}
             </div>
@@ -50,15 +50,15 @@
             {% for trick in tricks %}
 
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
-                        <a href="{{ path('app_trickpage', { name: trick.category.name, slug: trick.slug }) }}">
+                        <a href="{{ path('trickpage', { name: trick.category.name, id: trick.id }) }}">
                         <div class="md-12">
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
                         </div>
                         {{ trick.name }} {{ trick.id }}
                         </a>
                         {% if (1 == 1) %}
-                        <a href="{{ path('app_modifytrickpage', {id: trick.id}) }}"><i class="fa fa-pencil"></i></a>
-                        <a href="{{ path('app_deletetrick', {id: trick.id, slug: trick.slug}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('modifytrickpage', {id: trick.id}) }}"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ path('deletetrick', {id: trick.id, slug: trick.slug}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </div>
 

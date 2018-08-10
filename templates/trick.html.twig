@@ -15,8 +15,8 @@
                 {% if (1 == 1) %}
                 <div style="position:absolute;top: 100px; right: 20px;width:100px; height:50px;">
                     <div class="row">
-                        <button class="btn btn-sm" style="padding: 10px 14px;margin:0px 0px"><a href="{{ path('app_modifytrickpage', {id: trick.id})}}"><i class="fa fa-pencil fa-2x"></i></a></button>
-                        <button class="btn btn-sm" style="padding: 10px 14px;margin:0px 0px"><a href="{{ path('app_deletetrick', {id: trick.id}) }}" data-toggle='confirmation'><i class="fa fa-trash fa-2x"></i></a></button>
+                        <button class="btn btn-sm" style="padding: 10px 14px;margin:0px 0px"><a href="{{ path('modifytrickpage', {id: trick.id})}}"><i class="fa fa-pencil fa-2x"></i></a></button>
+                        <button class="btn btn-sm" style="padding: 10px 14px;margin:0px 0px"><a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'><i class="fa fa-trash fa-2x"></i></a></button>
 
                     </div>
                 </div>
@@ -42,12 +42,12 @@
                 <hr>
                 <p>{{ trick.description }}</p>
                 <hr>
-                <p>{{ trick.category.name }}</p>
-                <p>{{ trick.author.username }}</p>
+                <p>Catégorie: {{ trick.category.name }}</p>
+                <p>Auteur: {{ trick.author.username }}</p>
                 <p>{% if trick.updatedAt %}
-                        {{trick.updatedAt|date("m/d/Y") }}
+                        mis à jour le {{trick.updatedAt|date("d/m/Y") }}
                     {% else %}
-                        {{trick.createdAt|date("m/d/Y") }} %}</p>
+                        publié le {{trick.createdAt|date("d/m/Y") }} %}</p>
                 {% endif %}
                 <hr>
 
@@ -81,7 +81,7 @@
             </form>
             {% else %}
             <div class="form-card text-center">
-                <a class="btn btn-success" href="{{ path('app_loginpage') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous</a>
+                <a class="btn btn-success" href="{{ path('loginpage') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous</a>
                  pour publier un message<br>
             </div>
 
@@ -91,7 +91,7 @@
             {% for comment in comments %}
             <div class="form-card text-center">
                 <p class="text-left">{{ trick.author.username }}</p>
-                <p class="text-left">{{ comment.createdAt|date("m/d/Y") }}</p>
+                <p class="text-left">{{ comment.createdAt|date("d/m/Y") }}</p>
                 {{ comment.content }}
             </div>
             {% endfor %}

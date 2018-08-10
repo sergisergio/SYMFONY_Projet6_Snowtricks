@@ -1,4 +1,5 @@
 {%  extends 'base.html.twig' %}
+{% form_theme formModifyTrick 'bootstrap_4_layout.html.twig' %}
 {% block title %}Modifier un trick{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -17,12 +18,12 @@
                         <label class="form-element-label" for="name">Nom</label>
                     </div>
                     <div class="form-element form-input">
-                        <input id="category" class="form-element-field" type="input" placeholder="Entrez le nom d'une catégorie" required />
+                        <input id="category" class="form-element-field" type="input" placeholder="" required />
                         <div class="form-element-bar"></div>
                         <label class="form-element-label" for="category">Catégorie</label>
                     </div>
                     <div class="form-element form-input">
-                        <textarea id="description" class="form-element-field" placeholder="Description de la figure" type="text" required/></textarea>
+                        <textarea id="description" class="form-element-field" placeholder="" type="text" required/></textarea>
                         <div class="form-element-bar"></div>
                         <label class="form-element-label" for="description">Description</label>
                     </div>
@@ -40,6 +41,15 @@
             </form>
         </div>
     </div>
+    </div>
+    <h2 class="text-center">Formulaire fait avec Symfony</h2>
+    <div class="container formcentre">
+
+        {{ form_start(formModifyTrick) }}
+
+        {{ form_widget(formModifyTrick) }}
+
+        {{ form_end(formModifyTrick) }}
     </div>
     </div>
     </div>

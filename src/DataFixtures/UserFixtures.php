@@ -14,10 +14,10 @@ class UserFixtures extends Fixture
         // $manager->persist($product);
         for ($i = 1; $i <= 5; $i++) {
             $user = new User();
-            $user->setUsername('Philippe Traon')
-                ->setPassword('XXXXXXXX')
-                ->setEmail('email@email.com')
-                ->setToken('tokentokentoken')
+            $user->setUsername('Utilisateur-'.$i)
+                ->setPassword('XXXXXXXX-'.$i)
+                ->setEmail('email@email.com'.$i)
+                ->setToken('tokentokentoken'.$i)
                 ->setRole(1)
                 ->setIsActive(1);
 

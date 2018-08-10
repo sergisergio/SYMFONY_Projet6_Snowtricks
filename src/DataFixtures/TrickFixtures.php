@@ -16,9 +16,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 30; $i++)
         {
             $trick = new Trick();
-            $trick->setName('Name')
+            $trick->setName('Name-'.$i)
                 ->setSlug('slug')
-                ->setDescription('Ut suscipit posuere justo at vulputate. Aliquam sodales odio id eleifend tristique. Potus sensim ad ferox abnoba. Teres talis saepe tractare de camerarius flavum sensorem. Silva de secundus galatae demitto quadra.')
+                ->setDescription('Description'.$i.'Ut suscipit posuere justo at vulputate. Aliquam sodales odio id eleifend tristique. Potus sensim ad ferox abnoba. Teres talis saepe tractare de camerarius flavum sensorem. Silva de secundus galatae demitto quadra.')
                 ->setCreatedAt(new \DateTime())
                 ->setUpdatedAt(new \DateTime());
 

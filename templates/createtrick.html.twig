@@ -1,4 +1,5 @@
 {%  extends 'base.html.twig' %}
+{% form_theme formAddTrick 'bootstrap_4_layout.html.twig' %}
 {% block title %}Ajout Trick{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -40,6 +41,14 @@
             </form>
         </div>
     </div>
+    </div>
+    <div class="container formcentre">
+
+    {{ form_start(formAddTrick) }}
+
+    {{ form_widget(formAddTrick) }}
+
+    {{ form_end(formAddTrick) }}
     </div>
     </div>
     </div>

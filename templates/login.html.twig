@@ -1,4 +1,5 @@
 {%  extends 'base.html.twig' %}
+{% form_theme formLogin 'bootstrap_4_layout.html.twig' %}
 {% block title %}Se connecter{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
@@ -22,7 +23,7 @@
                         <input id="password" class="form-element-field" type="password" name="password" required />
                         <div class="form-element-bar"></div>
                         <label class="form-element-label" for="password">Mot de passe</label>
-                        <a href="{{ path('app_forgotpasswordpage') }}" class="pull-right">Mot de passe oublié ?</a>
+                        <a href="{{ path('forgotpasswordpage') }}" class="pull-right">Mot de passe oublié ?</a>
                     </div>
                 </fieldset>
                 <div class="form-actions">
@@ -32,6 +33,14 @@
             </form>
         </div>
     </div>
+    </div>
+    <div class="container formcentre">
+
+        {{ form_start(formLogin) }}
+
+        {{ form_widget(formLogin) }}
+
+        {{ form_end(formLogin) }}
     </div>
     </div>
     </div>

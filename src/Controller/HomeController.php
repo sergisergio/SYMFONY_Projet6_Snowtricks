@@ -16,15 +16,15 @@ class HomeController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/", name="homepage")
      */
     public function show(EntityManagerInterface $em)
     {
-        $repository = $em->getRepository(Trick::class);
-        $trick = $repository->findAll();
+        $repo = $em->getRepository(Trick::class);
+        $tricks = $repo->findAll();
 
         return $this->render('homepage.html.twig', [
-            'tricks' => $trick,
+            'tricks' => $tricks,
         ]);
     }
 }
