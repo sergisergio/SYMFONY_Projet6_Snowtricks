@@ -15,7 +15,7 @@ final class Version20180808190035 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        //$this->addSql('ALTER TABLE trick ADD author_id INT NOT NULL');
+        $this->addSql('ALTER TABLE trick ADD author_id INT NOT NULL');
         $this->addSql('ALTER TABLE trick ADD CONSTRAINT FK_D8F0A91EF675F31B FOREIGN KEY (author_id) REFERENCES user (id)');
         $this->addSql('CREATE INDEX IDX_D8F0A91EF675F31B ON trick (author_id)');
     }

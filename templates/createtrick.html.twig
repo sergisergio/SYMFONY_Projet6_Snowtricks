@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../css/custom.css">
 {% endblock %}
 {% block body %}
-    <div class="container formcentre">
+    <!--<div class="container formcentre">
     <div class="row" style="width:600px;">
         <div class="col-sm-12">
             <form class="form-card" style="max-width:600px;">
@@ -41,12 +41,21 @@
             </form>
         </div>
     </div>
-    </div>
+    </div>-->
     <div class="container formcentre">
 
     {{ form_start(formAddTrick) }}
 
     {{ form_widget(formAddTrick) }}
+
+    <button type="submit" class="btn btn-success">
+      {% if editMode %}
+        Mettre à jour
+      {% else %}
+        Ajouter
+      {% endif %}
+
+    </button>
 
     {{ form_end(formAddTrick) }}
     </div>

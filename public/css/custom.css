@@ -372,10 +372,11 @@ select.form-element-field {
 }
 
 .formcentre{
-    display : flex;
+    /*display : flex;*/
+    margin-top: 250px;
     justify-content : center;
     align-items : center;
-    min-height : 75vh;
+    min-height : 125vh;
 }
 
 body {

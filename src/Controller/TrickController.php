@@ -29,6 +29,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Form\AddTrickType;
 
 class TrickController extends AbstractController
 {
@@ -66,10 +68,13 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/add/trick", name="createtrickpage")
+     * @Route("/modifytrick/{id}", name="modifytrickpage")
      */
-    public function add(Request $request)
+    public function add(Trick $trick = null, Request $request, ObjectManager $manager)
     {
+        if (!$trick) {
         $trick = new Trick();
+        }
         /*$trick->setName('nameform')
             ->setSlug('slugform')
             ->setDescription('descriptionform')
@@ -81,36 +86,44 @@ class TrickController extends AbstractController
             ->add('name', TextType::class)
             ->add('slug', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('save', SubmitType::class, array('label' => 'create trick'))
+
+            //->add('save', SubmitType::class, array('label' => 'create trick'))
             ->getForm();
+
+        //$form->$this->createForm(AddTrickType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
              //$form->getData();  holds the submitted values
             /*but, the original '$trick' variable has also been updated*/
-            $trick = $form->getData();
+            //$trick = $form->getData();
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
-             $entityManager = $this->getDoctrine()->getManager();
-             $entityManager->persist($trick);
-             $entityManager->flush();
+             //$entityManager = $this->getDoctrine()->getManager();
+            if (!$trick->getId()) {
+                $trick->setCreatedAt(new \DateTime());
 
-            return $this->redirectToRoute('homepage');
+            }
+            $manager->persist($trick);
+            $manager->flush();
+
+
+            return $this->redirectToRoute('trickpage', ['id' => $trick->getId()]);
         }
 
         return $this->render(
             'createtrick.html.twig', [
                 'formAddTrick' => $form->createView(),
-            ]
-            );
+                'editMode' => $trick->getId() !== null
+            ]);
     }
 
-    /**
-     * @Route("/modifytrick/{id}", name="modifytrickpage")
-     */
-    function modifyTrickPage(Request $request)
+
+     /* Route("/modifytrick/{id}", name="modifytrickpage")*/
+
+    /*function modifyTrickPage(Request $request)
     {
         //$repository = $em->getRepository(Trick::class);
         //$trick = $repository->findOneBy(['id' => $id]);
@@ -125,7 +138,7 @@ class TrickController extends AbstractController
             ->setUpdatedAt(new \DateTime());*/
 
 
-        $form = $this->createFormBuilder($trick)
+        /*$form = $this->createFormBuilder($trick)
             ->add('name', TextType::class)
             ->add('slug', TextType::class)
             ->add('description', TextareaType::class)
@@ -153,7 +166,7 @@ class TrickController extends AbstractController
             ]
         );
 
-    }
+    }*/
 
     /**
      * @Route("/delete/{id}", name="deletetrick")

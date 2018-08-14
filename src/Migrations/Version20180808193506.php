@@ -15,7 +15,7 @@ final class Version20180808193506 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        //$this->addSql('ALTER TABLE comment ADD author_id INT NOT NULL');
+        $this->addSql('ALTER TABLE comment ADD author_id INT NOT NULL');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526CF675F31B FOREIGN KEY (author_id) REFERENCES user (id)');
         $this->addSql('CREATE INDEX IDX_9474526CF675F31B ON comment (author_id)');
     }
