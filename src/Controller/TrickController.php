@@ -82,15 +82,15 @@ class TrickController extends AbstractController
             ->setUpdatedAt(new \DateTime());*/
 
 
-        $form = $this->createFormBuilder($trick)
-            ->add('name', TextType::class)
-            ->add('slug', TextType::class)
-            ->add('description', TextareaType::class)
+        //$form = $this->createFormBuilder($trick)
+            //->add('name', TextType::class)
+            //->add('slug', TextType::class)
+            //->add('description', TextareaType::class)
 
             //->add('save', SubmitType::class, array('label' => 'create trick'))
-            ->getForm();
+            //->getForm();
 
-        //$form->$this->createForm(AddTrickType::class, $trick);
+        $form = $this->createForm(AddTrickType::class, $trick);
 
         $form->handleRequest($request);
 

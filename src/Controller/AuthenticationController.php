@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -11,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class AuthenticationController
@@ -19,81 +22,75 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthenticationController extends AbstractController
 {
   /**
-     * @Route("/signup", name="signuppage")
+     * @Route("/inscription", name="signuppage")
      */
-    function signupPage(Request $request)
+    function signupPage(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
-        /*$user->setUsername('username')
-            ->setEmail('email')
-            ->setPassword('password');*/
 
-
-        $form = $this->createFormBuilder($user)
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('save', SubmitType::class, array('label' => 's\'inscrire'))
-            ->getForm();
+        $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            //but, the original '$trick' variable has also been updated
-            $user = $form->getData();
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
+            // Il faudra que je traite le token, le rôle et le isActive
+            $user->setToken('exemple');
+            $user->setRole('1');
+            $user->setIsActive('1');
+            $manager->persist($user);
+            $manager->flush();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->>getDoctrine()->getManager();
-            // $entityManager->flush()
-
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('loginpage');
         }
 
         return $this->render(
-            'signup.html.twig', [
+            'security/signup.html.twig', [
                 'formSignup' => $form->createView(),
             ]
         );
-
     }
 
     /**
-     * @Route("/login", name="loginpage")
+     * @Route("/connexion", name="security_login")
      */
-    function loginPage(Request $request)
+    function loginPage()
     {
-        $user = new User();
+        //$user = new User();
         /*$user->setUsername('username')
             ->setPassword('password');*/
 
 
-        $form = $this->createFormBuilder($user)
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('save', SubmitType::class, array('label' => 'se connecter'))
-            ->getForm();
+        //$form = $this->createFormBuilder($user)
+            //->add('username', TextType::class)
+            //->add('password', PasswordType::class)
+            //->add('save', SubmitType::class, array('label' => 'se connecter'))
+            //->getForm();
 
-        $form->handleRequest($request);
+        //$form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        //if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             //but, the original '$trick' variable has also been updated
-            $user = $form->getData();
+            //$user = $form->getData();
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             // $entityManager = $this->>getDoctrine()->getManager();
             // $entityManager->flush()
 
-            return $this->redirectToRoute('homepage');
-        }
+            //return $this->redirectToRoute('homepage');
+        //}
 
-        return $this->render(
-            'login.html.twig', [
-                'formLogin' => $form->createView(),
-            ]
-        );
+        return $this->render('security/login.html.twig');
+    }
+
+    /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout(){
+
     }
 
     /**

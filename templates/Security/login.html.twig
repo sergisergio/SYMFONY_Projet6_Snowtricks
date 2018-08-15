@@ -1,0 +1,27 @@
+{%  extends 'base.html.twig' %}
+{% block title %}Se connecter{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/custom.css">
+
+{% endblock %}
+{% block body %}
+
+    <h1>Connexion</h1>
+
+    <form action="{{ path('security_login') }}" method="post" style="margin-top:150px;">
+        <div class="form-group">
+            <input type="text" placeholder="Adresse email" required name="_username" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="password" placeholder="Mot de passe" required name="_password" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Connexion</button>
+        </div>
+
+    </form>
+    </div>
+    </div>
+{%  endblock %}
