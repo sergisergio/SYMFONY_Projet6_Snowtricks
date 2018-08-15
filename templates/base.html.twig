@@ -35,7 +35,7 @@
                     <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks">Tricks</a>
                 </li>
                 {# Ici je mets une condition pour l'affichage du menu selon si l'utilisateur est connecté ou non #}
-                {% if (1 == 1) %}
+                {% if not app.user %}
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}">Se connecter</a>
                 </li>
@@ -44,7 +44,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}">Se déconnecter</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}">Se déconnecter</a>
                 </li>
                 {% endif %}
             </ul>

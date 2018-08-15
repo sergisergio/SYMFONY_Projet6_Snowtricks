@@ -41,7 +41,7 @@
     <section id="tricks" style="background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);" class="projects-section bg-light">
         <div class="container" >
             <div class="col-md-12 text-center">
-            {% if 1 == 1 %}
+            {% if app.user %}
                 <a class="btn btn-success" href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Ajouter une figure</a>
 
                 {% endif %}
@@ -58,14 +58,14 @@
                         </a>
                         {% if (1 == 1) %}
                         <a href="{{ path('modifytrickpage', {id: trick.id}) }}"><i class="fa fa-pencil"></i></a>
-                        <a href="{{ path('deletetrick', {id: trick.id, slug: trick.slug}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
                         {% endif %}
                     </div>
 
             {% endfor %}
             </div>
             <div class="text-center">
-            <a class="btn btn-primary" href="#tricks" id="loadMore">Voir plus</a>
+            <a class="btn btn-success" href="#tricks" id="loadMore">Voir plus</a>
             </div>
         </div>
         <div class="totop">

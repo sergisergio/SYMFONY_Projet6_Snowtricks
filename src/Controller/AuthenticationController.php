@@ -42,7 +42,7 @@ class AuthenticationController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('loginpage');
+            return $this->redirectToRoute('security_login');
         }
 
         return $this->render(

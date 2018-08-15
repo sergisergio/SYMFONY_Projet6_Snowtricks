@@ -45,9 +45,9 @@
                 <p>Catégorie: {{ trick.category.name }}</p>
                 <p>Auteur: {{ trick.author.username }}</p>
                 <p>{% if trick.updatedAt %}
-                        mis à jour le {{trick.updatedAt|date("d/m/Y") }}
+                        mis à jour le {{ trick.updatedAt|date("d/m/Y") }}
                     {% else %}
-                        publié le {{trick.createdAt|date("d/m/Y") }} %}</p>
+                        publié le {{ trick.createdAt|date("d/m/Y") }} %}</p>
                 {% endif %}
                 <hr>
 
@@ -64,30 +64,21 @@
         <div class="container" style="margin-top: 150px;">
     <div class="row">
         <div class="col-sm-12">
-            {% if 0 == 1 %}
-            <form class="form-card">
-                <fieldset class="form-fieldset">
-                    <legend class="form-legend">Ajouter un commentaire</legend>
-                    <div class="form-element form-input">
-                        <textarea id="description" class="form-element-field" placeholder="Votre commentaire" type="text" required/></textarea>
-                        <div class="form-element-bar"></div>
-                        <label class="form-element-label" for="description"></label>
-                    </div>
-                </fieldset>
-                <div class="form-actions">
-                    <button class="form-btn" type="submit">Publier</button>
-                    <button class="form-btn-cancel -nooutline" type="reset">Effacer</button>
-                </div>
-            </form>
+            {% if app.user %}
+                {{ form_start(commentForm) }}
+                {#{{ form_row(commentForm.author, {'attr': {'placeholder': "Votre nom" }}) }}#}
+                {{ form_row(commentForm.content, {'attr': {'placeholder': "Votre message" }}) }}
+                <button type="submit" class="btn btn-success">Publier</button>
+                {{ form_end(commentForm) }}
             {% else %}
-            <div class="form-card text-center">
-                <a class="btn btn-success" href="{{ path('loginpage') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous</a>
-                 pour publier un message<br>
-            </div>
-
+                <div class="form-card text-center">
+                    <a class="btn btn-success" href="{{ path('security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous</a>
+                     pour publier un message<br>
+                </div>
             {% endif %}
         </div>
         <div class="col-sm-12">
+            <h1 class="text-center">{{ trick.comments|length }} commentaires</h1>
             {% for comment in comments %}
             <div class="form-card text-center">
                 <p class="text-left">{{ trick.author.username }}</p>

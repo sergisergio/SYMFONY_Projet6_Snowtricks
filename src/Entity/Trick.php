@@ -25,7 +25,7 @@ class Trick
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
 
@@ -50,17 +50,17 @@ class Trick
     private $comments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"remove"}, inversedBy="tricks")
      */
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", cascade={"remove"}, mappedBy="trick")
      */
     private $media;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"remove"}, inversedBy="tricks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;

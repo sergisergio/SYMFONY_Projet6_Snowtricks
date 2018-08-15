@@ -8,7 +8,7 @@
 {% block body %}
 
     <h1>Connexion</h1>
-
+    <div class="container formcentre">
     <form action="{{ path('security_login') }}" method="post" style="margin-top:150px;">
         <div class="form-group">
             <input type="text" placeholder="Adresse email" required name="_username" class="form-control">
@@ -22,6 +22,7 @@
         </div>
 
     </form>
+    </div>
     </div>
     </div>
 {%  endblock %}
