@@ -1,15 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: leazygomalas
- * Date: 22/07/2018
- * Time: 19:40
+ * This file is part of the 6th Project.
+ *
+ * Philippe Traon <ptraon@gmail.com>
  */
 
 namespace App\Controller;
 
-
 //use App\Entity\Category;
+use App\Entity\Category;
 use App\Entity\Comment;
 //use App\Entity\Media;
 use App\Entity\User;
@@ -34,22 +33,30 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\AddTrickType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ *  This controller manages all tricks : show, add, modify and delete
+ *
+ * Class TrickController
+ * @package App\Controller
+ *
+ * @author Philippe Traon <ptraon@gmail.com>
+ */
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/trick/{name}/{id}", name="trickpage")
+     * Show one trick, its details and its comments
+     *
+     * @Route("/trick/{id}", name="trickpage")
      */
-    function trickPage(TokenStorageInterface $tokenStorage, $name, $id, TrickRepository $repoTrick, CommentRepository $repoComment, CategoryRepository $repoCategory, MediaRepository $repoMedia, UserRepository $repoUser, Request $request, ObjectManager $manager)
+    function trickPage($id,  TrickRepository $repoTrick, CommentRepository $repoComment, CategoryRepository $repoCategory, MediaRepository $repoMedia, UserRepository $repoUser, Request $request, ObjectManager $manager)
     {
-                //$repo = $em->getRepository(Trick::class);
-                // Je ne passe plus par entitymanager mais directement par le repository....
+        // Trouver un trick grâce à son id
         $trick = $repoTrick->find(['id' => $id]);
-                //$repo = $em->getRepository(Comment::class);
-                // Je ne passe plus par entitymanager mais directement par le repository....
+        // Trouver tous les commentaires
         $comments = $repoComment->findAll();
                 //$catRepo = $em->getRepository(Category::class);
                 // Je ne passe plus par entitymanager mais directement par le repository....
-        $categories = $repoCategory->findOneBy(['name' => $name]);
+        //$categories = $repoCategory->findOneBy(['name' => $name]);
                 //$mediaRepo = $em->getRepository(Media::class);
                 // Je ne passe plus par entitymanager mais directement par le repository....
         $media = $repoMedia->findAll();
@@ -59,25 +66,34 @@ class TrickController extends AbstractController
         $author = $repoUser->findOneBy(['username' => 'Philippe Traon']);
 
         $comment = new Comment();
-        $comment->setTrick($trick);
+        $comment->setAuthor($this->getUser());
+
+        //$comment->setTrick($trick);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
                 // Analyse de la requête envoyée via le formulaire CommentType basé sur l'objet $comment créé juste avant
+
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setCreatedAt(new \DateTime())
-                //->setTrick($trick)
-                ->setAuthor($tokenStorage->getToken()->getUser());
+                ->setTrick($trick);
+            $trick->addComment($comment);
+
             $manager->persist($comment);
             $manager->flush();
 
-            return $this->redirectToRoute('trickpage', ['name' => $categories->getName(), 'id' => $trick->getId()]);
-        }
+            // Flash messages are used to notify the user about the result of the
+            // actions. They are deleted automatically from the session as soon
+            // as they are accessed.
+            // See https://symfony.com/doc/current/book/controller.html#flash-messages
+            //$this->addFlash('success', 'post.created_successfully');
 
+            return $this->redirectToRoute('trickpage', ['id' => $trick->getId()]);
+        }
 
         return $this->render('trick.html.twig', [
             'trick' => $trick,
             'comments' => $comments,
-            'category' => $categories,
+            //'category' => $categories,
             'media' => $media,
             'medium' => $medium,
             'author' => $author,
@@ -87,56 +103,38 @@ class TrickController extends AbstractController
     }
 
     /**
+     * Add a trick/ Modify a trick
+     *
      * @Route("/add/trick", name="createtrickpage")
      * @Route("/modifytrick/{id}", name="modifytrickpage")
      */
-    public function add(Trick $trick = null, Request $request, ObjectManager $manager)
+    public function add(Trick $trick = null, Request $request, ObjectManager $manager, CategoryRepository $repoCategory)
     {
         if (!$trick) {
         $trick = new Trick();
+        $trick->setAuthor($this->getUser());
+        $trick->setCreatedAt(new \DateTime());
+        $trick->setSlug('test');
         }
-        /*$trick->setName('nameform')
-            ->setSlug('slugform')
-            ->setDescription('descriptionform')
-            ->setCreatedAt(new \DateTime())
-            ->setUpdatedAt(new \DateTime());*/
-
-
-        //$form = $this->createFormBuilder($trick)
-            //->add('name', TextType::class)
-            //->add('slug', TextType::class)
-            //->add('description', TextareaType::class)
-
-            //->add('save', SubmitType::class, array('label' => 'create trick'))
-            //->getForm();
+        //$categories = $repoCategory->findOneBy(['name' => $name]);
 
         $form = $this->createForm(AddTrickType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-             //$form->getData();  holds the submitted values
-            /*but, the original '$trick' variable has also been updated*/
-            //$trick = $form->getData();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-             //$entityManager = $this->getDoctrine()->getManager();
-            //$category = new Category();
-            $user = new User();
+            //$user = new User();
             if (!$trick->getId()) {
-                $trick->setCreatedAt(new \DateTime());
-                $trick->setSlug('tre');
-                //$trick->setCategory($category);
 
-                $trick->setAuthor(null);
 
             }
+
             $manager->persist($trick);
             $manager->flush();
 
 
-            return $this->redirectToRoute('trickpage', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
         }
 
         return $this->render(
@@ -195,6 +193,8 @@ class TrickController extends AbstractController
     }*/
 
     /**
+     * Delete a trick
+     *
      * @Route("/delete/{id}", name="deletetrick")
      *
      * @return Response
@@ -210,6 +210,8 @@ class TrickController extends AbstractController
         //$em = $this->getDoctrine()->getManager();
         $em->remove($trick);
         $em->flush();
+
+        //$this->addFlash('success', 'post.deleted_successfully');
 
         return $this->redirectToRoute('homepage');
     }

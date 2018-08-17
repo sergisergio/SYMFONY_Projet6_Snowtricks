@@ -8,6 +8,8 @@
 {% block body %}
     <div class="container formcentre">
 
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
         {{ form_start(formSignup) }}
         {{ form_row(formSignup.username, { 'label': 'Nom d\'utilisateur', 'attr': {
             'placeholder': 'Nom d\'utilisateur' }}) }}
@@ -16,6 +18,8 @@
         {{ form_row(formSignup.confirm_password, {'label': 'Confirmer Mot de passe', 'attr': {'placeholder': 'Confirmer Mot de passe'}}) }}
         <button type="submit" class="btn btn-success">Inscription</button>
         {{ form_end(formSignup) }}
+            </div>
+        </div>
     </div>
     </div>
     </div>

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the 6th Project.
+ *
+ * Philippe Traon <ptraon@gmail.com>
+ */
 namespace App\Controller;
 
 use App\Entity\User;
@@ -57,41 +61,13 @@ class AuthenticationController extends AbstractController
      */
     function loginPage()
     {
-        //$user = new User();
-        /*$user->setUsername('username')
-            ->setPassword('password');*/
-
-
-        //$form = $this->createFormBuilder($user)
-            //->add('username', TextType::class)
-            //->add('password', PasswordType::class)
-            //->add('save', SubmitType::class, array('label' => 'se connecter'))
-            //->getForm();
-
-        //$form->handleRequest($request);
-
-        //if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            //but, the original '$trick' variable has also been updated
-            //$user = $form->getData();
-
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->>getDoctrine()->getManager();
-            // $entityManager->flush()
-
-            //return $this->redirectToRoute('homepage');
-        //}
-
         return $this->render('security/login.html.twig');
     }
 
     /**
      * @Route("/deconnexion", name="security_logout")
      */
-    public function logout(){
-
-    }
+    public function logout(){}
 
     /**
      * @Route("/forgotpassword", name="forgotpasswordpage")
@@ -123,7 +99,7 @@ class AuthenticationController extends AbstractController
         }
 
         return $this->render(
-            'forgotpasswordpage.html.twig', [
+            'security/forgotpasswordpage.html.twig', [
                 'formForgotPassword' => $form->createView(),
             ]
         );
@@ -159,7 +135,7 @@ class AuthenticationController extends AbstractController
         }
 
         return $this->render(
-            'resetpasswordpage.html.twig', [
+            'security/resetpasswordpage.html.twig', [
                 'formResetPassword' => $form->createView(),
             ]
         );

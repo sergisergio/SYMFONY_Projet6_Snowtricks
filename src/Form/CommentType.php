@@ -13,7 +13,6 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content')
-            //->add('author')
         ;
     }
 

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This file is part of the 6th Project.
+ *
+ * Philippe Traon <ptraon@gmail.com>
+ */
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,13 +13,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Trick;
 
 /**
+ * This controller gives the homepage
+ *
  * Class HomeController
  * @package App\Controller
+ *
+ * @author Philippe Traon <ptraon@gmail.com>
  */
 class HomeController extends AbstractController
 {
 
     /**
+     * Lists all Trick entities
+     *
      * @Route("/", name="homepage")
      */
     public function show(EntityManagerInterface $em)

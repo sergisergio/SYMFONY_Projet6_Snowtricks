@@ -6,43 +6,11 @@
     <link rel="stylesheet" href="../../css/custom.css">
 {% endblock %}
 {% block body %}
-    <!--<div class="container formcentre">
-    <div class="row" style="width:600px;">
-        <div class="col-sm-12">
-            <form class="form-card" style="max-width:600px;">
-                <fieldset class="form-fieldset">
-                    <legend class="form-legend">Ajouter une figure</legend>
-                    <div class="form-element form-input">
-                        <input id="name" class="form-element-field" name="name" placeholder="Entrez le nom d'une figure" type="input" required/>
-                        <div class="form-element-bar"></div>
-                        <label class="form-element-label" for="name">Nom</label>
-                    </div>
-                    <div class="form-element form-input">
-                        <input id="category" class="form-element-field" type="input" placeholder="Entrez le nom d'une catégorie" required />
-                        <div class="form-element-bar"></div>
-                        <label class="form-element-label" for="category">Catégorie</label>
-                    </div>
-                    <div class="form-element form-input">
-                        <textarea id="description" class="form-element-field" placeholder="Description de la figure" type="text" required/></textarea>
-                        <div class="form-element-bar"></div>
-                        <label class="form-element-label" for="description">Description</label>
-                    </div>
-                    <div class="form-element">
-                        <button>Ajouter images</button>
-                    </div>
-                    <div class="form-element">
-                        <button>Ajouter videos</button>
-                    </div>
-                </fieldset>
-                <div class="form-actions">
-                    <button class="form-btn" type="submit">Publier</button>
-                    <button class="form-btn-cancel -nooutline" type="reset">Effacer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    </div>-->
+    <h1>Ajouter un nouveau trick</h1>
+
     <div class="container formcentre">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8">
 
     {{ form_start(formAddTrick) }}
 
@@ -58,6 +26,8 @@
     </button>
 
     {{ form_end(formAddTrick) }}
+            </div>
+    </div>
     </div>
     </div>
     </div>

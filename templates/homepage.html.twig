@@ -50,13 +50,13 @@
             {% for trick in tricks %}
 
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
-                        <a href="{{ path('trickpage', { name: trick.category.name, id: trick.id }) }}">
+                        <a href="{{ path('trickpage', { id: trick.id }) }}">
                         <div class="md-12">
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
                         </div>
                         {{ trick.name }} {{ trick.id }}
                         </a>
-                        {% if (1 == 1) %}
+                        {% if app.user %}
                         <a href="{{ path('modifytrickpage', {id: trick.id}) }}"><i class="fa fa-pencil"></i></a>
                         <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
                         {% endif %}

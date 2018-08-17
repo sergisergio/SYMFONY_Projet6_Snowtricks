@@ -50,7 +50,7 @@ class Trick
     private $comments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"remove"}, inversedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"persist"}, inversedBy="tricks")
      */
     private $category;
 

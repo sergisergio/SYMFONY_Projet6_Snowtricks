@@ -8,20 +8,24 @@
 {% block body %}
 
     <h1>Connexion</h1>
-    <div class="container formcentre">
-    <form action="{{ path('security_login') }}" method="post" style="margin-top:150px;">
-        <div class="form-group">
-            <input type="text" placeholder="Adresse email" required name="_username" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" placeholder="Mot de passe" required name="_password" class="form-control">
-        </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
+            <form action="{{ path('security_login') }}" method="post" style="margin-top:150px;">
+                <div class="form-group">
+                    <input type="text" placeholder="Adresse email" required name="_username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Mot de passe" required name="_password" class="form-control">
+                </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">Connexion</button>
-        </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Connexion</button>
+                </div>
 
-    </form>
+            </form>
+            </div>
+        </div>
     </div>
     </div>
     </div>
