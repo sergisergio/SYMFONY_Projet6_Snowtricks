@@ -22,6 +22,7 @@ class AddTrickType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('category', EntityType::class, [
+                'placeholder' => 'Choisissez une catégorie',
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name'
             ])

@@ -10,10 +10,10 @@
 {% block body %}
 
     <!-- Header -->
-    <header class="masthead" style="height: 50vh;background: url({{ medium.url }});background-repeat: no-repeat;background-size: cover;">
+    <header class="masthead" style="height: 50vh;background: url({# medium.url #});background-repeat: no-repeat;background-size: cover;">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
-                <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}{{ trick.id }}</h1>
+                <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
                 {% if app.user %}
                 <div style="position:absolute;top: 100px; right: 20px;width:100px; height:50px;">
@@ -29,13 +29,21 @@
     </header>
     <!-- Projects Section -->
     <section id="tricks" class="projects-section bg-light">
+
+
+
         <div class="container" >
             <div class="row justify-content-md-center">
             <div class="col-md-10 text-center">
                 <div class="row justify-content-md-center" style="padding: 0px;">
+                    {% for msg in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success">
+                            {{ msg }}
+                        </div>
+                    {% endfor %}
                 {% for medium in media %}
                         <div class="col-md-2">
-                            <p class="text-center"><img class="img-fluid" src="{{ medium.url }}" /></p>
+                            <p class="text-center"><img class="img-fluid" src="{# medium.url #}" /></p>
                         </div>
                 {% endfor %}
                 </div>
@@ -50,7 +58,7 @@
                     <i class="fa fa-calendar"></i>  publié le {{ trick.createdAt|date("d/m/Y") }}
                     {% endif %}
                 </span>
-                <span class="pull-right"><i class="fa fa-user"></i>Auteur: {{ trick.author.username }}</span>
+                <span class="pull-right"><i class="fa fa-user"></i> Auteur: {{ trick.author.username }}</span>
                 <hr>
             </div>
             </div>
@@ -66,15 +74,15 @@
                             <legend>
                              <i class="fa fa-comment" aria-hidden="true"></i> Laisser un commentaire
                             </legend>
-                            {{ form_errors(commentForm) }}
-                            <div class="form-group {% if not commentForm.content.vars.valid %}has-error{% endif %}">
+                            {{ form_start(commentForm) }}
+                            <div class="form-group {# if not commentForm.content.vars.valid %}has-error{% endif #}">
                             {#{{ form_label(commentForm.content, 'label.content', {label_attr: {class: 'hidden'}}) }}#}
 
                             {# Render any errors for the "content" field (e.g. when a class property constraint failed) #}
-                            {{ form_errors(commentForm.content) }}
+                                {#{{ form_errors(commentForm.content) }}#}
 
                             {{ form_widget(commentForm.content, {attr: {rows: 10}}) }}
-                            {{ form_help(commentForm.content) }}
+                            {# form_help(commentForm.content) #}
                             </div>
 
                             <div class="form-group">
@@ -93,8 +101,14 @@
                 </div>
             </div>
             <div class="col-sm-8" style="margin-bottom:250px;">
-                <h3><i class="fa fa-comments" aria-hidden="true"></i>{{ trick.comments|length }} commentaires</h3>
-                {% for comment in comments %}
+                <h3>
+                    <i class="fa fa-comments" aria-hidden="true"></i>{{ trick.comments|length }}
+                    {% if trick.comments|length <= 1 %}
+                    commentaire</h3>
+                    {% else %}
+                    commentaires</h3>
+                    {% endif %}
+                {% for comment in trick.comments %}
                     <div class="row post-comment" style="margin-bottom:2em;">
                         <a name="comment_{{ comment.id }}"></a>
                         <h4 class="col-sm-3" style="font-size:13px;">
@@ -110,7 +124,7 @@
                     </div>
                 {% else %}
                     <div class="post-comment">
-                        <p>{{ 'post.no_comments'|trans }}</p>
+                        {#<p>{{ 'post.no_comments'|trans }}</p>#}
                     </div>
                 {% endfor %}
             </div>

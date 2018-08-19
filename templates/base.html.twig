@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}">Accueil</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks">Tricks</a>
@@ -37,25 +37,34 @@
                 {# Ici je mets une condition pour l'affichage du menu selon si l'utilisateur est connecté ou non #}
                 {% if not app.user %}
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}">Se connecter</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}">S'incrire</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> S'incrire</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}">Se déconnecter</a>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ app.user.username }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="text-center"><a href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
+                        <hr>
+                        <li class="text-center"><a href=""><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a></li>
+                        <hr>
+                        <li class="text-center"><a href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a></li>
+                    </ul>
                 </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
-{% block body %}{% endblock %}
+{% block body %}
+
+{% endblock %}
 <!-- Footer -->
 <footer class="bg-black small text-center text-white-50" style="color: #fff;">
     <div class="container-fluid">
-        <p class="pull-left">Copyright &copy; Jimmy Sweat | Snowtricks 2018</p>
+        <p class="pull-left">Copyright &copy; Jimmy Sweat | Snowtricks {{ 'now'|date('Y') }}</p>
     </div>
 </footer>
 {% block javascripts %}

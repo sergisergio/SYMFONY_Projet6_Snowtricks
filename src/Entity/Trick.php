@@ -20,7 +20,7 @@ class Trick
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -60,7 +60,7 @@ class Trick
     private $media;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"remove"}, inversedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist"}, inversedBy="tricks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;

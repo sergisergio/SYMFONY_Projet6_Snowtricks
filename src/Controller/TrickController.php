@@ -48,7 +48,7 @@ class TrickController extends AbstractController
      *
      * @Route("/trick/{id}", name="trickpage")
      */
-    function trickPage($id,  TrickRepository $repoTrick, CommentRepository $repoComment, CategoryRepository $repoCategory, MediaRepository $repoMedia, UserRepository $repoUser, Request $request, ObjectManager $manager)
+    function trickPage($id,  TrickRepository $repoTrick, CommentRepository $repoComment, MediaRepository $repoMedia, UserRepository $repoUser, Request $request, ObjectManager $manager)
     {
         // Trouver un trick grâce à son id
         $trick = $repoTrick->find(['id' => $id]);
@@ -76,7 +76,7 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setCreatedAt(new \DateTime())
                 ->setTrick($trick);
-            $trick->addComment($comment);
+            //$trick->addComment($comment);
 
             $manager->persist($comment);
             $manager->flush();
@@ -133,7 +133,7 @@ class TrickController extends AbstractController
             $manager->persist($trick);
             $manager->flush();
 
-
+            $this->addFlash('success', 'Le trick a bien été ajouté!');
             return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
         }
 
@@ -211,7 +211,7 @@ class TrickController extends AbstractController
         $em->remove($trick);
         $em->flush();
 
-        //$this->addFlash('success', 'post.deleted_successfully');
+        $this->addFlash('message', 'Le trick a bien été supprimé');
 
         return $this->redirectToRoute('homepage');
     }

@@ -3,10 +3,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        #list .box-card{ display: none;}
-
-    </style>
 {% endblock %}
 {% block body %}
 
@@ -18,7 +14,9 @@
                 <h2 class="text-white-50 mx-auto mt-2 mb-5">Le snowboard dans tous ces états</h2>
 
             </div>
-            <a href="#tricks" class="js-scroll-trigger"><i class="fa fa-arrow-down fa-2x" style="position: absolute; right: 30px; bottom: 80px; color: #fff;"></i></a>
+            <a href="#tricks" class="js-scroll-trigger">
+                <i class="fa fa-arrow-down fa-2x" style="position: absolute; right: 30px; bottom: 80px; color: #fff;"></i>
+            </a>
         </div>
     </header>
 
@@ -42,9 +40,11 @@
         <div class="container" >
             <div class="col-md-12 text-center">
             {% if app.user %}
-                <a class="btn btn-success" href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Ajouter une figure</a>
-
-                {% endif %}
+                <a class="btn btn-success" href="{{ path('createtrickpage') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    &nbsp;Ajouter une figure
+                </a>
+            {% endif %}
             </div>
             <div class="row justify-content-md-center" id="list" style="margin: 50px auto;width: 100%;">
             {% for trick in tricks %}
@@ -52,41 +52,28 @@
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
                         <a href="{{ path('trickpage', { id: trick.id }) }}">
                         <div class="md-12">
+                            {% if trick.media is empty %}
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
+                            {% else %}
+                                ...
+                            {% endif %}
                         </div>
-                        {{ trick.name }} {{ trick.id }}
+                        {{ trick.name }}
                         </a>
                         {% if app.user %}
-                        <a href="{{ path('modifytrickpage', {id: trick.id}) }}"><i class="fa fa-pencil"></i></a>
-                        <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'><i class="fa fa-trash"></i></a>
+                        <a href="{{ path('modifytrickpage', {id: trick.id}) }}">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'>
+                            <i class="fa fa-trash"></i>
+                        </a>
                         {% endif %}
                     </div>
 
             {% endfor %}
             </div>
-            <div class="text-center">
-            <a class="btn btn-success" href="#tricks" id="loadMore">Voir plus</a>
-            </div>
+
         </div>
-        <div class="totop">
-        <a href="#tricks" class="js-scroll-trigger"><i class="fa fa-arrow-up fa-2x" style="position: absolute; right: 30px; bottom: 80px; color: #fff;"></i></a>
-        </div>
+
     </section>
-{% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            size_boxcard = $("#list .box-card").length;
-            x=15;
-            $('#list .box-card:lt('+x+')').show();
-            $('#loadMore').click(function () {
-                x= (x+5 <= size_boxcard) ? x+5 : size_boxcard;
-                $('#list .box-card:lt('+x+')').show();
-            });
-        });
-
-    </script>
-
-
-{% endblock %}
 {%  endblock %}
