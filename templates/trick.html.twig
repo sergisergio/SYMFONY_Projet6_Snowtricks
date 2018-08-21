@@ -1,5 +1,5 @@
 {%  extends 'base.html.twig' %}
-{% block title %}{{ trick.id }}{% endblock %}
+{% block title %}{{ trick.name }}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
@@ -10,7 +10,9 @@
 {% block body %}
 
     <!-- Header -->
-    <header class="masthead" style="height: 50vh;background: url({# medium.url #});background-repeat: no-repeat;background-size: cover;">
+    {% for medium in trick.media | slice(0) %}
+    <header class="masthead" style="height: 50vh;background: url(../../images/{{ medium.url }});background-repeat: no-repeat;background-size: cover;">
+    {% endfor %}
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
                 <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}</h1>
@@ -35,15 +37,18 @@
         <div class="container" >
             <div class="row justify-content-md-center">
             <div class="col-md-10 text-center">
-                <div class="row justify-content-md-center" style="padding: 0px;">
+                <div class="row justify-content-md-center">
                     {% for msg in app.session.flashBag.get('success') %}
                         <div class="alert alert-success">
                             {{ msg }}
                         </div>
                     {% endfor %}
-                {% for medium in media %}
+                </div>
+                <div class="row justify-content-md-center" style="padding: 0px;">
+
+                {% for medium in trick.media | slice(0) %}
                         <div class="col-md-2">
-                            <p class="text-center"><img class="img-fluid" src="{# medium.url #}" /></p>
+                            <p class="text-center"><img class="img-fluid" src="../../images/{{ medium.url }} " /></p>
                         </div>
                 {% endfor %}
                 </div>
@@ -102,7 +107,7 @@
             </div>
             <div class="col-sm-8" style="margin-bottom:250px;">
                 <h3>
-                    <i class="fa fa-comments" aria-hidden="true"></i>{{ trick.comments|length }}
+                    <i class="fa fa-comments" aria-hidden="true"></i> {{ trick.comments|length }}
                     {% if trick.comments|length <= 1 %}
                     commentaire</h3>
                     {% else %}

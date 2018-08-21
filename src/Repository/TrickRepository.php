@@ -19,6 +19,21 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
+    /**
+     * @param integer $page
+     * @param integer $nbPerPage
+     * @return Paginator
+     */
+    public function getTricksWithMedia()
+    {
+        $qb = $this->createQueryBuilder('t');
+        $qb
+            ->leftJoin('t.media', 'm')
+            //->addSelect('m')
+            ->getQuery()
+            ->getResult();
+
+    }
 //    /**
 //     * @return Trick[] Returns an array of Trick objects
 //     */

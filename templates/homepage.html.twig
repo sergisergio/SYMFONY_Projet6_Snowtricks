@@ -37,7 +37,7 @@
 
     <!-- Projects Section -->
     <section id="tricks" style="background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);" class="projects-section bg-light">
-        <div class="container" >
+        <div class="container-fluid" >
             <div class="col-md-12 text-center">
             {% if app.user %}
                 <a class="btn btn-success" href="{{ path('createtrickpage') }}">
@@ -47,15 +47,16 @@
             {% endif %}
             </div>
             <div class="row justify-content-md-center" id="list" style="margin: 50px auto;width: 100%;">
-            {% for trick in tricks %}
+            {% for trick in tricks  | slice(0, 15) %}
 
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
                         <a href="{{ path('trickpage', { id: trick.id }) }}">
                         <div class="md-12">
-                            {% if trick.media is empty %}
+                            {% for medium in trick.media|slice(0, 1) %}
+                            <img src="../../images/{{ medium.url }}" class="img-fluid"/>
+                            {% endfor %}
+                            {% if media is empty %}
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
-                            {% else %}
-                                ...
                             {% endif %}
                         </div>
                         {{ trick.name }}

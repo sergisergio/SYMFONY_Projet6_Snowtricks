@@ -6,6 +6,7 @@
  */
 namespace App\Controller;
 
+use App\Entity\Media;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +33,12 @@ class HomeController extends AbstractController
     {
         $repo = $em->getRepository(Trick::class);
         $tricks = $repo->findAll();
+        $repo = $em->getRepository(Media::class);
+        $media = $repo->findAll();
 
         return $this->render('homepage.html.twig', [
             'tricks' => $tricks,
+            'media' => $media
         ]);
     }
 }
