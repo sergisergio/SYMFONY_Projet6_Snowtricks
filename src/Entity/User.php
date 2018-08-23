@@ -15,6 +15,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     fields={"email"},
  *     message="Cet Email est déjà pris"
  * )
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="Ce pseudo est déjà pris"
+ * )
  */
 class User implements UserInterface
 {
@@ -27,6 +31,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage="Votre pseudo doit faire minimum 8 caractères")
      */
     private $username;
 

@@ -6,9 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="Cet nom est déjà pris"
+ * )
  */
 class Trick
 {
@@ -21,6 +26,7 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Length(min=4, max=255, minMessage="4 caractères minimum")
      */
     private $name;
 
@@ -36,6 +42,7 @@ class Trick
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Length(min=10, minMessage="10 caractères minimum")
      */
     private $createdAt;
 

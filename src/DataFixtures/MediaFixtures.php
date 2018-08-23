@@ -11,8 +11,7 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        // Première façon de faire des fixtures à l'aide d'une boucle
         /*for ($i = 1; $i <= 5; $i++) {
             $media = new Media();
             $media->setUrl('')
@@ -23,6 +22,8 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('media-'.$i, $media);
         }*/
         //$manager->flush();
+
+        // Deuxième façon: je crée des médias manuellement un par un de façon à avoir un jeu de données
         $image1 = new Media();
         $image1->setUrl('frontflip.jpg');
         $image1->setType('i');
@@ -62,18 +63,16 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image6);
 
         $image7 = new Media();
-        $image7->setUrl('indy.jpg');
+        $image7->setUrl('stalefish.jpg');
         $image7->setType('i');
         $image7->setTrick($this->getReference('trick7'));
         $manager->persist($image7);
 
         $image8 = new Media();
-        $image8->setUrl('sad.jpg');
+        $image8->setUrl('mute.jpg');
         $image8->setType('i');
         $image8->setTrick($this->getReference('trick8'));
         $manager->persist($image8);
-
-
 
         $image9 = new Media();
         $image9->setUrl('noseslide.jpg');
@@ -90,6 +89,7 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
+    // Chaque média correspond à un trick, je dois donc récupérer la référence de ce trick.
     public function getDependencies()
     {
         // TODO: Implement getDependencies() method.

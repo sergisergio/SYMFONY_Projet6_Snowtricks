@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -18,6 +19,7 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=1, max=255, minMessage="Le commentaire ne peut pas être vide !")
      */
     private $content;
 

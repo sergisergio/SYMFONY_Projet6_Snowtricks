@@ -14,7 +14,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-
+        // Première façon de faire des fixtures à l'aide d'une boucle
         /*for ($i = 1; $i <= 30; $i++)
         {
             $trick = new Trick();
@@ -29,9 +29,11 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('trick-'.$i, $trick);
             $trick->setCategory($this->getReference('category-'.rand(1, 5)));
             $trick->setAuthor($this->getReference('user-'.rand(1,5)));
-
-
-        }*/
+        }
+        $manager->flush();
+        */
+        // Deuxième façon: je crée des tricks manuellement un par un de façon à avoir un jeu de données
+        // 10 Tricks seront créés
         $date = new \DateTime();
 
         $trick1 = new Trick();
@@ -52,8 +54,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick2->setAuthor($this->getReference('user2'));
         $trick2->setName('Back flip');
         $manager->persist($trick2);
-
-
 
         $trick3 = new Trick();
         $trick3->setDescription(
@@ -100,23 +100,23 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick6);
 
         $trick7 = new Trick();
-        $trick7->setDescription('Saisie de la carre backside de la planche, entre les deux pieds, avec la main avant');
+        $trick7->setDescription('Saisie de la carre frontside de la planche entre les deux pieds avec la main avant');
         $trick7->setCreatedAt($date);
         $trick7->setSlug('slug');
         $trick7->setCategory($this->getReference('cat3'));
         $trick7->setAuthor($this->getReference('user1'));
-        $trick7->setName('sad');
+        $trick7->setName('mute');
         $manager->persist($trick7);
 
         $trick8 = new Trick();
         $trick8->setDescription(
-            'Saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière'
+            'saisie de la carre backside de la planche entre les deux pieds avec la main arrière'
         );
         $trick8->setCreatedAt($date->add(new \DateInterval('P2D')));
         $trick8->setSlug('slug');
         $trick8->setCategory($this->getReference('cat3'));
         $trick8->setAuthor($this->getReference('user1'));
-        $trick8->setName('indy');
+        $trick8->setName('stalefish');
         $manager->persist($trick8);
 
         $trick9 = new Trick();
@@ -138,8 +138,28 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick10->setName('tail slide');
         $manager->persist($trick10);
 
+        // J'ajoute encore 10 tricks avec une boucle pour tester le load more
+        for ($i = 11; $i <= 20; $i++)
+        {
+            $trick = new Trick();
+            $trick->setName('Name-'.$i)
+                ->setSlug('slug')
+                ->setDescription('Description'.$i.'Ut suscipit posuere justo at vulputate. Aliquam sodales odio id eleifend tristique. Potus sensim ad ferox abnoba. Teres talis saepe tractare de camerarius flavum sensorem. Silva de secundus galatae demitto quadra.')
+                ->setCreatedAt(new \DateTime())
+                ->setUpdatedAt(new \DateTime())
+                ->setCategory($this->getReference('cat4'))
+                ->setAuthor($this->getReference('user2'));
+
+
+            $manager->persist($trick);
+            $this->addReference('trick-'.$i, $trick);
+            //$trick->setCategory($this->getReference('category-'.rand(1, 5)));
+            //$trick->setAuthor($this->getReference('user-'.rand(1,5)));
+        }
+        // Effacer la boucle avant quand le load more sera ok
         $manager->flush();
 
+        // Chaque article peut avoir des commentaires donc je dois ajouter une référence
         $this->addReference('trick1', $trick1);
         $this->addReference('trick2', $trick2);
         $this->addReference('trick3', $trick3);
@@ -152,6 +172,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference('trick10', $trick10);
     }
 
+    // Aussi, chaque article a un auteur et une catégorie: je dois donc récupérer la référence des deux.
     public function getDependencies()
     {
         // TODO: Implement getDependencies() method.

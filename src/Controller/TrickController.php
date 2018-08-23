@@ -100,6 +100,7 @@ class TrickController extends AbstractController
             'commentForm' => $form->createView(),
 
         ]);
+        // Est-ce-que j'ai besoin de tout ? Je peux utiliser un paramconverter ?
     }
 
     /**
@@ -169,6 +170,7 @@ class TrickController extends AbstractController
             'trick' => $trick,
             'formModifyTrick' => $form->createView()
         ]);
+        // Idem ! Ne serait-ce pas mieux d'utiliser un paramconverter ?
     }
 
     /**
@@ -193,5 +195,6 @@ class TrickController extends AbstractController
         $this->addFlash('message', 'Le trick a bien été supprimé');
 
         return $this->redirectToRoute('homepage');
+        // Idem : paramconverter ?
     }
 }

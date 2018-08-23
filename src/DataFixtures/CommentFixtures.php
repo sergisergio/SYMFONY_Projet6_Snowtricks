@@ -11,8 +11,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        // Première façon de faire des fixtures à l'aide d'une boucle
         /*for ($i = 1; $i <= 5; $i++) {
             $comment = new Comment();
             $comment->setContent('Contenu Fixture-'.$i.'Diatrias tolerare tanquam noster caesium. Pellentesque vitae velit ex. Ubi est barbatus nix. Sunt seculaes transferre talis camerarius fluctuies. Bassus fatalis classiss virtualiter transferre de flavum. Sunt torquises imitari velox mirabilis medicinaes. Silva de secundus galatae demitto quadra. Ut eleifend mauris et risus ultrices egestas.')
@@ -22,7 +21,11 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $comment->setAuthor($this->getReference('user-1'));
 
             $manager->persist($comment);
-        }*/
+        }
+        $manager->flush();
+        */
+        // Deuxième façon: je crée des commentaires manuellement un par un de façon à avoir un jeu de données
+        // Ici, je crée 5 commentaires.
         $date = new \DateTime();
 
         $comment1 = new Comment();
@@ -62,7 +65,8 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
     }
-
+    // Chaque commentaire correspond à un utilisateur et à un trick.
+    // Je dois donc récupérer la référence du trick et celle de l'auteur pour chaque objet Comment
     public function getDependencies()
     {
         // TODO: Implement getDependencies() method.

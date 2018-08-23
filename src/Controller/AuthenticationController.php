@@ -65,7 +65,7 @@ class AuthenticationController extends AbstractController
             $message = (new \Swift_Message('Votre inscription sur SnowTricks'))
                 ->setFrom('ptraon@gmail.com')
                 ->setTo($user->getEmail())
-                ->setBody('Lien'.'http://localhost:8000/confirm?user=' . $user->getId() . '&token=' . $token);
+                ->setBody('http://localhost:8000/confirm?user=' . $user->getId() . '&token=' . $token);
             /* Envoi du mail avec lien de confirmation */
             $mailer->send($message);
             /* message Flash */
@@ -109,7 +109,7 @@ class AuthenticationController extends AbstractController
             $this->addFlash('success', 'Votre compte a bien été activé');
         }
         /* Si tout est bon, redirection vers la page d'accueil */
-        return $this->redirect('/');
+        return $this->redirecttoRoute('security_login');
     }
     /**
      * Page de connexion (Voir le fichier security.yaml)

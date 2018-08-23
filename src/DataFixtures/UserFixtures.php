@@ -10,8 +10,7 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        // Première façon de faire des fixtures à l'aide d'une boucle
         /*for ($i = 1; $i <= 5; $i++) {
             $user = new User();
             $user->setUsername('Utilisateur-'.$i)
@@ -20,20 +19,20 @@ class UserFixtures extends Fixture
                 ->setToken('tokentokentoken'.$i)
                 ->setRole(1)
                 ->setIsActive(1);
-
-
             $manager->persist($user);
             $this->addReference('user-' . $i, $user);
         }
-        $manager->flush();*/
+        $manager->flush();
+        */
+
+        // Deuxième façon: je crée des utilisateurs manuellement un par un de façon à avoir un jeu de données
+        // Je crée 2 utilisateurs
         $user1 = new User();
         $user1->setUsername('Philippe');
         $user1->setEmail('docsphilippe@gmail.com');
         $user1->setPassword(password_hash('philippe', PASSWORD_BCRYPT));
         $user1->setIsActive(true);
         $user1->setRole('1');
-        //$user1->setRegisteredAt(new \DateTime());
-        //$user1->setAvatar('johnAvatar.jpeg');
         $user1->setToken('blabla');
         $manager->persist($user1);
 
@@ -43,13 +42,12 @@ class UserFixtures extends Fixture
         $user2->setPassword(password_hash('anonyme', PASSWORD_BCRYPT));
         $user2->setIsActive(true);
         $user2->setRole('1');
-        //$user2->setRegisteredAt(new \DateTime());
-        //$user2->setAvatar('samAvatar.png');
         $user2->setToken('blabla');
         $manager->persist($user2);
 
         $manager->flush();
 
+        // Chaque utilisateur peut ajouter un trick ou un commentaire: je dois donc ajouter une référence
         $this->addReference('user1', $user1);
         $this->addReference('user2', $user2);
     }
