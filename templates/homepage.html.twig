@@ -4,7 +4,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
     <style>
-        .box-card {display:none;}
+        .box-card, .fa-arrow-up {display:none;}
     </style>
 {% endblock %}
 {% block body %}
@@ -96,6 +96,9 @@
 
             </div>
             <button class="btn btn-success" href="#" id="loadMore" style="margin: 50px auto 150px; display: block;">Load More</button>
+            <a href="#tricks" class="js-scroll-trigger">
+                <i class="fa fa-arrow-up fa-2x" style="position: absolute; right: 30px; bottom: 280px; color: #fff;"></i>
+            </a>
         </div>
 
     </section>
@@ -107,6 +110,7 @@
             $(".box-card").slice(0, 15).show();
             $("#loadMore").on('click', function (e) {
                 e.preventDefault();
+                $(".fa-arrow-up:hidden").slideDown();
                 $(".box-card:hidden").slice(0, 5).slideDown();
                 if ($(".box-card:hidden").length == 0) {
                     $("#load").fadeOut('slow');
