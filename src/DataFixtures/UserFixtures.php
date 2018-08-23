@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
         $manager->flush();*/
         $user1 = new User();
         $user1->setUsername('Philippe');
-        $user1->setEmail('ptraon@gmail.com');
+        $user1->setEmail('docsphilippe@gmail.com');
         $user1->setPassword(password_hash('philippe', PASSWORD_BCRYPT));
         $user1->setIsActive(true);
         $user1->setRole('1');

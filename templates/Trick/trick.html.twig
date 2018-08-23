@@ -31,9 +31,6 @@
     </header>
     <!-- Projects Section -->
     <section id="tricks" class="projects-section bg-light">
-
-
-
         <div class="container" >
             <div class="row justify-content-md-center">
             <div class="col-md-10 text-center">
@@ -74,7 +71,7 @@
             <div class="row justify-content-md-center">
                 <div class="col-sm-8">
                      <div id="post-add-comment" class="well" style="background-color: #ddd;padding: 19px;border-radius: 4px;margin-bottom: 50px;">
-                    {% if app.user %}
+                    {% if app.user.isActive == 1 %}
                         <fieldset>
                             <legend>
                              <i class="fa fa-comment" aria-hidden="true"></i> Laisser un commentaire

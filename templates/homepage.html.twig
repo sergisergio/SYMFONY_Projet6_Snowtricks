@@ -10,6 +10,22 @@
     <header class="masthead">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
+                {% for flash_message in app.session.flashbag.get('success') %}
+                    <div class="container alert alert-success alert-dismissible fade show col-md-5" role="alert" style="top: 30px">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                {% for flash_message in app.session.flashbag.get('info') %}
+                    <div class="container alert alert-success alert-dismissible fade show col-md-5" role="alert" style="top: 30px">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
                 <h1 class="mx-auto my-0 text-uppercase">Snowtricks</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5">Le snowboard dans tous ces états</h2>
 
@@ -48,27 +64,29 @@
             </div>
             <div class="row justify-content-md-center" id="list" style="margin: 50px auto;width: 100%;">
             {% for trick in tricks  | slice(0, 15) %}
-
                     <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
                         <a href="{{ path('trickpage', { id: trick.id }) }}">
-                        <div class="md-12">
+                        <div class="md-12 trickcard">
                             {% for medium in trick.media|slice(0, 1) %}
                             <img src="../../images/{{ medium.url }}" class="img-fluid"/>
                             {% endfor %}
                             {% if media is empty %}
                             <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
                             {% endif %}
+                            <hr>
+                            <span>{{ trick.name }}</span>
+                            {% if app.user %}
+                                <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'>
+                                    <i class="fa fa-trash pull-right"></i>
+                                </a>
+                                <a href="{{ path('modifytrickpage', {id: trick.id}) }}">
+                                    <i class="fa fa-pencil pull-right"></i>
+                                </a>
+
+                            {% endif %}
                         </div>
-                        {{ trick.name }}
                         </a>
-                        {% if app.user %}
-                        <a href="{{ path('modifytrickpage', {id: trick.id}) }}">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'>
-                            <i class="fa fa-trash"></i>
-                        </a>
-                        {% endif %}
+
                     </div>
 
             {% endfor %}

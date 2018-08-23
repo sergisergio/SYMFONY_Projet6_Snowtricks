@@ -23,9 +23,8 @@ use App\Entity\Trick;
  */
 class HomeController extends AbstractController
 {
-
     /**
-     * Lists all Trick entities
+     * Liste de tous les tricks
      *
      * @Route("/", name="homepage")
      */

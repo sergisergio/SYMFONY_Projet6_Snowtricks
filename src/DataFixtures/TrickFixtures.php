@@ -79,7 +79,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick5 = new Trick();
         $trick5->setDescription(
-            'Deux tours complets en effectuant une rotation horizontale pendant le saut, puis en attérissant en position switch ou normal'
+            'Deux tours complets en effectuant une rotation horizontale pendant le saut, puis en atterrissant en position switch ou normal'
         );
         $trick5->setCreatedAt($date->add(new \DateInterval('P1Y1D')));
         $trick5->setSlug('slug');

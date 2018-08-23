@@ -7,7 +7,23 @@
 {% endblock %}
 {% block body %}
 
-    <h1>Connexion</h1>
+    <h1 class="text-center" style="margin-top: 150px">Connexion</h1>
+    {% for flash_message in app.session.flashbag.get('info') %}
+        <div class="container alert alert-info alert-dismissible fade show col-md-5" role="alert" style="top: 100px">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    {% for flash_message in app.session.flashbag.get('success') %}
+        <div class="container alert alert-success alert-dismissible fade show col-md-5" role="alert" style="top: 30px">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ flash_message }}
+        </div>
+    {% endfor %}
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-6">
@@ -18,7 +34,7 @@
                 <div class="form-group">
                     <input type="password" placeholder="Mot de passe" required name="_password" class="form-control">
                 </div>
-
+                <a href="{{ path('forgotpasswordpage') }}" class="pull-right">Mot de passe oublié ?</a>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Connexion</button>
                 </div>

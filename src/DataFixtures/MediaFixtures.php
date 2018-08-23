@@ -24,16 +24,18 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         }*/
         //$manager->flush();
         $image1 = new Media();
-        $image1->setUrl('indy.jpg');
+        $image1->setUrl('frontflip.jpg');
         $image1->setType('i');
-        $image1->setTrick($this->getReference('trick2'));
+        $image1->setTrick($this->getReference('trick1'));
         $manager->persist($image1);
 
         $image2 = new Media();
-        $image2->setUrl('sad.jpg');
+        $image2->setUrl('backflip.jpg');
         $image2->setType('i');
-        $image2->setTrick($this->getReference('trick1'));
+        $image2->setTrick($this->getReference('trick2'));
         $manager->persist($image2);
+
+
 
         $image3 = new Media();
         $image3->setUrl('truckDriver.jpg');
@@ -60,16 +62,18 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($image6);
 
         $image7 = new Media();
-        $image7->setUrl('frontflip.jpg');
+        $image7->setUrl('indy.jpg');
         $image7->setType('i');
         $image7->setTrick($this->getReference('trick7'));
         $manager->persist($image7);
 
         $image8 = new Media();
-        $image8->setUrl('backflip.jpg');
+        $image8->setUrl('sad.jpg');
         $image8->setType('i');
         $image8->setTrick($this->getReference('trick8'));
         $manager->persist($image8);
+
+
 
         $image9 = new Media();
         $image9->setUrl('noseslide.jpg');

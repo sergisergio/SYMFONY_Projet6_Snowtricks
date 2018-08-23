@@ -48,7 +48,7 @@
                     <ul class="dropdown-menu">
                         <li class="text-center"><a href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
                         <hr>
-                        <li class="text-center"><a href=""><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a></li>
+                        <li class="text-center"><a href="{{ path('profile', {id: app.user.id}) }}"><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a></li>
                         <hr>
                         <li class="text-center"><a href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a></li>
                     </ul>

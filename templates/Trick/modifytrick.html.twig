@@ -1,0 +1,29 @@
+{%  extends 'base.html.twig' %}
+{% form_theme formModifyTrick 'bootstrap_4_layout.html.twig' %}
+{% block title %}Modifier un trick{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/custom.css">
+{% endblock %}
+{% block body %}
+    <h1>Modifier un nouveau trick</h1>
+
+    <div class="container formcentre">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8">
+
+                {{ form_start(formModifyTrick) }}
+
+                {{ form_widget(formModifyTrick) }}
+
+                <button type="submit" class="btn btn-success">
+                    Mettre à jour
+                </button>
+
+                {{ form_end(formModifyTrick) }}
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{%  endblock %}

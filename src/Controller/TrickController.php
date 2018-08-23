@@ -14,6 +14,7 @@ use App\Entity\Comment;
 use App\Entity\User;
 use App\Entity\Trick;
 use App\Form\CommentType;
+use App\Form\ModifyTrickType;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\MediaRepository;
@@ -80,7 +81,6 @@ class TrickController extends AbstractController
 
             $manager->persist($comment);
             $manager->flush();
-
             // Flash messages are used to notify the user about the result of the
             // actions. They are deleted automatically from the session as soon
             // as they are accessed.
@@ -90,7 +90,7 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('trickpage', ['id' => $trick->getId()]);
         }
 
-        return $this->render('trick.html.twig', [
+        return $this->render('Trick/trick.html.twig', [
             'trick' => $trick,
             'comments' => $comments,
             //'category' => $categories,
@@ -103,11 +103,12 @@ class TrickController extends AbstractController
     }
 
     /**
-     * Add a trick/ Modify a trick
+     * Add a trick
      *
      * @Route("/add/trick", name="createtrickpage")
-     * @Route("/modifytrick/{id}", name="modifytrickpage")
+     *
      */
+    /*@Route("/addtrick", name="addtrickpage")*/
     public function add(Trick $trick = null, Request $request, ObjectManager $manager, CategoryRepository $repoCategory)
     {
         if (!$trick) {
@@ -124,73 +125,51 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //$user = new User();
-            if (!$trick->getId()) {
-
-
-            }
-
             $manager->persist($trick);
             $manager->flush();
 
-            $this->addFlash('success', 'Le trick a bien été ajouté!');
+            //if (!$trick->getId()) {
+                $this->addFlash('success', 'Le trick a bien été ajouté!');
+            //}
+            //else
+                //$this->addFlash('success', 'Le trick a bien été modifié!');
             return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
         }
 
         return $this->render(
-            'createtrick.html.twig', [
-                'formAddTrick' => $form->createView(),
-                'editMode' => $trick->getId() !== null
+            'Trick/createtrick.html.twig', [
+                'formAddTrick' => $form->createView()
+                //'editMode' => $trick->getId() !== null
             ]);
     }
 
-
-     /* Route("/modifytrick/{id}", name="modifytrickpage")*/
-
-    /*function modifyTrickPage(Request $request)
+    /**
+     * Modify a trick
+     *
+     * @Route("/modifytrick/{id}", name="modifytrickpage")
+     */
+    function modifyTrickPage(int $id, Trick $trick, Request $request, ObjectManager $manager)
     {
-        //$repository = $em->getRepository(Trick::class);
-        //$trick = $repository->findOneBy(['id' => $id]);
-        //return $this->render('modifytrick.html.twig', [
-        //    'trick' => $trick,
-        //]);
-        $trick = new Trick();
-        /*$trick->setName('nameform')
-            ->setSlug('slugform')
-            ->setDescription('descriptionform')
-            ->setCreatedAt(new \DateTime())
-            ->setUpdatedAt(new \DateTime());*/
-
-
-        /*$form = $this->createFormBuilder($trick)
-            ->add('name', TextType::class)
-            ->add('slug', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('save', SubmitType::class, array('label' => 'modify trick'))
-            ->getForm();
-
+        $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);
+        $form = $this->createForm(ModifyTrickType::class, $trick);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            //but, the original '$trick' variable has also been updated
-            $trick = $form->getData();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->>getDoctrine()->getManager();
-            // $entityManager->flush()
+            $manager->persist($trick);
+            $manager->flush();
 
-            return $this->redirectToRoute('homepage');
+            //if (!$trick->getId()) {
+            $this->addFlash('success', 'Le trick a bien été modifié!');
+            //}
+            //else
+            //$this->addFlash('success', 'Le trick a bien été modifié!');
+            return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
         }
-
-        return $this->render(
-            'modifytrick.html.twig', [
-                'formModifyTrick' => $form->createView(),
-            ]
-        );
-
-    }*/
+        return $this->render('Trick/modifytrick.html.twig', [
+            'trick' => $trick,
+            'formModifyTrick' => $form->createView()
+        ]);
+    }
 
     /**
      * Delete a trick
