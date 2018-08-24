@@ -86,6 +86,8 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $image10->setTrick($this->getReference('trick10'));
         $manager->persist($image10);
 
+
+
         $manager->flush();
     }
 
@@ -93,6 +95,6 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         // TODO: Implement getDependencies() method.
-        return [TrickFixtures::class];
+        return [TrickFixtures::class, UserFixtures::class];
     }
 }

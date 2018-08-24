@@ -42,7 +42,6 @@ class Trick
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Length(min=10, minMessage="10 caractères minimum")
      */
     private $createdAt;
 

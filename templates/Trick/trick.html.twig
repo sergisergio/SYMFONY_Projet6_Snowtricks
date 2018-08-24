@@ -110,14 +110,19 @@
                     {% else %}
                     commentaires</h3>
                     {% endif %}
+                <hr>
                 {% for comment in trick.comments %}
                     <div class="row post-comment" style="margin-bottom:2em;">
                         <a name="comment_{{ comment.id }}"></a>
+
                         <h4 class="col-sm-3" style="font-size:13px;">
+                            {#<img src="../../images/{{ comment.author.media.url }}"/>#}
+                            {% if comment.author.avatar is not empty %}
+                            <img src="../../images/{{ comment.author.avatar }}" class="img-fluid" style="max-width:50%"/>
+                            {% else %}
+                                <img src="../../images/snowboarder-profile.png" class="img-fluid" style="max-width:50%"/>
+                            {% endif %}
                         <strong>{{ comment.author.username }}</strong><br/> publié le<br />
-                        {# it's not mandatory to set the timezone in localizeddate(). This is done to
-                           avoid errors when the 'intl' PHP extension is not available and the application
-                           is forced to use the limited "intl polyfill", which only supports UTC and GMT #}
                         <strong>{{ comment.createdAt|date("d/m/Y") }}</strong>
                         </h4>
                         <div class="col-sm-9">

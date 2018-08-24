@@ -152,7 +152,7 @@ class TrickController extends AbstractController
     function modifyTrickPage(int $id, Trick $trick, Request $request, ObjectManager $manager)
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);
-        $form = $this->createForm(ModifyTrickType::class, $trick);
+        $form = $this->createForm(AddTrickType::class, $trick);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -168,7 +168,7 @@ class TrickController extends AbstractController
         }
         return $this->render('Trick/modifytrick.html.twig', [
             'trick' => $trick,
-            'formModifyTrick' => $form->createView()
+            'formAddTrick' => $form->createView()
         ]);
         // Idem ! Ne serait-ce pas mieux d'utiliser un paramconverter ?
     }

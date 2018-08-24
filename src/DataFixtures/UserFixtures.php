@@ -34,6 +34,7 @@ class UserFixtures extends Fixture
         $user1->setIsActive(true);
         $user1->setRole('1');
         $user1->setToken('blabla');
+        $user1->setAvatar('avatar1.jpg');
         $manager->persist($user1);
 
         $user2 = new User();
@@ -43,6 +44,7 @@ class UserFixtures extends Fixture
         $user2->setIsActive(true);
         $user2->setRole('1');
         $user2->setToken('blabla');
+        $user1->setAvatar('avatar1.jpg');
         $manager->persist($user2);
 
         $manager->flush();

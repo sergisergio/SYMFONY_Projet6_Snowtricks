@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,17 +27,17 @@ class AddTrickType extends AbstractType
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name'
             ])
-            ->add(
-                'media',
-                EntityType::class,
-                [
-                    'class' => 'App\Entity\Media',
-                    'choice_label' => 'url'
-                ]
-            )
+                    // Comment faire ici car je dois utiliser EntityType et FileType...
+                    // Dans le traitement, cette donnée devra être de type 'i'
+            //->add('media', FileType::class, array('label' => 'Image (fichier jpg)'))
 
-            // QUESTION 1 MENTORAT 17/08/18
-        ;
+            // Ici même problème, la donnée devra être de type 'v'
+            /*->add('media', EntityType::class, [
+                'label' => 'Lien vidéo (youtube ou dailymotion)',
+                'class' => 'App\Entity\Media',
+                'choice_label' => 'url',
+            ])*/
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

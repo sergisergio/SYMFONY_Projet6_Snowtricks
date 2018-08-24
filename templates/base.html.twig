@@ -43,7 +43,7 @@
                     <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> S'incrire</a>
                 </li>
                 {% else %}
-                <li class="dropdown">
+                {#<li class="dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ app.user.username }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="text-center"><a href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
@@ -53,6 +53,17 @@
                         <li class="text-center"><a href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a></li>
                     </ul>
                 </li>
+                #}
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('profile', {id: app.user.id}) }}"><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
@@ -63,7 +74,7 @@
 {% endblock %}
 <!-- Footer -->
 <footer class="bg-black small text-center text-white-50" style="color: #fff;">
-    <div class="container-fluid">
+    <div class="container">
         <p class="pull-left">Copyright &copy; Jimmy Sweat | Snowtricks {{ 'now'|date('Y') }}</p>
     </div>
 </footer>
@@ -77,17 +88,8 @@
     </script>
     <!-- Custom scripts for this template -->
     <script src="../../js/grayscale.min.js"></script>
-    <script src="../../js/popconfirm.js"></script>
-    <script>
-        $("[data-toggle='confirmation']").popConfirm({
-        title: "Supprimer ce trick ?", // The title of the confirm
-        //content: "I have warned you !", // The message of the confirm
-        placement: "bottom", // The placement of the confirm (Top, Right, Bottom, Left)
-        container: "body", // The html container
-        yesBtn: "Supprimer",
-        noBtn: "Annuler"
-});
-    </script>
+
+
 {% endblock %}
 </body>
 </html>

@@ -67,14 +67,14 @@
             </div>
             <div class="row justify-content-md-center" id="list" style="margin: 50px auto;width: 100%;">
             {% for trick in tricks %}
-                    <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;">
+                    <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;border-radius:5px;">
                         <a href="{{ path('trickpage', { id: trick.id }) }}">
                         <div class="md-12 trickcard">
                             {% for medium in trick.media|slice(0, 1) %}
-                            <img src="../../images/{{ medium.url }}" class="img-fluid"/>
+                            <img src="../../images/{{ medium.url }}" class="img-fluid" style="padding-top:10px;"/>
                             {% endfor %}
                             {% if trick.media is empty %}
-                            <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" />
+                            <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" style="padding-top:10px;"/>
                             {% endif %}
                             <hr>
                             <span>{{ trick.name }}</span>
@@ -105,6 +105,17 @@
 {%  endblock %}
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="../../js/popconfirm.js"></script>
+    <script>
+        $("[data-toggle='confirmation']").popConfirm({
+            title: "Supprimer ce trick ?", // The title of the confirm
+            //content: "I have warned you !", // The message of the confirm
+            placement: "bottom", // The placement of the confirm (Top, Right, Bottom, Left)
+            container: "body", // The html container
+            yesBtn: "Supprimer",
+            noBtn: "Annuler"
+        });
+    </script>
     <script>
         $(function () {
             $(".box-card").slice(0, 15).show();
@@ -116,7 +127,7 @@
                     $("#load").fadeOut('slow');
                 }
                 $('html,body').animate({
-                scrollTop: $(this).offset().top
+                    scrollTop: $(this).offset().top
                 }, 1500);
             });
         });
