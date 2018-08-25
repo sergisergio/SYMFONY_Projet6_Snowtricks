@@ -129,11 +129,7 @@ class TrickController extends AbstractController
             $manager->persist($trick);
             $manager->flush();
 
-            //if (!$trick->getId()) {
-                $this->addFlash('success', 'Le trick a bien été ajouté!');
-            //}
-            //else
-                //$this->addFlash('success', 'Le trick a bien été modifié!');
+            $this->addFlash('success', 'Le trick a bien été ajouté!');
             return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
         }
 

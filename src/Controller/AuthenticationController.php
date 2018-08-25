@@ -22,11 +22,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-/* A voir avec Karim */
-/* 1. afficher seulement quand isActive est égal à 1 */
-/* 2. réinitialiser le mot de passe */
-/* 3. mise à jour de PHP pour installer swiftmailer->comment éviter l'export ? */
-/* 4. formulaire ajout d'image */
+
 /**
  * Class AuthenticationController
  * @package App\Controller
@@ -40,41 +36,45 @@ class AuthenticationController extends AbstractController
      */
     function signupPage(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $generator)
     {
-        /* 1) Construction du formulaire */
+        // 1) Construction du formulaire
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
 
-        /* 2) Traitement du formulaire RegistrationType à l'aide de Request */
+        // 2) Traitement du formulaire RegistrationType à l'aide de Request
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            /* Génération du token */
+
+            // 3) Génération du password hashé, du token et des champs non nullables
             $token = $generator->generateToken();
-            /* Hashage du mot de passe */
+
             $hash = $encoder->encodePassword($user, $user->getPlainPassword());
-            /* Définition du mot de passe, du token, du rôle et de l'activation */
+
             $user->setPassword($hash);
             $user->setToken($token);
             $user->setRole('1');
             $user->setIsActive('0');
-            /* Préparation de l'envoi vers la base de données */
+            // 4) Sauvegarde de l'utilisateur
             $manager->persist($user);
             $manager->flush();
-            /* Préparation du mail à l'aide de SwiftMailer */
+
+            // 5) Envoi du mai avec lien de confirmation
             $message = (new \Swift_Message('Votre inscription sur SnowTricks'))
                 ->setFrom('ptraon@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody('http://localhost:8000/confirm?user=' . $user->getId() . '&token=' . $token);
-            /* Envoi du mail avec lien de confirmation */
+
             $mailer->send($message);
-            /* message Flash */
+
+            // 6) Message Flash
             $this->addFlash(
                 'info',
                 'Un mail de confirmation vous a été envoyé, cliquez sur le lien pour activer votre compte.'
             );
-            /* Redirection vers la page de connexion */
+
+            // 7) Redirection vers la page de login
             return $this->redirectToRoute('security_login');
         }
+
         /* Affichage de la page d'inscription avec son formulaire */
         return $this->render(
             'security/signup.html.twig', [
@@ -89,25 +89,30 @@ class AuthenticationController extends AbstractController
      */
     public function validate(Request $request)
     {
-        /* Récupération du token dans l'URL */
+        // 1) récupération du token dans l'URL
         $token = $request->get('token');
+
         /* Erreur si pas de token */
         if (!$token) {
             return new Response(new InvalidCsrfTokenException());
         }
-        /* Récupérer le User à l'aide de son identifiant */
+
+        // 2) Récupérer le User à l'aide de son identifiant
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $request->get('user')]);
+
         /* Erreur si pas de User */
         if (!$user) {
             throw $this->createNotFoundException();
         }
-        /* Si le token est conforme, j'active le compte et j'affiche un message Flash */
+
+        // 3) Si le token est conforme, j'active le compte et j'affiche un message Flash
         if ($user->getToken() === $token) {
             $user->setIsActive('1');
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Votre compte a bien été activé');
         }
-        /* Si tout est bon, redirection vers la page d'accueil */
+
+        // 4) Si tout est bon, redirection vers la page d'accueil
         return $this->redirecttoRoute('security_login');
     }
     /**
@@ -135,19 +140,18 @@ class AuthenticationController extends AbstractController
      */
     function forgotPasswordPage(Request $request, \Swift_Mailer $mailer, TokenGeneratorInterface $generator)
     {
-        // Création d'un nouvel objet user
+        // 1) Création duf ormulaire
         $user = new User();
-        // Ajout du formulaire avec un champ email
         $form = $this->createFormBuilder($user)
             ->add('email', EmailType::class)
             ->add('save', SubmitType::class, array('label' => 'envoyer'))
             ->getForm();
-        // Traitement des données du formulaire
-        $form->handleRequest($request);
 
+        // 2) Traitement des données du formulaire
+        $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            // $form->getData() holds the submitted values
-            //but, the original '$trick' variable has also been updated
+
+            // 3) Vérification du mail et génération d'un token
             $user = $form->getData();
             $email = $user->getEmail();
             // Lien avec le repository User pour utiliser une méthode find pour trouver la ligne correspondant à l'utilisateur
@@ -156,24 +160,28 @@ class AuthenticationController extends AbstractController
             // Je génère un resetToken que je sette puis envoi dans la base de données
             $token = $generator->generateToken();
             $userReset->setResetToken($token);
+
+            // 4) Envoi du token dans la base de données
             $this->getDoctrine()->getManager()->flush();
 
             // si on a bien l'utilisateur
             if ($userReset){
-                /* Préparation du mail à l'aide de SwiftMailer */
+                // 5) Envoi du mail avec lien
                 $message = (new \Swift_Message('Réinitialisation de votre mot de passe'))
                     ->setFrom('ptraon@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody('http://localhost:8000/resetpassword?user=' . $userReset->getId() . '&token=' . $token);
                 /* Envoi du mail avec lien de confirmation */
                 $mailer->send($message);
+
+                // 6) Message Flash
                 $this->addFlash(
                     'info',
                     'Un mail vous a été envoyé, cliquez sur le lien pour réinitialiser votre mot de passe.'
                 );
             }
 
-            // redirection vers la page d'accueil avec message flash
+            // 7) redirection vers la page d'accueil avec message flash
             return $this->redirectToRoute('homepage');
         }
         // Affichage de la page "mot de passe oublié" avec son formulaire
@@ -190,43 +198,51 @@ class AuthenticationController extends AbstractController
      */
     function resetPasswordPage(Request $request, UserPasswordEncoderInterface $encoder)
     {
-        /*Récupération du token dans l'URL */
+        // 1) Récupération du token dans l'URL
         $token = $request->get('token');
+
         /* Erreur si pas de token */
         if (!$token) {
             return new Response(new InvalidCsrfTokenException());
         }
-        /* Récupérer le User à l'aide de son token */
+
+        // 2) Récupérer le User à l'aide de son token
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['resetToken' => $request->get('token')]);
+
         /* Erreur si pas de User */
         if (!$user) {
             throw $this->createNotFoundException();
         }
-        /* vérification du token */
+
+        // 3) vérification du token
         if ($user->getResetToken() !== $token) {
             throw $this->createNotFoundException();
         }
 
-        // Récupération du formulaire resetPasswordType
+        // 4) Récupération du formulaire resetPasswordType
         $form = $this->createForm(ResetPasswordType::class, $user);
-        // Traitement du formulaire
+
+        // 5) Traitement du formulaire
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
+            // 6) Récupération et chiffrage du mot de passe
+            $password = $form->getData();
+            $hash = $encoder->encodePassword($password, $user->getPlainPassword());
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Récupération et chiffrage du mot de passe
-                $password = $form->getData();
-                $hash = $encoder->encodePassword($password, $user->getPlainPassword());
-                // Définition du mot de passe et remise à zéro du ResetToken
-                $user->setPassword($hash);
-                $user->setResetToken('');
-                // Envoi vers la base de données
-                $this->getDoctrine()->getManager()->flush();
-                // Message Flash
-                $this->addFlash('success', 'Votre mot de passe a bien été réinitialisé !');
-                // redirection vers
-                return $this->redirectToRoute('security_login');
-            }
+            // 7) Définition du mot de passe et remise à zéro du ResetToken
+            $user->setPassword($hash);
+            $user->setResetToken('');
+
+            // 8) Envoi vers la base de données
+            $this->getDoctrine()->getManager()->flush();
+
+            // 9) Message Flash
+            $this->addFlash('success', 'Votre mot de passe a bien été réinitialisé !');
+
+            // 10) redirection
+            return $this->redirectToRoute('security_login');
+        }
         return $this->render(
             'security/resetpasswordpage.html.twig', [
                 'formResetPassword' => $form->createView(),

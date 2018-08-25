@@ -32,12 +32,9 @@ class HomeController extends AbstractController
     {
         $repo = $em->getRepository(Trick::class);
         $tricks = $repo->findAll();
-        //$repo = $em->getRepository(Media::class);
-        //$media = $repo->findAll();
 
         return $this->render('homepage.html.twig', [
             'tricks' => $tricks,
-            //'media' => $media
         ]);
     }
 }

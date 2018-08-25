@@ -9,11 +9,31 @@
     height: 100%;
     width: 100%;
 }
-
+button:hover {
+    transform : scale(1.03);
+    box-shadow : 6px 6px 25px 18px rgba(0,0,0, 0.2);
+}
+button:active {
+    transform : scale(0.98);
+    box-shadow : 6px 6px 18px 2px rgba(0,0,0, 0.23);
+}
+.btn:hover {
+    transform : scale(1.03);
+    box-shadow : 6px 6px 25px 18px rgba(0,0,0, 0.2);
+}
+.btn:active {
+    transform : scale(0.98);
+    box-shadow : 6px 6px 18px 2px rgba(0,0,0, 0.23);
+}
+.fa-arrow-down, .fa-arrow-up {font-size: 1.7em !important;}
 .fa {
     font-size: 1.1em;
 }
+.box-card, .fa-arrow-up {display:none;}
 
+.form-error-icon {
+    display: none;
+}
 .form-btn,
 .form-btn-cancel,
 .form-btn-error {
