@@ -371,6 +371,10 @@ select.form-element-field {
   margin: 0;
 }
 
+button:hover {
+  color: black;
+}
+
 body {
   margin: 40px auto;
   background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);

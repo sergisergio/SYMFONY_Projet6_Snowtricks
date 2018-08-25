@@ -9,6 +9,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+// The AdvancedUserInterface class was deprecated in Symfony 4.1 and no alternative is provided.
+// So I got to implement a custom user checker
+// See this :
+// https://symfony.com/doc/current/security/entity_provider.html
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
@@ -30,23 +35,30 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(min="8", minMessage="Votre pseudo doit faire minimum 8 caractères")
      */
     private $username;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /* Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères") */
+    /**
+     *
      * @ORM\Column(type="string", length=100)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
      */
     private $password;
-    /**
-     * @Assert\EqualTo(propertyPath="password", message="mot de passe pas identique")
-     */
-    public $confirm_password;
+    /* Assert\EqualTo(propertyPath="password", message="mot de passe pas identique") */
+
+    /*public $confirm_password;*/
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email()
      */
     private $email;
@@ -113,6 +125,22 @@ class User implements UserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($password): void
+    {
+        $this->plainPassword = $password;
     }
 
     public function getPassword(): ?string
@@ -299,4 +327,6 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 }

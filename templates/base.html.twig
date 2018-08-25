@@ -32,28 +32,11 @@
                     <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks">Tricks</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Tricks</a>
                 </li>
                 {# Ici je mets une condition pour l'affichage du menu selon si l'utilisateur est connecté ou non #}
-                {% if not app.user %}
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> S'incrire</a>
-                </li>
-                {% else %}
-                {#<li class="dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ app.user.username }}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="text-center"><a href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
-                        <hr>
-                        <li class="text-center"><a href="{{ path('profile', {id: app.user.id}) }}"><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a></li>
-                        <hr>
-                        <li class="text-center"><a href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a></li>
-                    </ul>
-                </li>
-                #}
+                {% if is_granted('ROLE_USER') %}
+
 
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a>
@@ -63,6 +46,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> S'incrire</a>
                     </li>
                 {% endif %}
             </ul>

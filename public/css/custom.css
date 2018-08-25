@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.fa {
+    font-size: 1.1em;
+}
+
 .form-btn,
 .form-btn-cancel,
 .form-btn-error {
@@ -373,7 +377,8 @@ select.form-element-field {
 
 .formcentre{
     /*display : flex;*/
-    margin-top: 250px;
+    margin-top: 200px;
+    padding-top: 50px;
     justify-content : center;
     align-items : center;
     min-height : 125vh;

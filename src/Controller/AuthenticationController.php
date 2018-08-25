@@ -40,18 +40,18 @@ class AuthenticationController extends AbstractController
      */
     function signupPage(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $generator)
     {
-        /* Création d'un nouveau membre */
+        /* 1) Construction du formulaire */
         $user = new User();
-        /* Récupération du formulaire */
         $form = $this->createForm(RegistrationType::class, $user);
-        /* Traitement du formulaire RegistrationType à l'aide de Request */
+
+        /* 2) Traitement du formulaire RegistrationType à l'aide de Request */
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /* Génération du token */
             $token = $generator->generateToken();
             /* Hashage du mot de passe */
-            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $hash = $encoder->encodePassword($user, $user->getPlainPassword());
             /* Définition du mot de passe, du token, du rôle et de l'activation */
             $user->setPassword($hash);
             $user->setToken($token);
@@ -59,7 +59,6 @@ class AuthenticationController extends AbstractController
             $user->setIsActive('0');
             /* Préparation de l'envoi vers la base de données */
             $manager->persist($user);
-            /* Envoi vers la base de données */
             $manager->flush();
             /* Préparation du mail à l'aide de SwiftMailer */
             $message = (new \Swift_Message('Votre inscription sur SnowTricks'))
@@ -214,10 +213,10 @@ class AuthenticationController extends AbstractController
         $form->handleRequest($request);
 
 
-            if ($form->isSubmitted()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 // Récupération et chiffrage du mot de passe
                 $password = $form->getData();
-                $hash = $encoder->encodePassword($password, $user->getPassword());
+                $hash = $encoder->encodePassword($password, $user->getPlainPassword());
                 // Définition du mot de passe et remise à zéro du ResetToken
                 $user->setPassword($hash);
                 $user->setResetToken('');

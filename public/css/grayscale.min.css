@@ -12,7 +12,7 @@
         padding:.5rem 0;color:rgba(0,0,0,.5)
     }
     #mainNav .nav-link{
-        transition:none;padding:2rem 1.5rem;color:rgba(0, 0, 0,.5)}
+        transition:none;padding:2rem 1.5rem;color:rgba(10, 10, 10,.8)}
     #mainNav .nav-link:hover{color:rgba(0,0,0,.75)}
     #mainNav .nav-link:active{color:#000}
     #mainNav.navbar-shrink{background-color:#000}
