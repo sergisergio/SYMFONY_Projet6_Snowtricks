@@ -4,13 +4,29 @@
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
     <style>
-        body {background: #fff;}
+        body {background: #ccc;}
+        .profile {
+            background: #fff;
+            margin-top: 150px;
+            border-radius: 10px;
+            padding-bottom: 100px;
+        }
     </style>
 {% endblock %}
 {% block body %}
-
-  <div style="margin-top:150px" class="text-center">Pseudo:  {{ user.username }}</div>
-    <div  class="text-center">Email:  {{ user.email }}</div>
-    <div  class="text-center">Role:  {{ user.role }}</div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6 profile">
+                {% if user.avatar is not empty %}
+                    <div><img src="../../images/{{ user.avatar }}" class="img-fluid" style="display: block;width: 150px; margin:150px auto -80px;"/></div>
+                {% else %}
+                    <div><img src="../../images/snowboarder-profile.png" class="img-fluid" style="display: block;width: 150px; margin:150px auto -80px;" /></div>
+                {% endif %}
+                <div style="margin-top:150px" class="text-center">Pseudo:  {{ user.username }}</div>
+                <hr>
+                <div  class="text-center">Email:  {{ user.email }}</div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

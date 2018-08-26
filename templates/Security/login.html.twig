@@ -28,7 +28,9 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-6">
+
             <form action="{{ path('security_login') }}" method="post" style="margin-top:150px;">
+
                 <div class="form-group">
                     <label for="email">Adresse Email</label>
                     <input type="text" id="email" placeholder="Adresse email" required name="_username" class="form-control">
@@ -37,7 +39,12 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" placeholder="Mot de passe" required name="_password" class="form-control">
                 </div>
+                <input type="checkbox" id="remember_me" name="_remember_me" />
+                <label for="remember_me">Se souvenir de moi</label>
                 <a href="{{ path('forgotpasswordpage') }}" class="pull-right" style="text-decoration: underline">Mot de passe oublié ?</a>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" style="display:block;margin:50px auto;">Connexion</button>
                 </div>

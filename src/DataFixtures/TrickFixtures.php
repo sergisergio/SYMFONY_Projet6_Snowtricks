@@ -39,7 +39,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick1 = new Trick();
         $trick1->setDescription('Rotation verticale avant');
         $trick1->setCreatedAt($date->add(new \DateInterval('P6DT2H9M')));
-        $trick1->setSlug('slug');
+        $trick1->setSlug('front-flip');
         $trick1->setUpdatedAt($date->add(new \DateInterval('P12DT12H')));
         $trick1->setCategory($this->getReference('cat1'));
         $trick1->setAuthor($this->getReference('user2'));
@@ -49,7 +49,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick2 = new Trick();
         $trick2->setDescription('Rotation verticale arrière');
         $trick2->setCreatedAt($date->add(new \DateInterval('P3DT3H')));
-        $trick2->setSlug('slug');
+        $trick2->setSlug('back-flip');
         $trick2->setCategory($this->getReference('cat1'));
         $trick2->setAuthor($this->getReference('user2'));
         $trick2->setName('Back flip');
@@ -60,7 +60,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Saisie du carre avant et carre arrière avec chaque main (comme tenir un volant de voiture)'
         );
         $trick3->setCreatedAt($date->add(new \DateInterval('P1D')));
-        $trick3->setSlug('slug');
+        $trick3->setSlug('truck-driver');
         $trick3->setCategory($this->getReference('cat1'));
         $trick3->setAuthor($this->getReference('user1'));
         $trick3->setName('truck driver');
@@ -71,7 +71,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Un tour complet en effectuant une rotation horizontale pendant le saut, puis en attérissant en position switch ou normal'
         );
         $trick4->setCreatedAt($date->add(new \DateInterval('P2W')));
-        $trick4->setSlug('slug');
+        $trick4->setSlug('360');
         $trick4->setCategory($this->getReference('cat2'));
         $trick4->setAuthor($this->getReference('user1'));
         $trick4->setName('360');
@@ -82,7 +82,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Deux tours complets en effectuant une rotation horizontale pendant le saut, puis en atterrissant en position switch ou normal'
         );
         $trick5->setCreatedAt($date->add(new \DateInterval('P1Y1D')));
-        $trick5->setSlug('slug');
+        $trick5->setSlug('720');
         $trick5->setCategory($this->getReference('cat2'));
         $trick5->setAuthor($this->getReference('user1'));
         $trick5->setName('720');
@@ -93,7 +93,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'Trois tours complets en effectuant une rotation horizontale pendant le saut, puis en atterrissant en position switch ou normal'
         );
         $trick6->setCreatedAt($date->add(new \DateInterval('P1DT12H')));
-        $trick6->setSlug('slug');
+        $trick6->setSlug('1080');
         $trick6->setCategory($this->getReference('cat2'));
         $trick6->setAuthor($this->getReference('user2'));
         $trick6->setName('1080');
@@ -102,7 +102,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick7 = new Trick();
         $trick7->setDescription('Saisie de la carre frontside de la planche entre les deux pieds avec la main avant');
         $trick7->setCreatedAt($date);
-        $trick7->setSlug('slug');
+        $trick7->setSlug('mute');
         $trick7->setCategory($this->getReference('cat3'));
         $trick7->setAuthor($this->getReference('user1'));
         $trick7->setName('mute');
@@ -113,7 +113,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             'saisie de la carre backside de la planche entre les deux pieds avec la main arrière'
         );
         $trick8->setCreatedAt($date->add(new \DateInterval('P2D')));
-        $trick8->setSlug('slug');
+        $trick8->setSlug('stalefish');
         $trick8->setCategory($this->getReference('cat3'));
         $trick8->setAuthor($this->getReference('user1'));
         $trick8->setName('stalefish');
@@ -122,7 +122,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick9 = new Trick();
         $trick9->setDescription('Glisser sur une barre de slide avec l\'avant de la planche sur la barre');
         $trick9->setCreatedAt($date->add(new \DateInterval('P10DT6H')));
-        $trick9->setSlug('slug');
+        $trick9->setSlug('nose-slide');
         $trick9->setCategory($this->getReference('cat4'));
         $trick9->setAuthor($this->getReference('user2'));
         $trick9->setName('nose slide');
@@ -131,7 +131,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick10 = new Trick();
         $trick10->setDescription('Glisser sur une barre de slide avec l\'arrière de la planche sur la barre');
         $trick10->setCreatedAt($date->add(new \DateInterval('P1W')));
-        $trick10->setSlug('slug');
+        $trick10->setSlug('tail-slide');
         $trick10->setUpdatedAt($date->add(new \DateInterval('P2D')));
         $trick10->setCategory($this->getReference('cat4'));
         $trick10->setAuthor($this->getReference('user2'));
@@ -143,7 +143,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         {
             $trick = new Trick();
             $trick->setName('Name-'.$i)
-                ->setSlug('slug')
+                ->setSlug('Name-'.$i)
                 ->setDescription('Description'.$i.'Ut suscipit posuere justo at vulputate. Aliquam sodales odio id eleifend tristique. Potus sensim ad ferox abnoba. Teres talis saepe tractare de camerarius flavum sensorem. Silva de secundus galatae demitto quadra.')
                 ->setCreatedAt(new \DateTime())
                 ->setUpdatedAt(new \DateTime())

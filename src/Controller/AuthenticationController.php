@@ -22,6 +22,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class AuthenticationController
@@ -75,6 +76,8 @@ class AuthenticationController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
+
+
         /* Affichage de la page d'inscription avec son formulaire */
         return $this->render(
             'security/signup.html.twig', [
@@ -82,6 +85,15 @@ class AuthenticationController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @Route("/CGU", name="conditions")
+     */
+    public function conditions()
+    {
+        return $this->render('conditions/cgu.html.twig');
+    }
+
     /**
      * Lien de validation contenu dans le mail : si le token est bien conforme, le compte est activé
      *
@@ -120,10 +132,19 @@ class AuthenticationController extends AbstractController
      *
      * @Route("/connexion", name="security_login")
      */
-    function loginPage()
+    function loginPage(AuthenticationUtils $authenticationUtils)
     {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         /* Affichage de la page de connexion (Voir le fichier security.yaml) */
-        return $this->render('security/login.html.twig');
+        return $this->render('security/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
     }
 
     /**
@@ -144,7 +165,7 @@ class AuthenticationController extends AbstractController
         $user = new User();
         $form = $this->createFormBuilder($user)
             ->add('email', EmailType::class)
-            ->add('save', SubmitType::class, array('label' => 'envoyer'))
+            //->add('save', SubmitType::class, array('label' => 'envoyer'))
             ->getForm();
 
         // 2) Traitement des données du formulaire
@@ -182,7 +203,7 @@ class AuthenticationController extends AbstractController
             }
 
             // 7) redirection vers la page d'accueil avec message flash
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('security_login');
         }
         // Affichage de la page "mot de passe oublié" avec son formulaire
         return $this->render(

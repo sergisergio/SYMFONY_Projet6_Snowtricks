@@ -4,6 +4,17 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
+    <style>
+        .form-check-label {
+            padding-left: 3.25rem;
+            margin-bottom: 0;
+        }
+        .form-check-input {
+            position: absolute;
+            margin-top: .25rem;
+            margin-left: 0.75rem;
+        }
+    </style>
 {% endblock %}
 {% block body %}
     <h1 class="text-center" style="margin-top: 150px">Inscription</h1>
@@ -11,11 +22,13 @@
         <div class="row justify-content-md-center">
             <div class="col-md-6">
         {{ form_start(formSignup) }}
-        {{ form_row(formSignup.username, { 'label': 'Nom d\'utilisateur', 'attr': {
+        {{ form_row(formSignup.username, { 'label': 'Nom d\'utilisateur *', 'attr': {
             'placeholder': 'Nom d\'utilisateur' }}) }}
-        {{ form_row(formSignup.email, {'label': 'Adresse email', 'attr': {'placeholder': 'email'}}) }}
-        {{ form_row(formSignup.plainPassword.first, {'label': 'Mot de passe', 'attr': {'placeholder': 'Mot de passe' }}) }}
-        {{ form_row(formSignup.plainPassword.second, {'label': 'Confirmer Mot de passe', 'attr': {'placeholder': 'Confirmer Mot de passe'}}) }}
+        {{ form_row(formSignup.email, {'label': 'Adresse email *', 'attr': {'placeholder': 'email'}}) }}
+        {{ form_row(formSignup.plainPassword.first, {'label': 'Mot de passe *', 'attr': {'placeholder': 'Mot de passe' }}) }}
+        {{ form_row(formSignup.plainPassword.second, {'label': 'Confirmer Mot de passe *', 'attr': {'placeholder': 'Confirmer Mot de passe'}}) }}
+        {{ form_row(formSignup.termsAccepted, {'label': 'J\'ai lu et j\'accepte les Conditions Générales d\'Utilisation' }) }}
+                <a href="{{ path('conditions') }}" class="pull-right">Voir les CGU</a>
         <button type="submit" style="display: block; margin: 50px auto;" class="btn btn-success">Inscription</button>
         {{ form_end(formSignup) }}
             </div>

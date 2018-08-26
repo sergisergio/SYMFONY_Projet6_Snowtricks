@@ -20,9 +20,17 @@ security:
 
             user_checker: App\Security\UserChecker
 
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+
             form_login:
                 login_path: security_login
                 check_path: security_login
+                csrf_token_generator: security.csrf.token_manager
+                #csrf_parameter: _csrf_security_token
+                #csrf_token_id: a_private_string
 
             logout:
                 path: security_logout

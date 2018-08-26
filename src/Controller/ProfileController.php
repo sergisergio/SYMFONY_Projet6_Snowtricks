@@ -16,6 +16,10 @@ class ProfileController extends AbstractController
     public function profile($id, UserRepository $repoUser, Request $request, ObjectManager $manager)
     {
         $user = $repoUser->find(['id' => $id]);
+
+        if (!$user) {
+            return $this->render('404.html.twig');
+        }
         return $this->render('profile/profile.html.twig', [
             'user' => $user,
         ]);

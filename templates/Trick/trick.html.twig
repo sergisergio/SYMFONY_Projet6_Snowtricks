@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-success pull-right" type="submit">
+                                <button class="btn btn-success" type="submit" style="display: block; margin: 20px auto;">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i> Publier
                                 </button>
                             </div>
@@ -114,7 +114,7 @@
                             {% if comment.author.avatar is not empty %}
                             <img src="../../images/{{ comment.author.avatar }}" class="img-fluid" style="max-width:50%"/>
                             {% else %}
-                                <img src="../../images/snowboarder-profile.png" class="img-fluid" style="max-width:50%"/>
+                                <img src="../../images/snowboarder-profile.png" class="img-fluid" style="max-width:30%"/>
                             {% endif %}
                         <strong>{{ comment.author.username }}</strong><br/> publié le<br />
                         <strong>{{ comment.createdAt|date("d/m/Y") }}</strong>

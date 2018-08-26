@@ -1,4 +1,8 @@
 framework:
+    validation: { enable_annotations: true }
+
+    csrf_protection: ~
+
     secret: '%env(APP_SECRET)%'
     #default_locale: en
     #csrf_protection: true

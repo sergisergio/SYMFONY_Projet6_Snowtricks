@@ -7,32 +7,22 @@
 
 namespace App\Controller;
 
-//use App\Entity\Category;
 use App\Entity\Category;
 use App\Entity\Comment;
-//use App\Entity\Media;
 use App\Entity\User;
 use App\Entity\Trick;
 use App\Form\CommentType;
-use App\Form\ModifyTrickType;
-use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\MediaRepository;
 use App\Repository\TrickRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-//use Symfony\Component\Form\Extension\Core\Type\DateType;
-//use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-//use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-//use Symfony\Component\Form\Extension\Core\Type\TextType;
-//use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\AddTrickType;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  *  This controller manages all tricks : show, add, modify and delete
@@ -47,12 +37,16 @@ class TrickController extends AbstractController
     /**
      * Show one trick, its details and its comments
      *
-     * @Route("/trick/{id}", name="trickpage")
+     * @Route("/trick/{slug}", name="trickpage")
      */
-    function trickPage($id,  TrickRepository $repoTrick, CommentRepository $repoComment, MediaRepository $repoMedia, UserRepository $repoUser, Request $request, ObjectManager $manager)
+    function trickPage($slug, TrickRepository $repoTrick, CommentRepository $repoComment, MediaRepository $repoMedia, UserRepository $repoUser, Request $request, ObjectManager $manager)
     {
         // Trouver un trick grâce à son id
-        $trick = $repoTrick->find(['id' => $id]);
+        $trick = $repoTrick->findOneBy(['slug' => $slug]);
+        //$trick = $this->getDoctrine()->getRepository(Trick::class)->find($slug);
+        if (!$trick) {
+            return $this->render('404.html.twig');
+        }
         // Trouver tous les commentaires
         $comments = $repoComment->findAll();
                 //$catRepo = $em->getRepository(Category::class);
@@ -87,7 +81,7 @@ class TrickController extends AbstractController
             // See https://symfony.com/doc/current/book/controller.html#flash-messages
             //$this->addFlash('success', 'post.created_successfully');
 
-            return $this->redirectToRoute('trickpage', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
         }
 
         return $this->render('Trick/trick.html.twig', [
@@ -104,20 +98,25 @@ class TrickController extends AbstractController
     }
 
     /**
+     * @Route("/trick/")
+     */
+    public function noTrick() {
+        return $this->render('404.html.twig');
+    }
+
+    /**
      * Add a trick
      *
      * @Route("/add/trick", name="createtrickpage")
      *
      */
-    /*@Route("/addtrick", name="addtrickpage")*/
-    public function add(Trick $trick = null, Request $request, ObjectManager $manager, CategoryRepository $repoCategory)
+    public function add(Request $request, ObjectManager $manager)
     {
-        if (!$trick) {
+        //if (!$trick) {
         $trick = new Trick();
-        $trick->setAuthor($this->getUser());
-        $trick->setCreatedAt(new \DateTime());
-        $trick->setSlug('test');
-        }
+
+
+        //}
         //$categories = $repoCategory->findOneBy(['name' => $name]);
 
         $form = $this->createForm(AddTrickType::class, $trick);
@@ -125,18 +124,19 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $trick->setSlug($this->slugify($trick->getName()));
+            $trick->setAuthor($this->getUser());
+            $trick->setCreatedAt(new \DateTime());
             $manager->persist($trick);
             $manager->flush();
 
             $this->addFlash('success', 'Le trick a bien été ajouté!');
-            return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
+            return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
         }
 
         return $this->render(
             'Trick/createtrick.html.twig', [
                 'formAddTrick' => $form->createView()
-                //'editMode' => $trick->getId() !== null
             ]);
     }
 
@@ -160,7 +160,7 @@ class TrickController extends AbstractController
             //}
             //else
             //$this->addFlash('success', 'Le trick a bien été modifié!');
-            return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'id' => $trick->getId()]);
+            return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'slug' => $trick->getSlug()]);
         }
         return $this->render('Trick/modifytrick.html.twig', [
             'trick' => $trick,
@@ -192,5 +192,33 @@ class TrickController extends AbstractController
 
         return $this->redirectToRoute('homepage');
         // Idem : paramconverter ?
+    }
+
+    public function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv'))
+        {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('#[^-\w]+#', '', $text);
+
+        if (empty($text))
+        {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }
