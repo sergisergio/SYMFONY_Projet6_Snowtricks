@@ -71,6 +71,8 @@ class Trick
      */
     private $author;
 
+    public $video;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();

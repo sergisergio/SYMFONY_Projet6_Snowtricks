@@ -43,11 +43,16 @@
                 </div>
                 <div class="row justify-content-md-center" style="padding: 0px;">
 
-                {% for medium in trick.media | slice(0) %}
+                {% for medium in media | slice(0) %}
                         <div class="col-md-2">
                                 <p class="text-center"><img class="img-fluid" src="../../images/{{ medium.url }} " /></p>
                         </div>
                 {% endfor %}
+                {% for vid in video | slice(0) %}
+                     <div class="col-md-2">
+                        <p class="text-center"><a href="{{ vid.url }}"</p>
+                     </div>
+                 {% endfor %}
                 </div>
                 <hr>
                 <p>{{ trick.description }}</p>

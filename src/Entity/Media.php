@@ -24,8 +24,6 @@ class Media
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\File(maxSize = "1024k",
-     *     mimeTypesMessage = "Veuillez envoyer un fichier valide !")
      */
     private $url;
 
