@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\AddTrickType;
+use App\Utils\Slugger;
 
 /**
  *  This controller manages all tricks : show, add, modify and delete
@@ -79,7 +80,9 @@ class TrickController extends AbstractController
             // actions. They are deleted automatically from the session as soon
             // as they are accessed.
             // See https://symfony.com/doc/current/book/controller.html#flash-messages
-            //$this->addFlash('success', 'post.created_successfully');
+            $this->addFlash('success', 'Votre message a bien été ajouté!');
+
+
 
             return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
         }
@@ -99,6 +102,7 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/trick/")
+     * @Route("/modifytrick/")
      */
     public function noTrick() {
         return $this->render('404.html.twig');
@@ -124,14 +128,17 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trick->setSlug($this->slugify($trick->getName()));
+            $trick->setSlug(Slugger::slugify($trick->getName()));
             $trick->setAuthor($this->getUser());
             $trick->setCreatedAt(new \DateTime());
             $manager->persist($trick);
             $manager->flush();
 
-            $this->addFlash('success', 'Le trick a bien été ajouté!');
-            return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
+            //$this->addFlash('success', 'Le trick a bien été ajouté!');
+            //return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
+
+            return $this->redirectToRoute('addMedia');
+
         }
 
         return $this->render(
@@ -194,31 +201,5 @@ class TrickController extends AbstractController
         // Idem : paramconverter ?
     }
 
-    public function slugify($text)
-    {
-        // replace non letter or digits by -
-        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
 
-        // trim
-        $text = trim($text, '-');
-
-        // transliterate
-        if (function_exists('iconv'))
-        {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        }
-
-        // lowercase
-        $text = strtolower($text);
-
-        // remove unwanted characters
-        $text = preg_replace('#[^-\w]+#', '', $text);
-
-        if (empty($text))
-        {
-            return 'n-a';
-        }
-
-        return $text;
-    }
 }

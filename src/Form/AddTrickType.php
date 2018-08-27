@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Media;
 use App\Entity\Trick;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,12 +21,15 @@ class AddTrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                'label' => 'Nom du trick',
+            ])
             ->add('description')
             ->add('category', EntityType::class, [
                 'placeholder' => 'Choisissez une catégorie',
                 'class' => 'App\Entity\Category',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'label' => 'Catégorie',
             ])
                     // Comment faire ici car je dois utiliser EntityType et FileType...
                     // Dans le traitement, cette donnée devra être de type 'i'

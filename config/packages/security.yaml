@@ -31,7 +31,8 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 #csrf_parameter: _csrf_security_token
                 #csrf_token_id: a_private_string
-
+                #success_handler: crv.authentication_success_handler
+                #failure_handler: crv.authentication_failure_handler
             logout:
                 path: security_logout
                 target: homepage

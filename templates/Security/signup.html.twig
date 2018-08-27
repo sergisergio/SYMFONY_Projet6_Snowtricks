@@ -21,6 +21,7 @@
     <div class="container" style="padding-top: 100px;">
         <div class="row justify-content-md-center">
             <div class="col-md-6">
+
         {{ form_start(formSignup) }}
         {{ form_row(formSignup.username, { 'label': 'Nom d\'utilisateur *', 'attr': {
             'placeholder': 'Nom d\'utilisateur' }}) }}
@@ -31,6 +32,7 @@
                 <a href="{{ path('conditions') }}" class="pull-right">Voir les CGU</a>
         <button type="submit" style="display: block; margin: 50px auto;" class="btn btn-success">Inscription</button>
         {{ form_end(formSignup) }}
+
             </div>
         </div>
     </div>

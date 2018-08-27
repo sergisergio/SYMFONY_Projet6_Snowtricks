@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
+ * @UniqueEntity(
+ *     fields={"url"},
+ *     message="Cette adresse est déjà utilisée !"
+ * )
  */
 class Media
 {
@@ -19,6 +24,8 @@ class Media
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(maxSize = "1024k",
+     *     mimeTypesMessage = "Veuillez envoyer un fichier valide !")
      */
     private $url;
 

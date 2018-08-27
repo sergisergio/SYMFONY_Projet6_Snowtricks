@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter un média{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/custom.css">
+    <style>
+        body {background: #fff;}
+        .custom-file-input {
+            min-width: 14rem;
+            max-width: 100%;
+            height: calc(2.25rem + 2px);
+            margin: 0;
+            opacity: 1;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container formcentre">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8">
+                {% for flash_message in app.session.flashbag.get('success') %}
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert" style="top: 30px">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                {% for flash_message in app.session.flashbag.get('info') %}
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert" style="top: 30px">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                <h1 class="text-center">Ajouter un média à ce trick</h1>
+                {{ form_start(formAddMedia) }}
+
+                {{ form_row(formAddMedia.url) }}
+                {{ form_row(formAddMedia.trick) }}
+                <button type="submit" class="btn btn-success" style="display: block; margin: 20px auto;">
+                    Ajouter
+                </button>
+                {{ form_end(formAddMedia) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

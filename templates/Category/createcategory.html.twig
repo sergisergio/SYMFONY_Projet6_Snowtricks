@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter une catégorie{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/custom.css">
+{% endblock %}
+{% block body %}
+    <div class="container formcentre">
+    <div class="row justify-content-md-center">
+    <div class="col-sm-8">
+        <h1 class="text-center">Ajouter une catégorie</h1>
+   {{ form_start(formAddCategory) }}
+
+    {{ form_widget(formAddCategory) }}
+        <button type="submit" class="btn btn-success" style="display: block; margin: 20px auto;">
+            Ajouter
+        </button>
+    {{ form_end(formAddCategory) }}
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
