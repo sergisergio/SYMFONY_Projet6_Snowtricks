@@ -3,17 +3,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        .fall {
-            display: block; margin: 0 auto;
-        }
-        .show-article-title {
-            text-align: center;display: block; margin: 0 auto;
-        }
-        .btn-primary {
-            display: block; margin: 20px auto;
-        }
-    </style>
 {% endblock %}
 {% block body %}
     <div class="container" style="margin-top: 300px">
@@ -24,10 +13,10 @@
                         <div class="col-sm-12">
                             <div class="show-article-title-container align-middle">
                                 <div>
-                                <span class="show-article-title align-middle text-center">Cette page n'existe pas</span>
+                                <span class="show-article-title align-middle text-center nonexists">Cette page n'existe pas</span>
                                 <img src="../../images/fall.jpg" class="img-fluid fall"/>
                                 </div>
-                                <button class="btn btn-primary" href="{{ path('homepage') }}">Retour à l' accueil</button>
+                                <button class="btn btn-primary btn404" href="{{ path('homepage') }}">Retour à l' accueil</button>
                             </div>
                         </div>
                     </div>

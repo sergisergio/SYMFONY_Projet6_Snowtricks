@@ -4,11 +4,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        .btn-success {
-            display: block; margin: 20px auto;
-        }
-    </style>
 {% endblock %}
 {% block body %}
     <div class="container formcentre">
@@ -17,7 +12,7 @@
                 <h1 class="text-center">Modifier un trick</h1>
                 {{ form_start(formAddTrick) }}
                 {{ form_widget(formAddTrick) }}
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success btnupdatetrick">
                     Mettre à jour
                 </button>
                 {{ form_end(formAddTrick) }}

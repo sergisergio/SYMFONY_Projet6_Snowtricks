@@ -3,23 +3,9 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        h1 {
-            margin-top: 150px
-        }
-        form {
-            margin-top:150px;
-        }
-        .forgot {
-            text-decoration: underline
-        }
-        .btn-success {
-            display:block;margin:50px auto;
-        }
-    </style>
 {% endblock %}
 {% block body %}
-    <h1 class="text-center">Connexion</h1>
+
     {% for flash_message in app.session.flashbag.get('info') %}
         <div class="container alert alert-info alert-dismissible fade show col-md-5" role="alert" style="top: 100px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -36,7 +22,8 @@
             {{ flash_message }}
         </div>
     {% endfor %}
-    <div class="container">
+    <h1 class="text-center connexion">Connexion</h1>
+    <div class="container containerlogin">
         <div class="row justify-content-md-center">
             <div class="col-md-6">
                 {% if error %}
@@ -56,7 +43,7 @@
                     <a href="{{ path('forgotpasswordpage') }}" class="pull-right forgot">Mot de passe oublié ?</a>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success">Connexion</button>
+                        <button type="submit" class="btn btn-success btnlogin">Connexion</button>
                     </div>
                 </form>
             </div>

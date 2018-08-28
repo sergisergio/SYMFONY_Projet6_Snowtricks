@@ -127,7 +127,7 @@
                     </div>
             {% endfor %}
             </div>
-            <button class="btn btn-success" href="#" id="loadMore">Load More</button>
+            <button class="btn btn-success" href="#" id="loadMore">Voir plus</button>
             <a href="#tricks" class="js-scroll-trigger">
                 <i class="fa fa-arrow-up fa-2x"></i>
             </a>
@@ -135,18 +135,9 @@
     </section>
 {%  endblock %}
 {% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="../../js/popconfirm.js"></script>
-    <script>
-        $("[data-toggle='confirmation']").popConfirm({
-            title: "Supprimer ce trick ?", // The title of the confirm
-            //content: "I have warned you !", // The message of the confirm
-            placement: "bottom", // The placement of the confirm (Top, Right, Bottom, Left)
-            container: "body", // The html container
-            yesBtn: "Supprimer",
-            noBtn: "Annuler"
-        });
-    </script>
+    {{ parent() }}
+
+
     <script>
         $(function () {
             $(".box-card").slice(0, 15).show();

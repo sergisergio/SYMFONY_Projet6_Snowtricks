@@ -9,6 +9,18 @@
     height: 100%;
     width: 100%;
 }
+.form-check-label {
+    padding-left: 3.25rem;
+    margin-bottom: 0;
+}
+.form-check-input {
+    position: absolute;
+    margin-top: .25rem;
+    margin-left: 0.75rem;
+}
+.containersignup, .containerlogin {
+    padding-top: 100px;
+}
 button:hover {
     transform : scale(1.03);
     box-shadow : 6px 6px 25px 18px rgba(0,0,0, 0.2);
@@ -17,6 +29,82 @@ button:active {
     transform : scale(0.98);
     box-shadow : 6px 6px 18px 2px rgba(0,0,0, 0.23);
 }
+.btnlogin, .btnsignup, .btnaddtrick, .btnaddcategory, .btnupdatetrick, .btn404, .btnpublish, .btnaddmedia, .btnaddvideo {
+    display: block; margin: 30px auto;
+}
+.custom-file-input {
+    min-width: 14rem;
+    max-width: 100%;
+    height: calc(2.25rem + 2px);
+    margin: 0;
+    opacity: 1;
+}
+.alertcss {
+    top: 30px;
+}
+.profile {
+    background: #fff;
+    margin-top: 150px;
+    border-radius: 10px;
+    padding-bottom: 100px;
+}
+.custom-file-input {
+    min-width: 14rem;
+    max-width: 100%;
+    height: calc(2.25rem + 2px);
+    margin: 0;
+    opacity: 1;
+}
+.para {
+    text-align: justify!important;
+    padding: 10px 50px;
+}
+/* LOGIN */
+.connexion, .inscription {
+    margin-top: 150px;
+}
+.forgot {
+    text-decoration: underline
+}
+/* ONE TRICK */
+.modifydelete {
+    position:absolute;
+    top: 100px;
+    right: 20px;
+    width:100px;
+    height:50px;
+}
+.avatar {
+    max-width:50%
+}
+.avatar2 {
+    max-width:30%
+}
+.btn-sm {
+    padding: 10px 14px;margin:0px 0px
+}
+.btn-info {
+    padding: 0.45rem 1rem;
+}
+.commentaires {
+    margin-top: 100px;
+}
+#post-add-comment {
+    background-color: #ddd;
+    padding: 19px;
+    border-radius: 4px;
+    margin-bottom: 50px;
+}
+.commentaires2 {
+    margin-bottom:250px;
+}
+.post-comment {
+    margin-bottom:2em;
+}
+.commentnotes {
+    font-size:13px;
+}
+/* END ONE TRICK */
 .btn:hover {
     transform : scale(1.03);
     box-shadow : 6px 6px 25px 18px rgba(0,0,0, 0.2);
@@ -24,6 +112,12 @@ button:active {
 .btn:active {
     transform : scale(0.98);
     box-shadow : 6px 6px 18px 2px rgba(0,0,0, 0.23);
+}
+.fall {
+    display: block; margin: 0 auto;
+}
+.nonexists {
+    text-align: center;display: block; margin: 0 auto;
 }
 .fa-arrow-down, .fa-arrow-up {font-size: 1.7em !important;}
 .fa {

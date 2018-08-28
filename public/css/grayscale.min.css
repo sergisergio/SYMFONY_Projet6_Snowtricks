@@ -12,8 +12,8 @@
         padding:.5rem 0;color:rgba(0,0,0,.5)
     }
     #mainNav .nav-link{
-        transition:none;padding:2rem 1.5rem;color:rgba(10, 10, 10,.8)}
-    #mainNav .nav-link:hover{color:rgba(0,0,0,.75)}
+        transition:0.3s ease-in;padding:2rem 1.5rem;color:rgba(10, 10, 10,.8)}
+    #mainNav .nav-link:hover{color:rgba(0,0,0,.75); text-decoration: underline blue;font-size:1.015em;}
     #mainNav .nav-link:active{color:#000}
     #mainNav.navbar-shrink{background-color:#000}
     #mainNav.navbar-shrink .navbar-brand{color:#161616}
@@ -30,7 +30,7 @@
     .masthead h1{font-size:6.5rem;line-height:6.5rem;letter-spacing:.8rem}
     .masthead h2{max-width:30rem;font-size:1.25rem}
 }
-    .btn{box-shadow:0 .1875rem .1875rem 0 rgba(0,0,0,.1)!important;padding:1.25rem 2rem;font-family:'Varela Round';font-size:80%;text-transform:uppercase;letter-spacing:.15rem;border:0}
+    .btn{box-shadow:9px 9px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08) !important;padding:1.25rem 2rem;font-family:'Varela Round';font-size:80%;text-transform:uppercase;letter-spacing:.15rem;border:0}
     .btn-primary{background-color:#64a19d}
     .btn-primary:hover{background-color:#4f837f}
     .btn-primary:focus{background-color:#4f837f;color:#fff}

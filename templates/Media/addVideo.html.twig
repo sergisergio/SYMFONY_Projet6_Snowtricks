@@ -3,22 +3,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        body {background: #fff;}
-        .custom-file-input {
-            min-width: 14rem;
-            max-width: 100%;
-            height: calc(2.25rem + 2px);
-            margin: 0;
-            opacity: 1;
-        }
-        .alert {
-            top: 30px
-        }
-        .btn-success {
-            display: block; margin: 20px auto;
-        }
-    </style>
 {% endblock %}
 {% block body %}
     <div class="container formcentre">
@@ -40,11 +24,11 @@
                         {{ flash_message }}
                     </div>
                 {% endfor %}
-                <h1 class="text-center">Ajouter un média à ce trick</h1>
+                <h1 class="text-center">Ajouter une vidéo à ce trick</h1>
                 {{ form_start(formAddVideo) }}
                 {{ form_row(formAddVideo.url) }}
                 {{ form_row(formAddVideo.trick) }}
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success btnaddvideo">
                     Ajouter
                 </button>
                 {{ form_end(formAddVideo) }}

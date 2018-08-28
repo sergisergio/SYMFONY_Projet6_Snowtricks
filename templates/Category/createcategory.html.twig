@@ -3,11 +3,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        .btn-success {
-            display: block; margin: 20px auto;
-        }
-    </style>
 {% endblock %}
 {% block body %}
     <div class="container formcentre">
@@ -16,7 +11,7 @@
                 <h1 class="text-center">Ajouter une catégorie</h1>
                 {{ form_start(formAddCategory) }}
                 {{ form_widget(formAddCategory) }}
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success btnaddcategory">
                 Ajouter
                 </button>
                 {{ form_end(formAddCategory) }}

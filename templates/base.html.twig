@@ -88,6 +88,17 @@
     </script>
     <!-- Custom scripts for this template -->
     <script src="../../js/grayscale.min.js"></script>
+    <script src="../../js/popconfirm.js"></script>
+    <script>
+        $("[data-toggle='confirmation']").popConfirm({
+            title: "Supprimer ce trick ?", // The title of the confirm
+            //content: "I have warned you !", // The message of the confirm
+            placement: "bottom", // The placement of the confirm (Top, Right, Bottom, Left)
+            container: "body", // The html container
+            yesBtn: "Supprimer",
+            noBtn: "Annuler"
+        });
+    </script>
 {% endblock %}
 </body>
 </html>

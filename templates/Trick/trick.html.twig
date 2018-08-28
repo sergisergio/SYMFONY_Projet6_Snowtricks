@@ -3,53 +3,8 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        body {background: #fff;}
-        .modifydelete {
-            position:absolute;
-            top: 100px;
-            right: 20px;
-            width:100px;
-            height:50px;
-        }
-        .btn-sm {
-            padding: 10px 14px;margin:0px 0px
-        }
-        .btn-info {
-            padding: 0.45rem 1rem;
-        }
-        .commentaires {
-            margin-top: 100px;
-        }
-        #post-add-comment {
-            background-color: #ddd;
-            padding: 19px;
-            border-radius: 4px;
-            margin-bottom: 50px;
-        }
-        .btn-success {
-            display: block;
-            margin: 20px auto;
-        }
-        .commentaires2 {
-            margin-bottom:250px;
-        }
-        .post-comment {
-            margin-bottom:2em;
-        }
-        h4 {
-            font-size:13px;
-        }
-        .avatar {
-            max-width:50%
-        }
-        .avatar2 {
-            max-width:30%
-        }
-    </style>
 {% endblock %}
 {% block body %}
-
     <!-- Header -->
     {% for medium in media | slice(0) %}
     <header class="masthead" style="height: 50vh;background: url(../../images/{{ medium.url }});background-repeat: no-repeat;background-size: cover;">
@@ -139,7 +94,7 @@
                             {{ form_widget(commentForm.content, {attr: {rows: 10}}) }}
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-success" type="submit">
+                                <button class="btn btn-success btnpublish" type="submit">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i> Publier
                                 </button>
                             </div>
@@ -147,7 +102,7 @@
                         {{ form_end(commentForm) }}
                     {% else %}
                         <div class="form-card text-center">
-                            <a class="btn btn-success" href="{{ path('security_login') }}">
+                            <a class="btn btn-success btnlogin" href="{{ path('security_login') }}">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous
                             </a>
                                 pour publier un message<br>
@@ -167,7 +122,7 @@
                 {% for comment in trick.comments %}
                     <div class="row post-comment">
                         <a name="comment_{{ comment.id }}"></a>
-                        <h4 class="col-sm-3">
+                        <h4 class="col-sm-3 commentnotes">
                             {% if comment.author.avatar is not empty %}
                             <img src="../../images/{{ comment.author.avatar }}" class="img-fluid avatar"/>
                             {% else %}
