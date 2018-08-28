@@ -14,45 +14,55 @@
         <link rel="stylesheet" href="../../css/font-awesome.css">
         <link rel="stylesheet" href="../../css/styles.css">
         <link href="../../css/grayscale.min.css" rel="stylesheet">
-
     {% endblock %}
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="background-color: #fff; color: #000 !important">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="background-color: #fff;color: #000 !important">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="{{ path('homepage') }}">Logo</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
-            <i class="fas fa-bars"></i>
+            <i class="fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}">
+                        <i class="fa fa-home" aria-hidden="true"></i> Accueil
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Tricks</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks">
+                        <i class="fa fa-snowflake-o" aria-hidden="true"></i> Tricks
+                    </a>
                 </li>
-                {# Ici je mets une condition pour l'affichage du menu selon si l'utilisateur est connecté ou non #}
                 {% if is_granted('ROLE_USER') %}
-
-
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ path('createtrickpage') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('createtrickpage') }}">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ path('profile', {id: app.user.id}) }}"><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('profile', {id: app.user.id}) }}">
+                            <i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
+                        </a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Se connecter
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> S'incrire</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('signuppage') }}">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> S'incrire
+                        </a>
                     </li>
                 {% endif %}
             </ul>
@@ -63,7 +73,7 @@
 
 {% endblock %}
 <!-- Footer -->
-<footer class="bg-black small text-center text-white-50" style="color: #fff;">
+<footer class="bg-black small text-center text-white-50">
     <div class="container">
         <p class="pull-left">Copyright &copy; Jimmy Sweat | Snowtricks {{ 'now'|date('Y') }}</p>
     </div>
@@ -78,8 +88,6 @@
     </script>
     <!-- Custom scripts for this template -->
     <script src="../../js/grayscale.min.js"></script>
-
-
 {% endblock %}
 </body>
 </html>

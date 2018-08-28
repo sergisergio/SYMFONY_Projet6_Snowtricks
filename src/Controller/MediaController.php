@@ -54,7 +54,7 @@ class MediaController extends AbstractController
             $manager->flush();
 
             //$this->addFlash('success', 'Le trick a bien été ajouté!');
-            return $this->redirectToRoute('addvideo');
+            return $this->redirectToRoute('addVideo');
         }
         return $this->render(
             'Media/addMedia.html.twig', [

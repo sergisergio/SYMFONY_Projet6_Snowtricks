@@ -5,12 +5,53 @@
     <link rel="stylesheet" href="../../css/custom.css">
     <style>
         body {background: #fff;}
+        .modifydelete {
+            position:absolute;
+            top: 100px;
+            right: 20px;
+            width:100px;
+            height:50px;
+        }
+        .btn-sm {
+            padding: 10px 14px;margin:0px 0px
+        }
+        .btn-info {
+            padding: 0.45rem 1rem;
+        }
+        .commentaires {
+            margin-top: 100px;
+        }
+        #post-add-comment {
+            background-color: #ddd;
+            padding: 19px;
+            border-radius: 4px;
+            margin-bottom: 50px;
+        }
+        .btn-success {
+            display: block;
+            margin: 20px auto;
+        }
+        .commentaires2 {
+            margin-bottom:250px;
+        }
+        .post-comment {
+            margin-bottom:2em;
+        }
+        h4 {
+            font-size:13px;
+        }
+        .avatar {
+            max-width:50%
+        }
+        .avatar2 {
+            max-width:30%
+        }
     </style>
 {% endblock %}
 {% block body %}
 
     <!-- Header -->
-    {% for medium in trick.media | slice(0) %}
+    {% for medium in media | slice(0) %}
     <header class="masthead" style="height: 50vh;background: url(../../images/{{ medium.url }});background-repeat: no-repeat;background-size: cover;">
     {% endfor %}
         <div class="container d-flex h-100 align-items-center">
@@ -18,11 +59,18 @@
                 <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
                 {% if is_granted('ROLE_USER') %}
-                <div style="position:absolute;top: 100px; right: 20px;width:100px; height:50px;">
+                <div class="modifydelete">
                     <div class="row">
-                        <button class="btn btn-sm" style="padding: 10px 14px;margin:0px 0px"><a href="{{ path('modifytrickpage', {id: trick.id})}}"><i class="fa fa-pencil fa-2x"></i></a></button>
-                        <button class="btn btn-sm" style="padding: 10px 14px;margin:0px 0px"><a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'><i class="fa fa-trash fa-2x"></i></a></button>
-
+                        <button class="btn btn-sm">
+                            <a href="{{ path('modifytrickpage', {id: trick.id})}}">
+                                <i class="fa fa-pencil fa-2x"></i>
+                            </a>
+                        </button>
+                        <button class="btn btn-sm">
+                            <a href="{{ path('deletetrick', {id: trick.id}) }}" data-toggle='confirmation'>
+                                <i class="fa fa-trash fa-2x"></i>
+                            </a>
+                        </button>
                     </div>
                 </div>
                 {% endif %}
@@ -33,7 +81,7 @@
     <section id="tricks" class="projects-section bg-light">
         <div class="container" >
             <div class="row justify-content-md-center">
-            <div class="col-md-10 text-center">
+            <div class="col-md-12 text-center">
                 <div class="row justify-content-md-center">
                     {% for msg in app.session.flashBag.get('success') %}
                         <div class="alert alert-success">
@@ -41,41 +89,46 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="row justify-content-md-center" style="padding: 0px;">
-
-                {% for medium in media | slice(0) %}
-                        <div class="col-md-2">
+                <div class="row justify-content-md-center">
+                <div class="col-md-6">
+                {% for medium in media | slice(0, 2) %}
+                        <div class="col-md-4">
                                 <p class="text-center"><img class="img-fluid" src="../../images/{{ medium.url }} " /></p>
                         </div>
                 {% endfor %}
-                {% for vid in video | slice(0) %}
-                     <div class="col-md-2">
-                        <p class="text-center"><a href="{{ vid.url }}"</p>
+                </div>
+                <div class="col-md-6">
+                {% for vid in video | slice(0, 2) %}
+                     <div class="col-md-4">
+                         <iframe width="160" height="100" src="{{ vid.url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                         <a href="{{ vid.url }}">Lien</a>
                      </div>
                  {% endfor %}
+                </div>
                 </div>
                 <hr>
                 <p>{{ trick.description }}</p>
                 <hr>
-                <p>Catégorie: {{ trick.category.name }}</p>
-                <span class="pull-left">
+                <p><span class="btn btn-info">Catégorie: {{ trick.category.name }}</span></p>
+                <hr>
+                <span class=" justify-content-md-center">
                     {% if trick.updatedAt %}
-                    <i class="fa fa-calendar"></i> mis à jour le {{ trick.updatedAt|date("d/m/Y") }}
+                    <span class="btn btn-info"><i class="fa fa-calendar"></i> mis à jour le {{ trick.updatedAt|date("d/m/Y") }}</span>
                     {% else %}
-                    <i class="fa fa-calendar"></i>  publié le {{ trick.createdAt|date("d/m/Y") }}
+                        <span class="btn btn-info"><i class="fa fa-calendar"></i>  publié le {{ trick.createdAt|date("d/m/Y") }}</span>
                     {% endif %}
                 </span>
-                <span class="pull-right"><i class="fa fa-user"></i> Auteur: {{ trick.author.username }}</span>
+                <span class="btn btn-info justify-content-md-center"><i class="fa fa-user"></i> Auteur: {{ trick.author.username }}</span>
                 <hr>
             </div>
             </div>
         </div>
     </section>
     <section id="comments">
-        <div class="container" style="margin-top: 100px;">
+        <div class="container commentaires">
             <div class="row justify-content-md-center">
                 <div class="col-sm-8">
-                     <div id="post-add-comment" class="well" style="background-color: #ddd;padding: 19px;border-radius: 4px;margin-bottom: 50px;">
+                     <div id="post-add-comment" class="well">
                     {% if is_granted('ROLE_USER') %}
                         <fieldset>
                             <legend>
@@ -85,9 +138,8 @@
                             <div class="form-group">
                             {{ form_widget(commentForm.content, {attr: {rows: 10}}) }}
                             </div>
-
                             <div class="form-group">
-                                <button class="btn btn-success" type="submit" style="display: block; margin: 20px auto;">
+                                <button class="btn btn-success" type="submit">
                                     <i class="fa fa-paper-plane" aria-hidden="true"></i> Publier
                                 </button>
                             </div>
@@ -95,13 +147,15 @@
                         {{ form_end(commentForm) }}
                     {% else %}
                         <div class="form-card text-center">
-                            <a class="btn btn-success" href="{{ path('security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous</a>
-                     pour publier un message<br>
+                            <a class="btn btn-success" href="{{ path('security_login') }}">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous
+                            </a>
+                                pour publier un message<br>
                         </div>
                     {% endif %}
                 </div>
             </div>
-            <div class="col-sm-8" style="margin-bottom:250px;">
+            <div class="col-sm-8 commentaires2">
                 <h3>
                     <i class="fa fa-comments" aria-hidden="true"></i> {{ trick.comments|length }}
                     {% if trick.comments|length <= 1 %}
@@ -111,15 +165,13 @@
                     {% endif %}
                 <hr>
                 {% for comment in trick.comments %}
-                    <div class="row post-comment" style="margin-bottom:2em;">
+                    <div class="row post-comment">
                         <a name="comment_{{ comment.id }}"></a>
-
-                        <h4 class="col-sm-3" style="font-size:13px;">
-                            {#<img src="../../images/{{ comment.author.media.url }}"/>#}
+                        <h4 class="col-sm-3">
                             {% if comment.author.avatar is not empty %}
-                            <img src="../../images/{{ comment.author.avatar }}" class="img-fluid" style="max-width:50%"/>
+                            <img src="../../images/{{ comment.author.avatar }}" class="img-fluid avatar"/>
                             {% else %}
-                                <img src="../../images/snowboarder-profile.png" class="img-fluid" style="max-width:30%"/>
+                                <img src="../../images/snowboarder-profile.png" class="img-fluid avatar2"/>
                             {% endif %}
                         <strong>{{ comment.author.username }}</strong><br/> publié le<br />
                         <strong>{{ comment.createdAt|date("d/m/Y") }}</strong>
@@ -130,12 +182,11 @@
                     </div>
                 {% else %}
                     <div class="post-comment">
-                        {#<p>{{ 'post.no_comments'|trans }}</p>#}
+                        <p>Il n'y a aucun commentaire pour l'instant.</p>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
-
 {%  endblock %}

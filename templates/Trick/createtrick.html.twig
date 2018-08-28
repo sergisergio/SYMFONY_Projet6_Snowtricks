@@ -4,22 +4,24 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
+    <style>
+        .btn-success {
+            display: block; margin: 20px auto;
+        }
+    </style>
 {% endblock %}
 {% block body %}
     <h1>Ajouter un nouveau trick</h1>
-
     <div class="container formcentre">
         <div class="row justify-content-md-center">
             <div class="col-sm-8">
                 <h1 class="text-center">Ajouter un trick</h1>
                 {{ form_start(formAddTrick) }}
-
                 {{ form_widget(formAddTrick) }}
                 <p class="text-center">La catégorie n'existe  pas ? <a href="{{ path('add_category') }}">Ajouter une catégorie</a></p>
-                <button type="submit" class="btn btn-success" style="display: block; margin: 20px auto;">
+                <button type="submit" class="btn btn-success">
                     Ajouter
                 </button>
-
                 {{ form_end(formAddTrick) }}
             </div>
     </div>

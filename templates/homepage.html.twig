@@ -3,6 +3,45 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="../../css/custom.css">
+    <style>
+        .alert {
+            top: 30px;
+        }
+        .fa-arrow-down {
+            position: absolute;
+            right: 30px;
+            bottom: 80px;
+            color: #fff;
+        }
+        .fa-arrow-up {
+            position: absolute;
+            right: 30px;
+            bottom: 280px;
+            color: #fff;
+        }
+        .text-white-50 {
+            color : #fff;
+        }
+        #list {
+            margin: 50px auto;
+            width: 100%;
+        }
+        .box-card {
+            border:2px solid white;
+            margin: 10px;
+            border-radius:5px;
+        }
+        .trick {
+            padding-top:10px;
+        }
+        #loadMore {
+            margin: 50px auto 150px;
+            display: block;
+        }
+        h2 {
+            color: #000 !important;
+        }
+    </style>
 {% endblock %}
 {% block body %}
 
@@ -11,7 +50,7 @@
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
                 {% for flash_message in app.session.flashbag.get('success') %}
-                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert" style="top: 30px">
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -19,7 +58,7 @@
                     </div>
                 {% endfor %}
                 {% for flash_message in app.session.flashbag.get('info') %}
-                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert" style="top: 30px">
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -31,7 +70,7 @@
 
             </div>
             <a href="#tricks" class="js-scroll-trigger">
-                <i class="fa fa-arrow-down fa-2x" style="position: absolute; right: 30px; bottom: 80px; color: #fff;"></i>
+                <i class="fa fa-arrow-down fa-2x"></i>
             </a>
         </div>
     </header>
@@ -42,7 +81,7 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <h2 class="text-white mb-4">Qui sommes-nous ?</h2>
-                    <p class="text-white-50" style="color : #fff;">Snowtricks est un site collaboratif dédié à la pratique du snowboard. Vous y trouverez
+                    <p class="text-white-50">Snowtricks est un site collaboratif dédié à la pratique du snowboard. Vous y trouverez
                     les tricks principaux et les conseils pour les réussir. Présentation de tricks, échanges et partages constituent la base
                         de ce lieu incontournable : bonne visite !
                     </p>
@@ -62,16 +101,16 @@
                 </a>
             {% endif %}
             </div>
-            <div class="row justify-content-md-center" id="list" style="margin: 50px auto;width: 100%;">
+            <div class="row justify-content-md-center" id="list">
             {% for trick in tricks %}
-                    <div class="col-md-2 col-xs-12 box-card" style="border:2px solid white; margin: 10px;border-radius:5px;">
+                    <div class="col-md-2 col-xs-12 box-card">
                         <a href="{{ path('trickpage', { slug: trick.slug }) }}">
                         <div class="md-12 trickcard">
                             {% for medium in trick.media|slice(0, 1) %}
-                            <img src="../../images/{{ medium.url }}" class="img-fluid" style="padding-top:10px;"/>
+                            <img src="../../images/{{ medium.url }}" class="img-fluid trick"/>
                             {% endfor %}
                             {% if trick.media is empty %}
-                            <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid" style="padding-top:10px;"/>
+                            <img src="https://assets.vogue.com/photos/5892046d186d7c1b6493d0cb/master/pass/embed-silje-norendal-snowboard-cold-weather-beauty-products.jpg" class="img-fluid class"/>
                             {% endif %}
                             <hr>
                             <span>{{ trick.name }}</span>
@@ -82,22 +121,17 @@
                                 <a href="{{ path('modifytrickpage', {id: trick.id}) }}">
                                     <i class="fa fa-pencil pull-right"></i>
                                 </a>
-
                             {% endif %}
                         </div>
                         </a>
-
                     </div>
-
             {% endfor %}
-
             </div>
-            <button class="btn btn-success" href="#" id="loadMore" style="margin: 50px auto 150px; display: block;">Load More</button>
+            <button class="btn btn-success" href="#" id="loadMore">Load More</button>
             <a href="#tricks" class="js-scroll-trigger">
-                <i class="fa fa-arrow-up fa-2x" style="position: absolute; right: 30px; bottom: 280px; color: #fff;"></i>
+                <i class="fa fa-arrow-up fa-2x"></i>
             </a>
         </div>
-
     </section>
 {%  endblock %}
 {% block javascripts %}

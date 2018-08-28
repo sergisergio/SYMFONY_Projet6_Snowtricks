@@ -12,6 +12,12 @@
             margin: 0;
             opacity: 1;
         }
+        .alert {
+            top: 30px;
+        }
+        .btn-success {
+            display: block; margin: 20px auto;
+        }
     </style>
 {% endblock %}
 {% block body %}
@@ -19,7 +25,7 @@
         <div class="row justify-content-md-center">
             <div class="col-sm-8">
                 {% for flash_message in app.session.flashbag.get('success') %}
-                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert" style="top: 30px">
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -27,7 +33,7 @@
                     </div>
                 {% endfor %}
                 {% for flash_message in app.session.flashbag.get('info') %}
-                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert" style="top: 30px">
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -36,10 +42,9 @@
                 {% endfor %}
                 <h1 class="text-center">Ajouter un média à ce trick</h1>
                 {{ form_start(formAddMedia) }}
-
                 {{ form_row(formAddMedia.url) }}
                 {{ form_row(formAddMedia.trick) }}
-                <button type="submit" class="btn btn-success" style="display: block; margin: 20px auto;">
+                <button type="submit" class="btn btn-success">
                     Ajouter
                 </button>
                 {{ form_end(formAddMedia) }}
