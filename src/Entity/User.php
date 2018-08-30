@@ -304,7 +304,6 @@ class User implements UserInterface
                 $medium->setUser(null);
             }
         }
-
         return $this;
     }
 
@@ -327,6 +326,4 @@ class User implements UserInterface
 
         return $this;
     }
-
-
 }

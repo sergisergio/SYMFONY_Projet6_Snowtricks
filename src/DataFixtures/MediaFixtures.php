@@ -12,6 +12,7 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         // Première façon de faire des fixtures à l'aide d'une boucle
+
         /*for ($i = 1; $i <= 5; $i++) {
             $media = new Media();
             $media->setUrl('')
@@ -24,6 +25,7 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         //$manager->flush();
 
         // Deuxième façon: je crée des médias manuellement un par un de façon à avoir un jeu de données
+
         $image1 = new Media();
         $image1->setUrl('frontflip.jpg');
         $image1->setType('i');
@@ -35,8 +37,6 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $image2->setType('i');
         $image2->setTrick($this->getReference('trick2'));
         $manager->persist($image2);
-
-
 
         $image3 = new Media();
         $image3->setUrl('truckDriver.jpg');
@@ -85,8 +85,6 @@ class MediaFixtures extends Fixture implements DependentFixtureInterface
         $image10->setType('i');
         $image10->setTrick($this->getReference('trick10'));
         $manager->persist($image10);
-
-
 
         $manager->flush();
     }

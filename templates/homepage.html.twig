@@ -1,56 +1,12 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Accueil Snowtricks{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="../../css/custom.css">
-    <style>
-        .alert {
-            top: 30px;
-        }
-        .fa-arrow-down {
-            position: absolute;
-            right: 30px;
-            bottom: 80px;
-            color: #fff;
-        }
-        .fa-arrow-up {
-            position: absolute;
-            right: 30px;
-            bottom: 280px;
-            color: #fff;
-        }
-        .text-white-50 {
-            color : #fff;
-        }
-        #list {
-            margin: 50px auto;
-            width: 100%;
-        }
-        .box-card {
-            border:2px solid white;
-            margin: 10px;
-            border-radius:5px;
-        }
-        .trick {
-            padding-top:10px;
-        }
-        #loadMore {
-            margin: 50px auto 150px;
-            display: block;
-        }
-        h2 {
-            color: #000 !important;
-        }
-    </style>
-{% endblock %}
 {% block body %}
-
     <!-- Header -->
     <header class="masthead">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
                 {% for flash_message in app.session.flashbag.get('success') %}
-                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert">
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8 alertcss" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -58,7 +14,7 @@
                     </div>
                 {% endfor %}
                 {% for flash_message in app.session.flashbag.get('info') %}
-                    <div class="container alert alert-success alert-dismissible fade show col-md-8" role="alert">
+                    <div class="container alert alert-success alert-dismissible fade show col-md-8 alertcss" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,15 +22,13 @@
                     </div>
                 {% endfor %}
                 <h1 class="mx-auto my-0 text-uppercase">Snowtricks</h1>
-                <h2 class="text-white-50 mx-auto mt-2 mb-5">Le snowboard dans tous ces états</h2>
-
+                <h2 class="text-black-50 mx-auto mt-2 mb-5">Le snowboard dans tous ces états</h2>
             </div>
             <a href="#tricks" class="js-scroll-trigger">
                 <i class="fa fa-arrow-down fa-2x"></i>
             </a>
         </div>
     </header>
-
     <!-- About Section -->
     <section id="about" class="about-section text-center">
         <div class="container">
@@ -89,7 +43,6 @@
             </div>
         </div>
     </section>
-
     <!-- Projects Section -->
     <section id="tricks" style="background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);" class="projects-section bg-light">
         <div class="container-fluid" >
@@ -136,8 +89,6 @@
 {%  endblock %}
 {% block javascripts %}
     {{ parent() }}
-
-
     <script>
         $(function () {
             $(".box-card").slice(0, 15).show();

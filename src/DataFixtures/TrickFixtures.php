@@ -15,6 +15,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         // Première façon de faire des fixtures à l'aide d'une boucle
+
         /*for ($i = 1; $i <= 30; $i++)
         {
             $trick = new Trick();
@@ -32,8 +33,10 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         }
         $manager->flush();
         */
+
         // Deuxième façon: je crée des tricks manuellement un par un de façon à avoir un jeu de données
         // 10 Tricks seront créés
+
         $date = new \DateTime();
 
         $trick1 = new Trick();
@@ -153,10 +156,8 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
             $manager->persist($trick);
             $this->addReference('trick-'.$i, $trick);
-            //$trick->setCategory($this->getReference('category-'.rand(1, 5)));
-            //$trick->setAuthor($this->getReference('user-'.rand(1,5)));
         }
-        // Effacer la boucle avant quand le load more sera ok
+
         $manager->flush();
 
         // Chaque article peut avoir des commentaires donc je dois ajouter une référence

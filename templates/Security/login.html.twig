@@ -1,13 +1,9 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Se connecter{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="../../css/custom.css">
-{% endblock %}
 {% block body %}
 
     {% for flash_message in app.session.flashbag.get('info') %}
-        <div class="container alert alert-info alert-dismissible fade show col-md-5" role="alert" style="top: 100px">
+        <div class="container alert alert-info alert-dismissible fade show col-md-5" role="alert" style="top: 130px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -15,7 +11,7 @@
         </div>
     {% endfor %}
     {% for flash_message in app.session.flashbag.get('success') %}
-        <div class="container alert alert-success alert-dismissible fade show col-md-5" role="alert" style="top: 30px">
+        <div class="container alert alert-success alert-dismissible fade show col-md-5" role="alert" style="top: 130px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

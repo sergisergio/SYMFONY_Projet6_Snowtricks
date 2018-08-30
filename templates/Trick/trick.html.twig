@@ -1,9 +1,5 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ trick.name }}{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="../../css/custom.css">
-{% endblock %}
 {% block body %}
     <!-- Header -->
     {% for medium in media | slice(0) %}
@@ -11,8 +7,7 @@
     {% endfor %}
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
-                <h1 class="mx-auto my-0 text-uppercase">{{ trick.name }}</h1>
-                <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
+                <h1 class="text-uppercase mx-auto my-0">{{ trick.name }}</h1>
                 {% if is_granted('ROLE_USER') %}
                 <div class="modifydelete">
                     <div class="row">
@@ -44,22 +39,34 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="row justify-content-md-center">
-                <div class="col-md-6">
-                {% for medium in media | slice(0, 2) %}
-                        <div class="col-md-4">
-                                <p class="text-center"><img class="img-fluid" src="../../images/{{ medium.url }} " /></p>
+                <div class="row justify-content-md-center" id="media">
+                    <div class="col-md-6">
+                        <div class="row">
+                    {% for medium in media | slice(0, 2) %}
+                            <div class="col-md-4 trickimages">
+                                    <a href="../../images/{{ medium.url }}" class="zoombox zgallery1">
+                                        <img class="img-fluid" src="../../images/{{ medium.url }} " />
+                                    </a>
+                            </div>
+                    {% endfor %}
                         </div>
-                {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                        {% for vid in video | slice(0, 2) %}
+                                 <div class="col-md-4 trickvideos">
+                                     <a href="{{ vid.url }}" class="zoombox zgallery1">
+                                         <img class="img-fluid" src="https://image.freepik.com/free-icon/play-round_318-29886.jpg" />
+                                     </a>
+                                 </div>
+                         {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                {% for vid in video | slice(0, 2) %}
-                     <div class="col-md-4">
-                         <iframe width="160" height="100" src="{{ vid.url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                         <a href="{{ vid.url }}">Lien</a>
-                     </div>
-                 {% endfor %}
-                </div>
+                <div class="row seeMedia">
+                    <div class="mx-auto">
+                        <button id="seeMedia" class="btn btn-primary">Voir les médias</button>
+                    </div>
                 </div>
                 <hr>
                 <p>{{ trick.description }}</p>
@@ -82,7 +89,7 @@
     <section id="comments">
         <div class="container commentaires">
             <div class="row justify-content-md-center">
-                <div class="col-sm-8">
+                <div class="col-md-8 col-sm-12">
                      <div id="post-add-comment" class="well">
                     {% if is_granted('ROLE_USER') %}
                         <fieldset>
@@ -145,3 +152,17 @@
     </div>
 </section>
 {%  endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $('a.zoombox').zoombox();
+        });
+    </script>
+    <script>
+        $("#seeMedia").on('click', function (e) {
+            $("#media").show(500);
+            $("#seeMedia").hide(500);
+        });
+    </script>
+{% endblock %}

@@ -11,6 +11,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Première façon de faire des fixtures à l'aide d'une boucle
+
         /*for ($i = 1; $i <= 5; $i++) {
             $user = new User();
             $user->setUsername('Utilisateur-'.$i)
@@ -27,6 +28,7 @@ class UserFixtures extends Fixture
 
         // Deuxième façon: je crée des utilisateurs manuellement un par un de façon à avoir un jeu de données
         // Je crée 2 utilisateurs
+
         $user1 = new User();
         $user1->setUsername('Philippe');
         $user1->setEmail('docsphilippe@gmail.com');

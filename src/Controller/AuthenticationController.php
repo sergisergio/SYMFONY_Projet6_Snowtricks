@@ -62,7 +62,7 @@ class AuthenticationController extends AbstractController
             $message = (new \Swift_Message('Votre inscription sur SnowTricks'))
                 ->setFrom('ptraon@gmail.com')
                 ->setTo($user->getEmail())
-                ->setBody('http://localhost:8000/confirm?user=' . $user->getId() . '&token=' . $token);
+                ->setBody('Validez votre compte en cliquant sur ce <a href="http://localhost:8000/confirm?user=' . $user->getId() . '&token=' . $token . '">LIEN</a>', 'text/html');
 
             $mailer->send($message);
 
@@ -75,8 +75,6 @@ class AuthenticationController extends AbstractController
             // 7) Redirection vers la page de login
             return $this->redirectToRoute('security_login');
         }
-
-
 
         /* Affichage de la page d'inscription avec son formulaire */
         return $this->render(
@@ -191,7 +189,7 @@ class AuthenticationController extends AbstractController
                 $message = (new \Swift_Message('Réinitialisation de votre mot de passe'))
                     ->setFrom('ptraon@gmail.com')
                     ->setTo($user->getEmail())
-                    ->setBody('http://localhost:8000/resetpassword?user=' . $userReset->getId() . '&token=' . $token);
+                    ->setBody('<a href="http://localhost:8000/resetpassword?user=' . $userReset->getId() . '&token=' . $token . '">Réinitialiser votre mot de passe</a>', 'text/html');
                 /* Envoi du mail avec lien de confirmation */
                 $mailer->send($message);
 

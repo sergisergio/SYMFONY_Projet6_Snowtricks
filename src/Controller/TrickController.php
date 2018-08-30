@@ -207,6 +207,4 @@ class TrickController extends AbstractController
         return $this->redirectToRoute('homepage');
         // Idem : paramconverter ?
     }
-
-
 }

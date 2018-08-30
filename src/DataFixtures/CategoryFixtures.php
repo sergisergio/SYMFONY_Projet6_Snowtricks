@@ -11,6 +11,7 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Première façon de faire des fixtures à l'aide d'une boucle
+
         /*for ($i = 1; $i <= 5; $i++) {
             $category = new Category();
             $category->setName('Catégorie-'.$i)
@@ -24,6 +25,7 @@ class CategoryFixtures extends Fixture
 
         // Deuxième façon: je crée des catégories manuellement un par un de façon à avoir un jeu de données
         // Ici, je crée 4 catégories : Flips, Rotations, Grabs et Slides.
+
         $cat1 = new Category();
         $cat1->setName('Flips');
         $cat1->setSlug('Flips');
@@ -48,28 +50,14 @@ class CategoryFixtures extends Fixture
         $cat4->setDescription('Slides');
         $manager->persist($cat4);
 
-        /*$cat5 = new Category();
-        $cat5->setName('One Foot');
-        $cat5->setSlug('One Foot');
-        $cat5->setDescription('One Foot');
-        $manager->persist($cat5);
-
-        $cat6 = new Category();
-        $cat6->setName('Old school');
-        $cat6->setSlug('Old school');
-        $cat6->setDescription('Old school');
-        $manager->persist($cat6);*/
-
         $manager->flush();
 
         // Une catégorie peut contenir plusieurs tricks donc j'ajoute une référence que je récupère dans Trick Fixtures
+
         $this->addReference('cat1', $cat1);
         $this->addReference('cat2', $cat2);
         $this->addReference('cat3', $cat3);
         $this->addReference('cat4', $cat4);
-        //$this->addReference('cat5', $cat5);
-        //$this->addReference('cat6', $cat6);
     }
-
     // Ici, je ne récupère pas de référence donc pas besoin de la méthode getDeoendencies
 }

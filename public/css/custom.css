@@ -9,6 +9,29 @@
     height: 100%;
     width: 100%;
 }
+#list {
+    margin: 50px auto;
+    width: 100%;
+}.text-white-50 {
+    color : #fff;
+}
+
+.box-card {
+    border:2px solid white;
+    margin: 10px;
+    border-radius:5px;
+}
+.trick {
+    padding-top:10px;
+}
+.tricktitle{
+    display: block;
+    margin: 0 auto;
+}
+#loadMore {
+    margin: 50px auto 150px;
+    display: block;
+}
 .form-check-label {
     padding-left: 3.25rem;
     margin-bottom: 0;
@@ -29,7 +52,7 @@ button:active {
     transform : scale(0.98);
     box-shadow : 6px 6px 18px 2px rgba(0,0,0, 0.23);
 }
-.btnlogin, .btnsignup, .btnaddtrick, .btnaddcategory, .btnupdatetrick, .btn404, .btnpublish, .btnaddmedia, .btnaddvideo {
+.btnlogin, .btnsignup, .btnaddtrick, .btnaddcategory, .btnupdatetrick, .btn404, .btnpublish, .btnaddmedia, .btnaddvideo, .btnforgot, .btnreset {
     display: block; margin: 30px auto;
 }
 .custom-file-input {
@@ -54,6 +77,26 @@ button:active {
     height: calc(2.25rem + 2px);
     margin: 0;
     opacity: 1;
+}
+#seeMedia {
+    display: none
+}
+@media(max-width: 767px) {
+    #seeMedia {
+        display: block;
+    }
+    #media {
+        display: none;
+    }
+    .trickimages {
+        padding-bottom: 30px;
+    }
+    .trickvideos {
+        padding-bottom: 30px;
+        max-width:55%;
+        display: block;
+        margin: 0 auto;
+    }
 }
 .para {
     text-align: justify!important;
@@ -122,6 +165,18 @@ button:active {
 .fa-arrow-down, .fa-arrow-up {font-size: 1.7em !important;}
 .fa {
     font-size: 1.1em;
+}
+.fa-arrow-down {
+    position: absolute;
+    right: 30px;
+    bottom: 80px;
+    color: #fff;
+}
+.fa-arrow-up {
+    position: absolute;
+    right: 30px;
+    bottom: 280px;
+    color: #fff;
 }
 .box-card, .fa-arrow-up {display:none;}
 
