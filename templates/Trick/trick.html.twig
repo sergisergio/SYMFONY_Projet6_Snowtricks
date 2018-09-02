@@ -3,7 +3,12 @@
 {% block body %}
     <!-- Header -->
     {% for medium in media | slice(0) %}
-    <header class="masthead" style="height: 50vh;background: url(../../images/{{ medium.url }});background-repeat: no-repeat;background-size: cover;">
+        {% if medium.url  %}
+           <header class="masthead" style="height: 50vh;background: url(../../images/{{ medium.url }});background-repeat: no-repeat;background-size: cover;">
+        {% else %}
+            <header class="masthead" style="height: 50vh;background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Shakedown_2008_Figure_4.jpg/1200px-Shakedown_2008_Figure_4.jpg');background-repeat: no-repeat;background-size: cover;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Shakedown_2008_Figure_4.jpg/1200px-Shakedown_2008_Figure_4.jpg">
+        {% endif %}
     {% endfor %}
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">

@@ -12,7 +12,9 @@ namespace App\Controller;
 use App\Entity\Media;
 use App\Form\MediaType;
 use App\Form\VideoType;
+use App\Repository\MediaRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,7 +75,7 @@ class MediaController extends AbstractController
     }
 
     /**
-     * Ajouter un média
+     * Ajouter une vidéo
      *
      * @Route("/add/video/", name="addVideo")
      */
@@ -96,5 +98,26 @@ class MediaController extends AbstractController
             'Media/addVideo.html.twig', [
             'formAddVideo' => $form->createView()
         ]);
+    }
+
+    /**
+     * Delete a media
+     *
+     * @Route("/delete/media/{id}", name="deletemedia")
+     */
+    public function removeMedia($id, EntityManagerInterface $em,  MediaRepository $repoMedia) {
+        $repository = $em->getRepository(Media::class);
+        $media = $repository->find($id);
+        //$type= 'i';
+        //$type2 = 'v';
+        //$media = $repoMedia->findMediaByTrick($slug, $type);
+
+
+        //$video = $repoMedia->findMediaByTrick($slug, $type2);
+
+        $em->remove($media);
+        $em->flush();
+
+        return $this->redirectToRoute('homepage');
     }
 }
