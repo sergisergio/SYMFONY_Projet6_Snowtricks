@@ -26,10 +26,20 @@
 <filter>
     <whitelist>
         <directory>./src/</directory>
+        <exclude>
+            <directory>./src/Migrations/</directory>
+            <directory>./src/Kernel.php</directory>
+        </exclude>
     </whitelist>
 </filter>
 
 <listeners>
-    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener">
+        <arguments>
+            <array>
+                <element key="time-sensitive"><string>Symfony\Component\HttpFoundation</string></element>
+            </array>
+        </arguments>
+    </listener>
 </listeners>
 </phpunit>

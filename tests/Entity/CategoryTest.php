@@ -10,6 +10,7 @@ namespace App\Tests\Entity;
 
 
 use App\Entity\Category;
+use App\Entity\Trick;
 use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
@@ -19,6 +20,7 @@ class CategoryTest extends TestCase
     public function setUp()
     {
         $this->category = new Category();
+        $this->trick = new Trick();
     }
     public function testMediaIsInstanceOfCategoryClass()
     {

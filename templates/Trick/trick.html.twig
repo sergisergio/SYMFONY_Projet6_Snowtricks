@@ -32,7 +32,7 @@
             </div>
         </div>
     </header>
-    <!-- Projects Section -->
+    <!-- Trick Section -->
     <section id="tricks" class="projects-section bg-light">
         <div class="container" >
             <div class="row justify-content-md-center">
@@ -91,6 +91,7 @@
             </div>
         </div>
     </section>
+    <!-- Comments Section -->
     <section id="comments">
         <div class="container commentaires">
             <div class="row justify-content-md-center">
@@ -114,7 +115,7 @@
                         {{ form_end(commentForm) }}
                     {% else %}
                         <div class="form-card text-center">
-                            <a class="btn btn-success btnlogin" href="{{ path('security_login') }}">
+                            <a class="btn btn-success btnlogin2" href="{{ path('security_login') }}">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Connectez-vous
                             </a>
                                 pour publier un message<br>
@@ -159,6 +160,7 @@
 {%  endblock %}
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/zoombox.js')}}"></script>
     <script>
         $(function(){
             $('a.zoombox').zoombox();

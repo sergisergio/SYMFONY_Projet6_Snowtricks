@@ -7,7 +7,7 @@
                 {% if user.avatar is not empty %}
                     <div><img src="../../images/{{ user.avatar }}" class="img-fluid" style="display: block;width: 150px; margin:150px auto -80px;"/></div>
                 {% else %}
-                    <div><img src="../../images/snowboarder-profile.png" class="img-fluid" style="display: block;width: 150px; margin:150px auto -80px;" /></div>
+                    <div><img src="{{ asset('images/snowboarder-profile.png') }}" class="img-fluid" style="display: block;width: 150px; margin:150px auto -80px;" /></div>
                 {% endif %}
                 <div style="margin-top:150px" class="text-center">Pseudo:  {{ user.username }}</div>
                 <hr>

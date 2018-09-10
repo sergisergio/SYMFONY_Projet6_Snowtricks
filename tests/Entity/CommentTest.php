@@ -28,6 +28,15 @@ class CommentTest extends TestCase
     {
         $this->assertNull($this->comment->getId());
     }
+    public function testContentIsNull()
+    {
+        $this->assertNull($this->comment->getContent());
+    }
+    public function testContentIsNotNull()
+    {
+        $this->comment->setContent('Contenu');
+        $this->assertNotNull($this->comment->getContent());
+    }
     public function testCreatedAt()
     {
         $this->comment->setCreatedAt(new \DateTime());

@@ -55,6 +55,10 @@ button:active {
 .btnlogin, .btnsignup, .btnaddtrick, .btnaddcategory, .btnupdatetrick, .btn404, .btnpublish, .btnaddmedia, .btnaddvideo, .btnforgot, .btnreset {
     display: block; margin: 30px auto;
 }
+.btnlogin2 {
+    display: inline-block;
+    margin: 30px auto;
+}
 .custom-file-input {
     min-width: 14rem;
     max-width: 100%;
@@ -103,8 +107,14 @@ button:active {
     padding: 10px 50px;
 }
 /* LOGIN */
-.connexion, .inscription {
+.connexion, .inscription, .cgu {
     margin-top: 150px;
+    font-family: 'Varela Round';
+    color: rgba(51,71,255,.9);
+}
+.addtrick, .modifytrick, .addcategory, .addmedia, .addvideo{
+    font-family: 'Varela Round';
+    color: rgba(51,71,255,.9);
 }
 .forgot {
     text-decoration: underline

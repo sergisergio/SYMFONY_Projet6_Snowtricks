@@ -26,7 +26,11 @@ class HomeController extends AbstractController
     /**
      * Liste de tous les tricks
      *
-     * @Route("/", name="homepage")
+     * @Route(
+     *     path="/",
+     *     name="homepage",
+     *     methods={"GET"}
+     * )
      */
     public function show(EntityManagerInterface $em)
     {

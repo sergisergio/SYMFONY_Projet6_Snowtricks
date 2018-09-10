@@ -5,9 +5,10 @@
     <div class="container formcentre">
         <div class="row justify-content-md-center">
             <div class="col-sm-8">
-                <h1 class="text-center">Modifier un trick</h1>
+                <h1 class="text-center modifytrick">Modifier un trick</h1>
                 {{ form_start(formAddTrick) }}
                 {{ form_widget(formAddTrick) }}
+                <p class="text-center">La catégorie n'existe  pas ? <a href="{{ path('add_category') }}">Ajouter une catégorie</a></p>
                 <button type="submit" class="btn btn-success btnupdatetrick">
                     Mettre à jour
                 </button>
