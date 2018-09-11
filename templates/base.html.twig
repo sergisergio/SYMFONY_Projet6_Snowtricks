@@ -37,13 +37,13 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ path('homepage') }}#tricks">
-                        <i class="fa fa-snowflake-o" aria-hidden="true"></i> Tricks
+                        <i class="fa fa-snowflake-o" aria-hidden="true"></i> Figures
                     </a>
                 </li>
                 {% if is_granted('ROLE_USER') %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{ path('createtrickpage') }}">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un trick
+                            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une figure
                         </a>
                     </li>
                     <li class="nav-item">
@@ -72,9 +72,7 @@
         </div>
     </div>
 </nav>
-{% block body %}
-
-{% endblock %}
+{% block body %}{% endblock %}
 <!-- Footer -->
 <footer class="bg-black small text-center text-white-50">
     <div class="container">
