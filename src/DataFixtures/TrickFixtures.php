@@ -71,7 +71,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick4 = new Trick();
         $trick4->setDescription(
-            'Un tour complet en effectuant une rotation horizontale pendant le saut, puis en attérissant en position switch ou normal'
+            'Un tour complet en effectuant une rotation horizontale pendant le saut'
         );
         $trick4->setCreatedAt($date->add(new \DateInterval('P2W')));
         $trick4->setSlug('360');
@@ -82,7 +82,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick5 = new Trick();
         $trick5->setDescription(
-            'Deux tours complets en effectuant une rotation horizontale pendant le saut, puis en atterrissant en position switch ou normal'
+            'Deux tours complets en effectuant une rotation horizontale pendant le saut'
         );
         $trick5->setCreatedAt($date->add(new \DateInterval('P1Y1D')));
         $trick5->setSlug('720');
@@ -93,7 +93,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick6 = new Trick();
         $trick6->setDescription(
-            'Trois tours complets en effectuant une rotation horizontale pendant le saut, puis en atterrissant en position switch ou normal'
+            'Trois tours complets en effectuant une rotation horizontale pendant le saut'
         );
         $trick6->setCreatedAt($date->add(new \DateInterval('P1DT12H')));
         $trick6->setSlug('1080');
@@ -123,7 +123,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick8);
 
         $trick9 = new Trick();
-        $trick9->setDescription('Glisser sur une barre de slide avec l\'avant de la planche sur la barre');
+        $trick9->setDescription('Glisser sur une barre de slide avec l\'avant de la planche');
         $trick9->setCreatedAt($date->add(new \DateInterval('P10DT6H')));
         $trick9->setSlug('nose-slide');
         $trick9->setCategory($this->getReference('cat4'));
@@ -132,7 +132,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick9);
 
         $trick10 = new Trick();
-        $trick10->setDescription('Glisser sur une barre de slide avec l\'arrière de la planche sur la barre');
+        $trick10->setDescription('Glisser sur une barre de slide avec l\'arrière de la planche');
         $trick10->setCreatedAt($date->add(new \DateInterval('P1W')));
         $trick10->setSlug('tail-slide');
         $trick10->setUpdatedAt($date->add(new \DateInterval('P2D')));

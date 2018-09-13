@@ -22,7 +22,7 @@ class CategoryTest extends TestCase
         $this->category = new Category();
         $this->trick = new Trick();
     }
-    public function testMediaIsInstanceOfCategoryClass()
+    public function testCategoryIsInstanceOfCategoryClass()
     {
         $this->assertInstanceOf(Category::class, $this->category);
     }
@@ -44,5 +44,24 @@ class CategoryTest extends TestCase
     {
         $this->category->setDescription('une description lambda');
         $this->assertSame('une description lambda', $this->category->getDescription());
+    }
+    public function getTricksTest()
+    {
+        $this->category->getTricks([]);
+        $this->assertSame([], $this->category->getTricks());
+    }
+    public function testTricksEmpty()
+    {
+        $this->assertCount(0, $this->category->getTricks());
+    }
+    public function testAddTrick()
+    {
+        $this->category->addTrick($this->trick);
+        $this->assertCount(1, $this->category->getTricks());
+    }
+    public function testRemoveTrick()
+    {
+        $this->category->removeTrick($this->trick);
+        $this->assertCount(0, $this->category->getTricks());
     }
 }

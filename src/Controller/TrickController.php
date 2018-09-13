@@ -58,14 +58,12 @@ class TrickController extends AbstractController
         $type= 'i';
         $type2 = 'v';
         $media = $repoMedia->findMediaByTrick($slug, $type);
-
-
         $video = $repoMedia->findMediaByTrick($slug, $type2);
-        dump($video);
+
         $medium = $repoMedia->findOneBy(['url' => 'https://image.redbull.com/rbcom/010/2015-04-15/1331717228402_2/0010/1/1500/1000/1/billy-morgan-lands-first-ever-snowboard-quad-cork.jpg']);
                 //$repo= $em->getRepository(User::class);
                 // Je ne passe plus par entitymanager mais directement par le repository....
-        //$author = $repoUser->findOneBy(['username' => 'Philippe Traon']);
+                //$author = $repoUser->findOneBy(['username' => 'Philippe Traon']);
 
         $comment = new Comment();
         $comment->setAuthor($this->getUser());

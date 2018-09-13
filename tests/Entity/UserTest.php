@@ -10,6 +10,9 @@ namespace App\Tests\Entity;
 
 
 use App\Entity\User;
+use App\Entity\Trick;
+use App\Entity\Comment;
+use App\Entity\Media;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
@@ -19,8 +22,11 @@ class UserTest extends TestCase
     public function setUp()
     {
         $this->user = new User();
+        $this->trick = new Trick();
+        $this->comment = new Comment();
+        $this->media = new Media();
     }
-    public function testMediaIsInstanceOfCategoryClass()
+    public function testUserIsInstanceOfUserClass()
     {
         $this->assertInstanceOf(User::class, $this->user);
     }
@@ -108,5 +114,35 @@ class UserTest extends TestCase
     {
         $this->user->setAvatar('toto.jpg');
         $this->assertNotNull($this->user->getAvatar());
+    }
+    public function testAddTrickIsOk()
+    {
+        $this->user->addTrick($this->trick);
+        $this->assertCount(1, $this->user->getTricks());
+    }
+    public function testRemoveTrickIsOk()
+    {
+        $this->user->removeTrick($this->trick);
+        $this->assertCount(0, $this->user->getTricks());
+    }
+    public function testAddCommentIsOk()
+    {
+        $this->user->addComment($this->comment);
+        $this->assertCount(1, $this->user->getComments());
+    }
+    public function testRemoveCommentIsOk()
+    {
+        $this->user->removeComment($this->comment);
+        $this->assertCount(0, $this->user->getComments());
+    }
+    public function testAddMediumIsOk()
+    {
+        $this->user->addMedium($this->media);
+        $this->assertCount(1, $this->user->getMedia());
+    }
+    public function testRemoveMediumIsOk()
+    {
+        $this->user->removeMedium($this->media);
+        $this->assertCount(0, $this->user->getMedia());
     }
 }

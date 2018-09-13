@@ -10,6 +10,10 @@ namespace App\Tests\Entity;
 
 
 use App\Entity\Trick;
+use App\Entity\Comment;
+use App\Entity\User;
+use App\Entity\Media;
+use App\Entity\Category;
 use PHPUnit\Framework\TestCase;
 
 class TrickTest extends TestCase
@@ -19,8 +23,12 @@ class TrickTest extends TestCase
     public function setUp()
     {
         $this->trick = new Trick();
+        $this->comment = new Comment();
+        $this->user = new User();
+        $this->media = new Media();
+        $this->category = new Category();
     }
-    public function testMediaIsInstanceOfCategoryClass()
+    public function testTrickIsInstanceOfTrickClass()
     {
         $this->assertInstanceOf(Trick::class, $this->trick);
     }
@@ -64,5 +72,35 @@ class TrickTest extends TestCase
     {
         $this->trick->setUpdatedAt(new \DateTime());
         $this->assertInstanceOf(\DateTime::class, $this->trick->getUpdatedAt());
+    }
+    public function testAddCommentIsOk()
+    {
+        $this->trick->addComment($this->comment);
+        $this->assertCount(1, $this->trick->getComments());
+    }
+    public function testRemoveCommentIsOk()
+    {
+        $this->trick->removeComment($this->comment);
+        $this->assertCount(0, $this->trick->getComments());
+    }
+    public function testAddMediumIsOk()
+    {
+        $this->trick->addMedium($this->media);
+        $this->assertCount(1, $this->trick->getMedia());
+    }
+    public function testRemoveMediumIsOk()
+    {
+        $this->trick->removeMedium($this->media);
+        $this->assertCount(0, $this->trick->getMedia());
+    }
+    public function testAuthorIsOk()
+    {
+        $this->trick->setAuthor($this->user);
+        $this->assertNotNull($this->trick->getAuthor());
+    }
+    public function testCategoryIsOk()
+    {
+        $this->trick->setCategory($this->category);
+        $this->assertNotNull($this->trick->getCategory());
     }
 }
