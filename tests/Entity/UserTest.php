@@ -145,4 +145,8 @@ class UserTest extends TestCase
         $this->user->removeMedium($this->media);
         $this->assertCount(0, $this->user->getMedia());
     }
+    public function testRolesIsNotNull()
+    {
+        $this->assertSame(['ROLE_USER'], $this->user->getRoles());
+    }
 }
