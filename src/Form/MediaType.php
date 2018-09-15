@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 
 class MediaType extends AbstractType
@@ -18,8 +19,17 @@ class MediaType extends AbstractType
         $builder
             //->add('url')
             ->add('url', FileType::class, array(
-                'label' => 'Choisissez votre fichier'
-                    )
+                'label' => 'Choisissez votre fichier',
+                'constraints' => new File([
+                    'maxSize' => '5M',
+                    'mimeTypes' => [
+                        'application/jpg',
+                        'application/jpeg',
+                        'application/png',
+                    ],
+                    'mimeTypesMessage' => 'Fichier JPG, JPEG ou PNG autorisés',
+                ])
+                )
             )
             //->add('type')
             ->add('trick', EntityType::class, [

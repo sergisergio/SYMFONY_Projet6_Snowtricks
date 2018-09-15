@@ -159,7 +159,7 @@ class AuthenticationController extends AbstractController
      */
     function forgotPasswordPage(Request $request, \Swift_Mailer $mailer, TokenGeneratorInterface $generator)
     {
-        // 1) Création duf ormulaire
+        // 1) Création du formulaire
         $user = new User();
         $form = $this->createFormBuilder($user)
             ->add('email', EmailType::class)
