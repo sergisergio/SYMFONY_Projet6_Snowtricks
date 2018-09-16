@@ -103,4 +103,20 @@ class TrickTest extends TestCase
         $this->trick->setCategory($this->category);
         $this->assertNotNull($this->trick->getCategory());
     }
+    public function testCommentsIsOk()
+    {
+        $this->trick->addComment($this->comment);
+        $this->assertCount(1, $this->trick->getComments());
+
+        $this->trick->removeComment($this->comment);
+        $this->assertCount(0, $this->trick->getComments());
+    }
+    public function testMediaIsOk()
+    {
+        $this->trick->addMedium($this->media);
+        $this->assertCount(1, $this->trick->getMedia());
+
+        $this->trick->removeMedium($this->media);
+        $this->assertCount(0, $this->trick->getMedia());
+    }
 }

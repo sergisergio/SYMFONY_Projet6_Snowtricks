@@ -64,4 +64,12 @@ class CategoryTest extends TestCase
         $this->category->removeTrick($this->trick);
         $this->assertCount(0, $this->category->getTricks());
     }
+    public function testTricksIsOk()
+    {
+        $this->category->addTrick($this->trick);
+        $this->assertCount(1, $this->category->getTricks());
+
+        $this->category->removeTrick($this->trick);
+        $this->assertCount(0, $this->category->getTricks());
+    }
 }

@@ -149,4 +149,28 @@ class UserTest extends TestCase
     {
         $this->assertSame(['ROLE_USER'], $this->user->getRoles());
     }
+    public function testTricksIsOk()
+    {
+        $this->user->addTrick($this->trick);
+        $this->assertCount(1, $this->user->getTricks());
+
+        $this->user->removeTrick($this->trick);
+        $this->assertCount(0, $this->user->getTricks());
+    }
+    public function testCommentsIsOk()
+    {
+        $this->user->addComment($this->comment);
+        $this->assertCount(1, $this->user->getComments());
+
+        $this->user->removeComment($this->comment);
+        $this->assertCount(0, $this->user->getComments());
+    }
+    public function testMediaIsOk()
+    {
+        $this->user->addMedium($this->media);
+        $this->assertCount(1, $this->user->getMedia());
+
+        $this->user->removeMedium($this->media);
+        $this->assertCount(0, $this->user->getMedia());
+    }
 }
