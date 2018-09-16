@@ -35,7 +35,13 @@ class AuthenticationController extends AbstractController
      *
      * @Route("/inscription", name="signuppage")
      */
-    function signupPage(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $generator)
+    function signupPage(
+        Request $request,
+        ObjectManager $manager,
+        UserPasswordEncoderInterface $encoder,
+        \Swift_Mailer $mailer,
+        TokenGeneratorInterface $generator
+    )
     {
         // 1) Construction du formulaire
         $user = new User();
@@ -47,18 +53,17 @@ class AuthenticationController extends AbstractController
 
             // 3) Génération du password hashé, du token et des champs non nullables
             $token = $generator->generateToken();
-
             $hash = $encoder->encodePassword($user, $user->getPlainPassword());
-
             $user->setPassword($hash);
             $user->setToken($token);
             $user->setRole('1');
             $user->setIsActive('0');
+
             // 4) Sauvegarde de l'utilisateur
             $manager->persist($user);
             $manager->flush();
 
-            // 5) Envoi du mai avec lien de confirmation
+            // 5) Envoi du mail avec lien de confirmation
             $message = (new \Swift_Message('Votre inscription sur SnowTricks'))
                 ->setFrom('ptraon@gmail.com')
                 ->setTo($user->getEmail())
@@ -76,7 +81,6 @@ class AuthenticationController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-        /* Affichage de la page d'inscription avec son formulaire */
         return $this->render(
             'security/signup.html.twig', [
                 'formSignup' => $form->createView(),
@@ -102,7 +106,6 @@ class AuthenticationController extends AbstractController
         // 1) récupération du token dans l'URL
         $token = $request->get('token');
 
-        /* Erreur si pas de token */
         if (!$token) {
             return new Response(new InvalidCsrfTokenException());
         }
@@ -110,7 +113,6 @@ class AuthenticationController extends AbstractController
         // 2) Récupérer le User à l'aide de son identifiant
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $request->get('user')]);
 
-        /* Erreur si pas de User */
         if (!$user) {
             throw $this->createNotFoundException();
         }
@@ -125,6 +127,7 @@ class AuthenticationController extends AbstractController
         // 4) Si tout est bon, redirection vers la page d'accueil
         return $this->redirecttoRoute('security_login');
     }
+
     /**
      * Page de connexion (Voir le fichier security.yaml)
      *
@@ -157,13 +160,16 @@ class AuthenticationController extends AbstractController
      *
      * @Route("/forgotpassword", name="forgotpasswordpage")
      */
-    function forgotPasswordPage(Request $request, \Swift_Mailer $mailer, TokenGeneratorInterface $generator)
+    function forgotPasswordPage(
+        Request $request,
+        \Swift_Mailer $mailer,
+        TokenGeneratorInterface $generator
+    )
     {
         // 1) Création du formulaire
         $user = new User();
         $form = $this->createFormBuilder($user)
             ->add('email', EmailType::class)
-            //->add('save', SubmitType::class, array('label' => 'envoyer'))
             ->getForm();
 
         // 2) Traitement des données du formulaire
@@ -190,7 +196,7 @@ class AuthenticationController extends AbstractController
                     ->setFrom('ptraon@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody('<a href="http://localhost:8000/resetpassword?user=' . $userReset->getId() . '&token=' . $token . '">Réinitialiser votre mot de passe</a>', 'text/html');
-                /* Envoi du mail avec lien de confirmation */
+
                 $mailer->send($message);
 
                 // 6) Message Flash
@@ -203,24 +209,27 @@ class AuthenticationController extends AbstractController
             // 7) redirection vers la page d'accueil avec message flash
             return $this->redirectToRoute('security_login');
         }
-        // Affichage de la page "mot de passe oublié" avec son formulaire
+
         return $this->render(
             'security/forgotpasswordpage.html.twig', [
                 'formForgotPassword' => $form->createView(),
             ]
         );
     }
+
     /**
      * Page pour réinitialiser son mot de passe
      *
      * @Route("/resetpassword", name="resetpasswordpage")
      */
-    function resetPasswordPage(Request $request, UserPasswordEncoderInterface $encoder)
+    function resetPasswordPage(
+        Request $request,
+        UserPasswordEncoderInterface $encoder
+    )
     {
         // 1) Récupération du token dans l'URL
         $token = $request->get('token');
 
-        /* Erreur si pas de token */
         if (!$token) {
             return new Response(new InvalidCsrfTokenException());
         }
@@ -228,7 +237,6 @@ class AuthenticationController extends AbstractController
         // 2) Récupérer le User à l'aide de son token
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['resetToken' => $request->get('token')]);
 
-        /* Erreur si pas de User */
         if (!$user) {
             throw $this->createNotFoundException();
         }

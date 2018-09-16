@@ -29,7 +29,6 @@ class TrickRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('t');
         $qb
             ->leftJoin('t.media', 'm')
-            //->addSelect('m')
             ->getQuery()
             ->getResult();
 

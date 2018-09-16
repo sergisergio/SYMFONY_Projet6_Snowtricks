@@ -17,7 +17,6 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('url')
             ->add('url', FileType::class, array(
                 'label' => 'Choisissez votre fichier',
                 'constraints' => new File([
@@ -31,14 +30,12 @@ class MediaType extends AbstractType
                 ])
                 )
             )
-            //->add('type')
             ->add('trick', EntityType::class, [
                 'placeholder' => 'Choisissez un trick',
                 'class' => 'App\Entity\Trick',
                 'choice_label' => 'name',
                 'label' => 'Trick',
             ])
-            //->add('url', TextType::class)
         ;
     }
 

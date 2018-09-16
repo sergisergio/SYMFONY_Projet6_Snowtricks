@@ -23,6 +23,7 @@ class CategoryFixtures extends Fixture
         $manager->flush();
         */
 
+
         // Deuxième façon: je crée des catégories manuellement un par un de façon à avoir un jeu de données
         // Ici, je crée 4 catégories : Flips, Rotations, Grabs et Slides.
 

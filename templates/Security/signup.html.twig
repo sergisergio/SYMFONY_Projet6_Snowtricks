@@ -6,6 +6,8 @@
     <div class="container containersignup">
         <div class="row justify-content-md-center">
             <div class="col-md-6">
+
+                {# formulaire inscription #}
                 {{ form_start(formSignup) }}
                 {{ form_row(formSignup.username, { 'label': 'Nom d\'utilisateur *', 'attr': {
             'placeholder': 'Nom d\'utilisateur' }}) }}
@@ -16,6 +18,8 @@
                 <a href="{{ path('conditions') }}" class="pull-right">Voir les CGU</a>
                 <button type="submit" class="btn btn-success btnsignup">Inscription</button>
                 {{ form_end(formSignup) }}
+                {# fin formulaire inscription #}
+
             </div>
         </div>
     </div>

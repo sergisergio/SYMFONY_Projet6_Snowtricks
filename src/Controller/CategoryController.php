@@ -23,8 +23,11 @@ class CategoryController extends AbstractController
      *
      * @Route("/category/add/", name="add_category")
      */
-    public function addCategory(Request $request, ObjectManager $manager) {
-
+    public function addCategory(
+        Request $request,
+        ObjectManager $manager
+    )
+    {
         $category = new Category();
 
         $form = $this->createForm(CategoryType::class, $category);

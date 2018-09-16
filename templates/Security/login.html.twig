@@ -25,6 +25,8 @@
                 {% if error %}
                     <div>Identifiants invalides</div>
                 {% endif %}
+
+                {# formulaire connexion #}
                 <form action="{{ path('security_login') }}" method="post">
                     <div class="form-group">
                         <label for="email">Adresse Email</label>
@@ -42,6 +44,8 @@
                         <button type="submit" class="btn btn-success btnlogin">Connexion</button>
                     </div>
                 </form>
+                {# fin formulaire connexion #}
+
             </div>
         </div>
     </div>

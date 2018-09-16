@@ -21,6 +21,8 @@
                     </div>
                 {% endfor %}
                 <h1 class="text-center addmedia">Ajouter un média</h1>
+
+                {# formulaire ajout image #}
                 {{ form_start(formAddMedia) }}
                 {{ form_row(formAddMedia.url) }}
                 {{ form_row(formAddMedia.trick) }}
@@ -28,6 +30,8 @@
                     Ajouter
                 </button>
                 {{ form_end(formAddMedia) }}
+                {# fin formulaire ajout image #}
+
             </div>
         </div>
     </div>

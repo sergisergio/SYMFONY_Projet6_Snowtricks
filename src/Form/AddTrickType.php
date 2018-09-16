@@ -30,18 +30,7 @@ class AddTrickType extends AbstractType
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name',
                 'label' => 'Catégorie',
-            ])
-                    // Comment faire ici car je dois utiliser EntityType et FileType...
-                    // Dans le traitement, cette donnée devra être de type 'i'
-            //->add('media', FileType::class, array('label' => 'Image (fichier jpg)'))
-
-            // Ici même problème, la donnée devra être de type 'v'
-            /*->add('media', EntityType::class, [
-                'label' => 'Lien vidéo (youtube ou dailymotion)',
-                'class' => 'App\Entity\Media',
-                'choice_label' => 'url',
-            ])*/
-            ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

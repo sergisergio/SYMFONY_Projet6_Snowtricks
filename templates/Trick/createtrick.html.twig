@@ -7,6 +7,8 @@
         <div class="row justify-content-md-center">
             <div class="col-sm-8">
                 <h1 class="text-center addtrick">Ajouter une figure</h1>
+
+                {# formulaire ajout figure #}
                 {{ form_start(formAddTrick) }}
                 {{ form_widget(formAddTrick) }}
                 <p class="text-center">La catégorie n'existe  pas ? <a href="{{ path('add_category') }}">Ajouter une catégorie</a></p>
@@ -14,8 +16,10 @@
                     Ajouter
                 </button>
                 {{ form_end(formAddTrick) }}
+                {# formulaire ajout figure #}
+
             </div>
-    </div>
+        </div>
     </div>
     </div>
     </div>

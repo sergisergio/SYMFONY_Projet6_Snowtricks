@@ -21,6 +21,8 @@
                     </div>
                 {% endfor %}
                 <h1 class="text-center addvideo">Ajouter une vidéo</h1>
+
+                {# formulaire ajout video #}
                 {{ form_start(formAddVideo) }}
                 {{ form_row(formAddVideo.url) }}
                 {{ form_row(formAddVideo.trick) }}
@@ -28,6 +30,8 @@
                     Ajouter
                 </button>
                 {{ form_end(formAddVideo) }}
+                {# fin formulaire ajout video #}
+
             </div>
         </div>
     </div>

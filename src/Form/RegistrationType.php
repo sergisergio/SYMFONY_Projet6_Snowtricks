@@ -18,8 +18,6 @@ class RegistrationType extends AbstractType
         $builder
             ->add('username')
             ->add('email')
-            /*->add('password', PasswordType::class)
-            ->add('confirm_password', PasswordType::class)*/
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe doivent être identiques',

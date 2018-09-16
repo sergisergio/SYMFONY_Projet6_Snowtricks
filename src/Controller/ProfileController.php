@@ -13,7 +13,10 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/{id}", name="profile")
      */
-    public function profile($id, UserRepository $repoUser, Request $request, ObjectManager $manager)
+    public function profile(
+        $id,
+        UserRepository $repoUser
+    )
     {
         $user = $repoUser->find(['id' => $id]);
 

@@ -27,8 +27,11 @@ class MediaController extends AbstractController
      *
      * @Route("/add/media/", name="addMedia")
      */
-    public function addMedia(Request $request, ObjectManager $manager) {
-
+    public function addMedia(
+        Request $request,
+        ObjectManager $manager
+    )
+    {
         $media = new Media();
 
         $form = $this->createForm(MediaType::class, $media);
@@ -36,18 +39,17 @@ class MediaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded PDF file
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            //$file = $media->getUrl();
             $file = $form->get('url')->getData();
 
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
-            // moves the file to the directory where brochures are stored
+            // moves the file to the directory where media are stored
             $file->move(
                 $this->getParameter('images'),
                 $fileName
             );
 
-            // updates the 'brochure' property to store the PDF file name
+            // updates the 'media' property to store the image file name
             // instead of its contents
             $media->setUrl($fileName);
 
@@ -55,7 +57,6 @@ class MediaController extends AbstractController
             $manager->persist($media);
             $manager->flush();
 
-            //$this->addFlash('success', 'Le trick a bien été ajouté!');
             return $this->redirectToRoute('addVideo');
         }
         return $this->render(
@@ -79,9 +80,12 @@ class MediaController extends AbstractController
      *
      * @Route("/add/video/", name="addVideo")
      */
-    public function addVideo(Request $request, ObjectManager $manager) {
-
-        $video = new Media();
+    public function addVideo(
+        Request $request,
+        ObjectManager $manager
+    )
+    {
+         $video = new Media();
 
         $form = $this->createForm(VideoType::class, $video);
         $form->handleRequest($request);
@@ -105,15 +109,13 @@ class MediaController extends AbstractController
      *
      * @Route("/delete/media/{id}", name="deletemedia")
      */
-    public function removeMedia($id, EntityManagerInterface $em,  MediaRepository $repoMedia) {
+    public function removeMedia(
+        $id,
+        EntityManagerInterface $em
+    )
+    {
         $repository = $em->getRepository(Media::class);
         $media = $repository->find($id);
-        //$type= 'i';
-        //$type2 = 'v';
-        //$media = $repoMedia->findMediaByTrick($slug, $type);
-
-
-        //$video = $repoMedia->findMediaByTrick($slug, $type2);
 
         $em->remove($media);
         $em->flush();

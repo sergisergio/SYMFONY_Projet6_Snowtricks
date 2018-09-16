@@ -1,5 +1,7 @@
 {%  extends 'base.html.twig' %}
+
 {% block title %}{{ trick.name }}{% endblock %}
+
 {% block body %}
     <!-- Header -->
     {% for medium in media | slice(0) %}
@@ -158,6 +160,7 @@
     </div>
 </section>
 {%  endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/zoombox.js')}}"></script>

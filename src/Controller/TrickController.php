@@ -40,11 +40,17 @@ class TrickController extends AbstractController
      *
      * @Route("/trick/{slug}", name="trickpage")
      */
-    function trickPage($slug, TrickRepository $repoTrick, CommentRepository $repoComment, MediaRepository $repoMedia, Request $request, ObjectManager $manager)
+    function trickPage(
+        $slug,
+        TrickRepository $repoTrick,
+        CommentRepository $repoComment,
+        MediaRepository $repoMedia,
+        Request $request,
+        ObjectManager $manager
+    )
     {
-        // Trouver un trick grâce à son id
+        // Trouver un trick grâce à son slug
         $trick = $repoTrick->findOneBy(['slug' => $slug]);
-        //$trick = $this->getDoctrine()->getRepository(Trick::class)->find($slug);
         if (!$trick) {
             return $this->render('404.html.twig');
         }
@@ -52,7 +58,7 @@ class TrickController extends AbstractController
         $comments = $repoComment->findAll();
                 //$catRepo = $em->getRepository(Category::class);
                 // Je ne passe plus par entitymanager mais directement par le repository....
-        //$categories = $repoCategory->findOneBy(['name' => $name]);
+                //$categories = $repoCategory->findOneBy(['name' => $name]);
                 //$mediaRepo = $em->getRepository(Media::class);
                 // Je ne passe plus par entitymanager mais directement par le repository....
         $type= 'i';
@@ -68,25 +74,18 @@ class TrickController extends AbstractController
         $comment = new Comment();
         $comment->setAuthor($this->getUser());
 
-        //$comment->setTrick($trick);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-                // Analyse de la requête envoyée via le formulaire CommentType basé sur l'objet $comment créé juste avant
+        // Analyse de la requête envoyée via le formulaire CommentType basé sur l'objet $comment créé juste avant
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setCreatedAt(new \DateTime())
                 ->setTrick($trick);
-            //$trick->addComment($comment);
 
             $manager->persist($comment);
             $manager->flush();
-            // Flash messages are used to notify the user about the result of the
-            // actions. They are deleted automatically from the session as soon
-            // as they are accessed.
-            // See https://symfony.com/doc/current/book/controller.html#flash-messages
+
             $this->addFlash('success', 'Votre message a bien été ajouté!');
-
-
 
             return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
         }
@@ -94,11 +93,9 @@ class TrickController extends AbstractController
         return $this->render('Trick/trick.html.twig', [
             'trick' => $trick,
             'comments' => $comments,
-            //'category' => $categories,
             'media' => $media,
             'medium' => $medium,
             'video' => $video,
-            //'author' => $author,
             'commentForm' => $form->createView(),
 
         ]);
@@ -119,14 +116,12 @@ class TrickController extends AbstractController
      * @Route("/add/trick", name="createtrickpage")
      *
      */
-    public function add(Request $request, ObjectManager $manager)
+    public function add(
+        Request $request,
+        ObjectManager $manager
+    )
     {
-        //if (!$trick) {
         $trick = new Trick();
-
-
-        //}
-        //$categories = $repoCategory->findOneBy(['name' => $name]);
 
         $form = $this->createForm(AddTrickType::class, $trick);
 
@@ -136,14 +131,11 @@ class TrickController extends AbstractController
             $trick->setSlug(Slugger::slugify($trick->getName()));
             $trick->setAuthor($this->getUser());
             $trick->setCreatedAt(new \DateTime());
+
             $manager->persist($trick);
             $manager->flush();
 
-            //$this->addFlash('success', 'Le trick a bien été ajouté!');
-            //return $this->redirectToRoute('trickpage', ['slug' => $trick->getSlug()]);
-
             return $this->redirectToRoute('addMedia');
-
         }
 
         return $this->render(
@@ -157,7 +149,11 @@ class TrickController extends AbstractController
      *
      * @Route("/modifytrick/{id}", name="modifytrickpage")
      */
-    function modifyTrickPage(int $id, Trick $trick, Request $request, ObjectManager $manager)
+    function modifyTrickPage(
+        int $id,
+        Request $request,
+        ObjectManager $manager
+    )
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);
         $form = $this->createForm(AddTrickType::class, $trick);
@@ -167,11 +163,8 @@ class TrickController extends AbstractController
             $manager->persist($trick);
             $manager->flush();
 
-            //if (!$trick->getId()) {
             $this->addFlash('success', 'Le trick a bien été modifié!');
-            //}
-            //else
-            //$this->addFlash('success', 'Le trick a bien été modifié!');
+
             return $this->redirectToRoute('trickpage', ['name' => $trick->getCategory(), 'slug' => $trick->getSlug()]);
         }
         return $this->render('Trick/modifytrick.html.twig', [
@@ -188,15 +181,14 @@ class TrickController extends AbstractController
      *
      * @return Response
      */
-    public function deleteTrick($id, EntityManagerInterface $em)
+    public function deleteTrick(
+        $id,
+        EntityManagerInterface $em
+    )
     {
         $repository = $em->getRepository(Trick::class);
         $trick = $repository->find($id);
 
-        //if(!$trick)
-            //throw $this->createNotFoundException('No trick found for id'.$id);
-
-        //$em = $this->getDoctrine()->getManager();
         $em->remove($trick);
         $em->flush();
 
