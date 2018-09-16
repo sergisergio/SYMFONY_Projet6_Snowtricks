@@ -22,9 +22,9 @@ class MediaType extends AbstractType
                 'constraints' => new File([
                     'maxSize' => '5M',
                     'mimeTypes' => [
-                        'application/jpg',
-                        'application/jpeg',
-                        'application/png',
+                        'image/jpg',
+                        'image/jpeg',
+                        'image/png',
                     ],
                     'mimeTypesMessage' => 'Fichier JPG, JPEG ou PNG autorisés',
                 ])
