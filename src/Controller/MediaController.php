@@ -13,7 +13,6 @@ use App\Entity\Media;
 use App\Form\MediaType;
 use App\Form\VideoType;
 use App\Repository\MediaRepository;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +28,7 @@ class MediaController extends AbstractController
      */
     public function addMedia(
         Request $request,
-        ObjectManager $manager
+        EntityManagerInterface $manager
     )
     {
         $media = new Media();
@@ -82,7 +81,7 @@ class MediaController extends AbstractController
      */
     public function addVideo(
         Request $request,
-        ObjectManager $manager
+        EntityManagerInterface $manager
     )
     {
          $video = new Media();

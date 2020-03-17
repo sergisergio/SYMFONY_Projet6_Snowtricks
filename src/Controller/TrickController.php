@@ -21,7 +21,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\AddTrickType;
 use App\Utils\Slugger;
 
@@ -46,7 +45,7 @@ class TrickController extends AbstractController
         CommentRepository $repoComment,
         MediaRepository $repoMedia,
         Request $request,
-        ObjectManager $manager
+        EntityManagerInterface $manager
     )
     {
         // Trouver un trick grâce à son slug
@@ -118,7 +117,7 @@ class TrickController extends AbstractController
      */
     public function add(
         Request $request,
-        ObjectManager $manager
+        EntityManagerInterface $manager
     )
     {
         $trick = new Trick();
@@ -152,7 +151,7 @@ class TrickController extends AbstractController
     function modifyTrickPage(
         int $id,
         Request $request,
-        ObjectManager $manager
+        EntityManagerInterface $manager
     )
     {
         $trick = $this->getDoctrine()->getRepository(Trick::class)->find($id);

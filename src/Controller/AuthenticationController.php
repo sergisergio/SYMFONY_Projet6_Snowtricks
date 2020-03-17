@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
@@ -37,7 +37,7 @@ class AuthenticationController extends AbstractController
      */
     function signupPage(
         Request $request,
-        ObjectManager $manager,
+        EntityManagerInterface $manager,
         UserPasswordEncoderInterface $encoder,
         \Swift_Mailer $mailer,
         TokenGeneratorInterface $generator
