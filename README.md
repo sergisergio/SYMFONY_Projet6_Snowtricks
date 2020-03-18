@@ -44,6 +44,9 @@ php bin/console server:run
 
 Now check out the site at `http://localhost:8000`
 
+![api2](https://raw.githubusercontent.com/sergisergio/SYMFONY_Projet6_Snowtricks/master/snowtricks.png)
+
+
 **Any Questions ?**
 
 Feel free to contact me !
